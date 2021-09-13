@@ -1,6 +1,7 @@
 import {Formik} from 'formik';
 import React, {useEffect, useState} from 'react';
 import {
+  Button,
   ScrollView,
   StyleSheet,
   Text,
@@ -16,6 +17,7 @@ import {
   updateRandevu,
 } from '../store/randevu/actions';
 import MyModal from '../components/MyModal';
+import DateTimePicker from '@react-native-community/datetimepicker';
 
 export default function AddRandevu({navigation, route, ...props}) {
   const editing = route?.params?.editing;
@@ -28,6 +30,21 @@ export default function AddRandevu({navigation, route, ...props}) {
     dispatch(getRandevuById(data.id));
   }, []);
 
+  const [show, setShow] = useState(false);
+
+  function formatDate(dateStr) {
+    if (!dateStr) {
+      return '';
+    }
+
+    var date = new Date(dateStr);
+    var dd = String(date.getDate()).padStart(2, '0');
+    var mm = String(date.getMonth() + 1).padStart(2, '0');
+    var yyyy = date.getFullYear();
+
+    return dd + '/' + mm + '/' + yyyy;
+  }
+
   return (
     <ScrollView style={styles.container}>
       <MyModal
@@ -39,7 +56,7 @@ export default function AddRandevu({navigation, route, ...props}) {
       <Formik
         initialValues={{
           title: data.id ? randevu?.title : '',
-          rezDate: data.id ? randevu?.rezDate : '',
+          rezDate: data.id ? new Date(randevu?.rezDate) : new Date(),
         }}
         onSubmit={values => {
           if (data?.id) {
@@ -57,7 +74,7 @@ export default function AddRandevu({navigation, route, ...props}) {
           }
         }}
         enableReinitialize={true}>
-        {({handleChange, handleBlur, handleSubmit, values}) => (
+        {({handleChange, handleBlur, handleSubmit, setFieldValue, values}) => (
           <View>
             <View style={styles.inputContainer}>
               <Text style={styles.inputLabel}>Başlık</Text>
@@ -71,12 +88,48 @@ export default function AddRandevu({navigation, route, ...props}) {
 
             <View style={styles.inputContainer}>
               <Text style={styles.inputLabel}>Randevu Tarihi</Text>
-              <TextInput
-                style={styles.input}
-                value={values.rezDate}
-                onBlur={handleBlur('rezDate')}
-                onChangeText={handleChange('rezDate')}
-              />
+              <View
+                style={{
+                  display: 'flex',
+                  flexDirection: 'row',
+                }}>
+                <View
+                  style={{
+                    display: 'flex',
+                    flex: 1,
+                    alignItems: 'center',
+                    justifyContent: 'center',
+                  }}>
+                  <Text
+                    style={{
+                      fontSize: 15,
+                    }}>
+                    {formatDate(values.rezDate)}
+                  </Text>
+                </View>
+                <TouchableOpacity
+                  style={[styles.addButton, {flex: 1}]}
+                  onPress={() => {
+                    setShow(true);
+                  }}>
+                  <Text style={styles.addButtonText}>Tarih Seç</Text>
+                </TouchableOpacity>
+              </View>
+              {show && (
+                <DateTimePicker
+                  testID="dateTimePicker"
+                  value={values.rezDate}
+                  display="default"
+                  mode="date"
+                  onChange={val => {
+                    setFieldValue(
+                      'rezDate',
+                      val.nativeEvent.timestamp || values.rezDate,
+                    );
+                    setShow(false);
+                  }}
+                />
+              )}
             </View>
 
             <TouchableOpacity style={styles.addButton} onPress={handleSubmit}>
