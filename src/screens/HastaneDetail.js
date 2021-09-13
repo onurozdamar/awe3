@@ -29,7 +29,6 @@ const HastaneDetail = ({navigation, route, ...props}) => {
     }
 
     const willFocusSubscription = navigation.addListener('focus', () => {
-      console.log('çek2');
       dispatch(getHastaneById(data.hastaneId));
     });
 

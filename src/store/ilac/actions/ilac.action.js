@@ -8,7 +8,6 @@ export const SET_LOADING = 'SET_LOADING';
 import {BaseManager} from '../../../database';
 
 export const getIlac = hastaneId => dispatch => {
-  console.log('employee');
   const manager = new BaseManager();
   dispatch(setLoading(true));
 
@@ -31,7 +30,6 @@ export const getIlac = hastaneId => dispatch => {
 };
 
 export const getIlacById = id => dispatch => {
-  console.log('employee');
   const manager = new BaseManager();
   dispatch(setLoading(true));
 
@@ -54,7 +52,6 @@ export const getIlacById = id => dispatch => {
 };
 
 export const addIlac = model => dispatch => {
-  console.log('add employee');
   const manager = new BaseManager();
 
   manager
@@ -74,7 +71,6 @@ export const addIlac = model => dispatch => {
 };
 
 export const updateIlac = model => dispatch => {
-  console.log('update employee');
   const manager = new BaseManager();
 
   manager
@@ -95,7 +91,6 @@ export const updateIlac = model => dispatch => {
 };
 
 export const deleteIlac = id => dispatch => {
-  console.log('delete employee');
   const manager = new BaseManager();
 
   manager
@@ -115,7 +110,6 @@ export const deleteIlac = id => dispatch => {
 };
 
 export const setLoading = loading => dispatch => {
-  console.log('set loading ================> ilaç');
   dispatch({
     type: SET_LOADING,
     payload: loading,

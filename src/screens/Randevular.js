@@ -22,7 +22,6 @@ const Randevular = ({navigation}) => {
     }
 
     const willFocusSubscription = navigation.addListener('focus', () => {
-      console.log('çek2');
       dispatch(getAllRandevus());
     });
 

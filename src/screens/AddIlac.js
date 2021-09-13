@@ -44,7 +44,6 @@ export default function AddIlac({navigation, route, ...props}) {
           endDate: data.id ? ilac?.endDate : '',
         }}
         onSubmit={values => {
-          console.log('ekle');
           if (data?.id) {
             dispatch(
               updateIlac({

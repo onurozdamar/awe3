@@ -32,7 +32,6 @@ const MyList = props => {
       return;
     }
     const willFocusSubscription = navigation.addListener('focus', () => {
-      console.log('çek2');
       dispatch(getData(hastaneId));
     });
 

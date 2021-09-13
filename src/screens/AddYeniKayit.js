@@ -19,8 +19,6 @@ export default function AddYeniKayit({navigation, route, ...props}) {
   const editing = route?.params?.editing;
   const data = route?.params?.data;
 
-  console.log('data=>', data);
-
   const [inputValue, setInputValue] = useState(data?.title ?? '');
 
   const dispatch = useDispatch();
@@ -50,7 +48,6 @@ export default function AddYeniKayit({navigation, route, ...props}) {
         style={styles.addButton}
         disabled={inputValue === ''}
         onPress={() => {
-          console.log('ekle');
           if (editing) {
             dispatch(updateHastane({title: inputValue, id: data.id}));
             navigation.navigate('Ana Sayfa');

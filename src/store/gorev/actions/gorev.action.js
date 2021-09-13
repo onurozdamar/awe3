@@ -9,7 +9,6 @@ export const SET_LOADING = 'SET_LOADING';
 import {BaseManager} from '../../../database';
 
 export const getGorev = hastaneId => dispatch => {
-  console.log('employee');
   const manager = new BaseManager();
   dispatch(setLoading(true));
 
@@ -32,7 +31,6 @@ export const getGorev = hastaneId => dispatch => {
 };
 
 export const getGorevById = id => dispatch => {
-  console.log('employee');
   const manager = new BaseManager();
   dispatch(setLoading(true));
 
@@ -55,7 +53,6 @@ export const getGorevById = id => dispatch => {
 };
 
 export const addGorev = model => dispatch => {
-  console.log('add employee');
   const manager = new BaseManager();
 
   manager
@@ -76,7 +73,6 @@ export const addGorev = model => dispatch => {
 };
 
 export const updateGorev = model => dispatch => {
-  console.log('update employee');
   const manager = new BaseManager();
 
   manager
@@ -96,7 +92,6 @@ export const updateGorev = model => dispatch => {
 };
 
 export const updateGorevComplete = model => dispatch => {
-  console.log('update employee');
   const manager = new BaseManager();
 
   manager
@@ -118,7 +113,6 @@ export const updateGorevComplete = model => dispatch => {
 };
 
 export const deleteGorev = id => dispatch => {
-  console.log('delete employee');
   const manager = new BaseManager();
 
   manager
@@ -138,7 +132,6 @@ export const deleteGorev = id => dispatch => {
 };
 
 export const setLoading = loading => dispatch => {
-  console.log('set loading ================> gorev');
   dispatch({
     type: SET_LOADING,
     payload: loading,

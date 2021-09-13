@@ -45,7 +45,6 @@ export default function AddGorev({navigation, route, ...props}) {
           complete: data.id ? gorev?.complete === 'true' : false,
         }}
         onSubmit={values => {
-          console.log('ekle');
           if (data?.id) {
             dispatch(
               updateGorev({
@@ -105,7 +104,6 @@ export default function AddGorev({navigation, route, ...props}) {
                 value={values.complete}
                 onBlur={handleBlur('complete')}
                 onValueChange={val => {
-                  console.log(val);
                   setFieldValue('complete', val);
                 }}
               />

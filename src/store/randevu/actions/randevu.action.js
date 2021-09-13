@@ -9,7 +9,6 @@ export const SET_LOADING = 'SET_LOADING';
 import {BaseManager} from '../../../database';
 
 export const getRandevu = hastaneId => dispatch => {
-  console.log('employee');
   const manager = new BaseManager();
   dispatch(setLoading(true));
 
@@ -32,14 +31,12 @@ export const getRandevu = hastaneId => dispatch => {
 };
 
 export const getAllRandevus = hastaneId => dispatch => {
-  console.log('employee');
   const manager = new BaseManager();
   dispatch(setLoading(true));
 
   manager
     .getAllRandevus()
     .then(res => {
-      console.log('gelen====================<', res);
       dispatch(setLoading(false));
       dispatch({
         type: GET_ALL_RANDEVUS,
@@ -56,7 +53,6 @@ export const getAllRandevus = hastaneId => dispatch => {
 };
 
 export const getRandevuById = id => dispatch => {
-  console.log('employee');
   const manager = new BaseManager();
   dispatch(setLoading(true));
 
@@ -79,7 +75,6 @@ export const getRandevuById = id => dispatch => {
 };
 
 export const addRandevu = model => dispatch => {
-  console.log('add employee');
   const manager = new BaseManager();
 
   manager
@@ -99,7 +94,6 @@ export const addRandevu = model => dispatch => {
 };
 
 export const updateRandevu = model => dispatch => {
-  console.log('update employee');
   const manager = new BaseManager();
 
   manager
@@ -119,7 +113,6 @@ export const updateRandevu = model => dispatch => {
 };
 
 export const deleteRandevu = id => dispatch => {
-  console.log('delete employee');
   const manager = new BaseManager();
 
   manager
@@ -139,7 +132,6 @@ export const deleteRandevu = id => dispatch => {
 };
 
 export const setLoading = loading => dispatch => {
-  console.log('set loading ================> randevu');
   dispatch({
     type: SET_LOADING,
     payload: loading,

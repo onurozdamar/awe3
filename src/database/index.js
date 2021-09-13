@@ -22,18 +22,9 @@ export class BaseManager {
               'title TEXT, date TEXT);',
           )
             .then(val => {
-              console.log(
-                '%c table created ',
-                'background: #222; color: #bada55',
-              );
               resolve(true);
             })
             .catch(err => {
-              console.log(
-                "%c table didn't created " + err,
-                'background: #222; color: #b22a55',
-              );
-
               reject(false);
             });
         })
@@ -57,18 +48,9 @@ export class BaseManager {
               'title TEXT , date TEXT, rezDate TEXT,active INTEGER, hastaneId INTEGER);',
           )
             .then(val => {
-              console.log(
-                '%c table created ',
-                'background: #222; color: #bada55',
-              );
               resolve(true);
             })
             .catch(err => {
-              console.log(
-                "%c table didn't created " + err,
-                'background: #222; color: #b22a55',
-              );
-
               reject(false);
             });
         });
@@ -89,18 +71,9 @@ export class BaseManager {
               'title TEXT, date TEXT, endDate TEXT, frequency TEXT, hastaneID INTEGER);',
           )
             .then(val => {
-              console.log(
-                '%c table created ',
-                'background: #222; color: #bada55',
-              );
               resolve(true);
             })
             .catch(err => {
-              console.log(
-                "%c table didn't created " + err,
-                'background: #222; color: #b22a55',
-              );
-
               reject(false);
             });
         });
@@ -121,18 +94,9 @@ export class BaseManager {
               'title TEXT, date TEXT,endDate TEXT, desc TEXT, hastaneId INTEGER, complete TEXT);',
           )
             .then(val => {
-              console.log(
-                '%c table created ',
-                'background: #222; color: #bada55',
-              );
               resolve(true);
             })
             .catch(err => {
-              console.log(
-                "%c table didn't created " + err,
-                'background: #222; color: #b22a55',
-              );
-
               reject(false);
             });
         });
@@ -152,14 +116,9 @@ export class BaseManager {
               `VALUES('${model.title}','${new Date()}')`,
           )
             .then(val => {
-              console.log('%c val added ', 'background: #222; color: #bada55');
               resolve(true);
             })
             .catch(err => {
-              console.log(
-                '%c val did not added' + err,
-                'background: #222; color: #b22a55',
-              );
               reject(false);
             });
         });
@@ -183,14 +142,9 @@ export class BaseManager {
               }','${active}','${model.hastaneId}')`,
           )
             .then(val => {
-              console.log('%c val added ', 'background: #222; color: #bada55');
               resolve(true);
             })
             .catch(err => {
-              console.log(
-                '%c val did not added' + err,
-                'background: #222; color: #b22a55',
-              );
               reject(false);
             });
         });
@@ -212,14 +166,9 @@ export class BaseManager {
               }','${model.hastaneId}')`,
           )
             .then(val => {
-              console.log('%c val added ', 'background: #222; color: #bada55');
               resolve(true);
             })
             .catch(err => {
-              console.log(
-                '%c val did not added' + err,
-                'background: #222; color: #b22a55',
-              );
               reject(false);
             });
         });
@@ -241,14 +190,9 @@ export class BaseManager {
               }','${model.complete}','${model.hastaneId}')`,
           )
             .then(val => {
-              console.log('%c val added ', 'background: #222; color: #bada55');
               resolve(true);
             })
             .catch(err => {
-              console.log(
-                '%c val did not added' + err,
-                'background: #222; color: #b22a55',
-              );
               reject(false);
             });
         });
@@ -269,17 +213,9 @@ export class BaseManager {
                where id = ${model.id};`,
           )
             .then(val => {
-              console.log(
-                '%c val updated ',
-                'background: #222; color: #bada55',
-              );
               resolve(true);
             })
             .catch(err => {
-              console.log(
-                '%c val did not updated' + err,
-                'background: #222; color: #b22a55',
-              );
               reject(false);
             });
         });
@@ -304,17 +240,9 @@ export class BaseManager {
                where id = ${model.id};`,
           )
             .then(val => {
-              console.log(
-                '%c val updated ',
-                'background: #222; color: #bada55',
-              );
               resolve(true);
             })
             .catch(err => {
-              console.log(
-                '%c val did not updated' + err,
-                'background: #222; color: #b22a55',
-              );
               reject(false);
             });
         });
@@ -337,17 +265,9 @@ export class BaseManager {
                where id = ${model.id};`,
           )
             .then(val => {
-              console.log(
-                '%c val updated ',
-                'background: #222; color: #bada55',
-              );
               resolve(true);
             })
             .catch(err => {
-              console.log(
-                '%c val did not updated' + err,
-                'background: #222; color: #b22a55',
-              );
               reject(false);
             });
         });
@@ -371,17 +291,9 @@ export class BaseManager {
              where id = ${model.id};`,
           )
             .then(val => {
-              console.log(
-                '%c val updated ',
-                'background: #222; color: #bada55',
-              );
               resolve(true);
             })
             .catch(err => {
-              console.log(
-                '%c val did not updated' + err,
-                'background: #222; color: #b22a55',
-              );
               reject(false);
             });
         });
@@ -402,17 +314,9 @@ export class BaseManager {
              where id = ${model.id};`,
           )
             .then(val => {
-              console.log(
-                '%c val updated ',
-                'background: #222; color: #bada55',
-              );
               resolve(true);
             })
             .catch(err => {
-              console.log(
-                '%c val did not updated' + err,
-                'background: #222; color: #b22a55',
-              );
               reject(false);
             });
         });
@@ -430,24 +334,15 @@ export class BaseManager {
           db.executeSql('SELECT * FROM Hastane')
             .then(([values]) => {
               var array = [];
-              console.log(values);
 
               for (let index = 0; index < values.rows.length; index++) {
                 const element = values.rows.item(index);
                 array.push(element);
               }
 
-              console.log(
-                '%c get success ',
-                'background: #222; color: #bada55',
-              );
               resolve(array);
             })
             .catch(err => {
-              console.log(
-                '%c gett error ' + err,
-                'background: #222; color: #b22a55',
-              );
               reject(false);
             });
         });
@@ -465,7 +360,6 @@ export class BaseManager {
           db.executeSql('SELECT * FROM Hastane')
             .then(([values]) => {
               var array = [];
-              console.log(values);
               if (values.rows.length === 0) {
                 resolve(array);
                 return;
@@ -473,7 +367,6 @@ export class BaseManager {
 
               for (let index = 0; index < values.rows.length - 1; index++) {
                 const element = values.rows.item(index);
-                console.log('data==========>', element);
                 this.getRandevu(element.id).then(res => {
                   res.map(data => {
                     array.push(data);
@@ -485,19 +378,11 @@ export class BaseManager {
                   res.map(data => {
                     array.push(data);
                   });
-                  console.log(
-                    '%c get success ',
-                    'background: #222; color: #bada55',
-                  );
                   resolve(array);
                 },
               );
             })
             .catch(err => {
-              console.log(
-                '%c gett error ' + err,
-                'background: #222; color: #b22a55',
-              );
               reject(false);
             });
         });
@@ -515,24 +400,15 @@ export class BaseManager {
           db.executeSql('SELECT * FROM Randevu where hastaneId=' + hastaneId)
             .then(([values]) => {
               var array = [];
-              console.log(values);
 
               for (let index = 0; index < values.rows.length; index++) {
                 const element = values.rows.item(index);
                 array.push(element);
               }
 
-              console.log(
-                '%c get success ',
-                'background: #222; color: #bada55',
-              );
               resolve(array);
             })
             .catch(err => {
-              console.log(
-                '%c gett error ' + err,
-                'background: #222; color: #b22a55',
-              );
               reject(false);
             });
         });
@@ -550,24 +426,15 @@ export class BaseManager {
           db.executeSql('SELECT * FROM Ilac where hastaneId=' + hastaneId)
             .then(([values]) => {
               var array = [];
-              console.log(values);
 
               for (let index = 0; index < values.rows.length; index++) {
                 const element = values.rows.item(index);
                 array.push(element);
               }
 
-              console.log(
-                '%c get success ',
-                'background: #222; color: #bada55',
-              );
               resolve(array);
             })
             .catch(err => {
-              console.log(
-                '%c gett error ' + err,
-                'background: #222; color: #b22a55',
-              );
               reject(false);
             });
         });
@@ -585,24 +452,15 @@ export class BaseManager {
           db.executeSql('SELECT * FROM Gorev where hastaneId=' + hastaneId)
             .then(([values]) => {
               var array = [];
-              console.log('görev value => ', values);
 
               for (let index = 0; index < values.rows.length; index++) {
                 const element = values.rows.item(index);
                 array.push(element);
               }
 
-              console.log(
-                '%c get success ',
-                'background: #222; color: #bada55',
-              );
               resolve(array);
             })
             .catch(err => {
-              console.log(
-                '%c gett error ' + err,
-                'background: #222; color: #b22a55',
-              );
               reject(false);
             });
         });
@@ -620,25 +478,15 @@ export class BaseManager {
           db.executeSql('SELECT * FROM Hastane where id=' + id)
             .then(([values]) => {
               var array = [];
-              console.log(values);
 
               for (let index = 0; index < values.rows.length; index++) {
                 const element = values.rows.item(index);
                 array.push(element);
               }
 
-              console.log(
-                '%c get success ',
-                'background: #222; color: #bada55',
-              );
               resolve(array);
             })
             .catch(err => {
-              console.log(
-                '%c gett error ',
-                err,
-                'background: #222; color: #b22a55',
-              );
               reject(false);
             });
         });
@@ -656,25 +504,15 @@ export class BaseManager {
           db.executeSql('SELECT * FROM Randevu where id=' + id)
             .then(([values]) => {
               var array = [];
-              console.log(values);
 
               for (let index = 0; index < values.rows.length; index++) {
                 const element = values.rows.item(index);
                 array.push(element);
               }
 
-              console.log(
-                '%c get success ',
-                'background: #222; color: #bada55',
-              );
               resolve(array);
             })
             .catch(err => {
-              console.log(
-                '%c gett error ',
-                err,
-                'background: #222; color: #b22a55',
-              );
               reject(false);
             });
         });
@@ -692,25 +530,15 @@ export class BaseManager {
           db.executeSql('SELECT * FROM Ilac where id=' + id)
             .then(([values]) => {
               var array = [];
-              console.log(values);
 
               for (let index = 0; index < values.rows.length; index++) {
                 const element = values.rows.item(index);
                 array.push(element);
               }
 
-              console.log(
-                '%c get success ',
-                'background: #222; color: #bada55',
-              );
               resolve(array);
             })
             .catch(err => {
-              console.log(
-                '%c gett error ',
-                err,
-                'background: #222; color: #b22a55',
-              );
               reject(false);
             });
         });
@@ -728,25 +556,15 @@ export class BaseManager {
           db.executeSql('SELECT * FROM Gorev where id=' + id)
             .then(([values]) => {
               var array = [];
-              console.log(values);
 
               for (let index = 0; index < values.rows.length; index++) {
                 const element = values.rows.item(index);
                 array.push(element);
               }
 
-              console.log(
-                '%c get success ',
-                'background: #222; color: #bada55',
-              );
               resolve(array);
             })
             .catch(err => {
-              console.log(
-                '%c gett error ',
-                err,
-                'background: #222; color: #b22a55',
-              );
               reject(false);
             });
         });
@@ -763,20 +581,12 @@ export class BaseManager {
         .then(db => {
           db.executeSql('DELETE FROM Hastane where id=' + id)
             .then(val => {
-              console.log(
-                '%c val deleted ',
-                'background: #222; color: #bada55',
-              );
               this.deleteRandevuByHastaneId(id);
               this.deleteIlacByHastaneId(id);
               this.deleteGorevByHastaneId(id);
               resolve(true);
             })
             .catch(err => {
-              console.log(
-                '%c val did not deleted' + err,
-                'background: #222; color: #b22a55',
-              );
               reject(false);
             });
         });
@@ -793,17 +603,9 @@ export class BaseManager {
         .then(db => {
           db.executeSql('DELETE FROM Randevu where id=' + id)
             .then(val => {
-              console.log(
-                '%c val deleted ',
-                'background: #222; color: #bada55',
-              );
               resolve(true);
             })
             .catch(err => {
-              console.log(
-                '%c val did not deleted' + err,
-                'background: #222; color: #b22a55',
-              );
               reject(false);
             });
         });
@@ -820,17 +622,9 @@ export class BaseManager {
         .then(db => {
           db.executeSql('DELETE FROM Ilac where id=' + id)
             .then(val => {
-              console.log(
-                '%c val deleted ',
-                'background: #222; color: #bada55',
-              );
               resolve(true);
             })
             .catch(err => {
-              console.log(
-                '%c val did not deleted' + err,
-                'background: #222; color: #b22a55',
-              );
               reject(false);
             });
         });
@@ -847,17 +641,9 @@ export class BaseManager {
         .then(db => {
           db.executeSql('DELETE FROM Gorev where id=' + id)
             .then(val => {
-              console.log(
-                '%c val deleted ',
-                'background: #222; color: #bada55',
-              );
               resolve(true);
             })
             .catch(err => {
-              console.log(
-                '%c val did not deleted' + err,
-                'background: #222; color: #b22a55',
-              );
               reject(false);
             });
         });
@@ -874,17 +660,9 @@ export class BaseManager {
         .then(db => {
           db.executeSql('DELETE FROM Randevu where hastaneId=' + id)
             .then(val => {
-              console.log(
-                '%c val deleted ',
-                'background: #222; color: #bada55',
-              );
               resolve(true);
             })
             .catch(err => {
-              console.log(
-                '%c val did not deleted' + err,
-                'background: #222; color: #b22a55',
-              );
               reject(false);
             });
         });
@@ -901,17 +679,9 @@ export class BaseManager {
         .then(db => {
           db.executeSql('DELETE FROM Ilac where hastaneId=' + id)
             .then(val => {
-              console.log(
-                '%c val deleted ',
-                'background: #222; color: #bada55',
-              );
               resolve(true);
             })
             .catch(err => {
-              console.log(
-                '%c val did not deleted' + err,
-                'background: #222; color: #b22a55',
-              );
               reject(false);
             });
         });
@@ -928,17 +698,9 @@ export class BaseManager {
         .then(db => {
           db.executeSql('DELETE FROM Gorev where hastaneId=' + id)
             .then(val => {
-              console.log(
-                '%c val deleted ',
-                'background: #222; color: #bada55',
-              );
               resolve(true);
             })
             .catch(err => {
-              console.log(
-                '%c val did not deleted' + err,
-                'background: #222; color: #b22a55',
-              );
               reject(false);
             });
         });

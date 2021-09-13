@@ -42,7 +42,6 @@ export default function AddRandevu({navigation, route, ...props}) {
           rezDate: data.id ? randevu?.rezDate : '',
         }}
         onSubmit={values => {
-          console.log('ekle');
           if (data?.id) {
             dispatch(
               updateRandevu({

@@ -21,7 +21,6 @@ const hospitalReducer = function (state = initialState, action) {
       return {...state};
 
     case Actions.GET_GOREV_BY_ID:
-      console.log('action=>', action.payload);
       return {...state, item: action.payload};
 
     case Actions.SET_LOADING:

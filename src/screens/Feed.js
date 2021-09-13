@@ -40,7 +40,6 @@ const Feed = ({navigation}) => {
     }
 
     const willFocusSubscription = navigation.addListener('focus', () => {
-      console.log('çek2');
       dispatch(getHastaneAction());
     });
 
@@ -60,7 +59,6 @@ const Feed = ({navigation}) => {
       <TouchableOpacity
         style={styles.floatActionButton}
         onPress={() => {
-          console.log('as');
           navigation.navigate('Yeni Kayıt');
         }}>
         <Icon name={'plus'} size={30} color={'green'} />

@@ -9,7 +9,6 @@ export const OPEN_MODAL = 'OPEN_MODAL';
 import {BaseManager} from '../../../database';
 
 export const getHastane = () => dispatch => {
-  console.log('employee');
   const manager = new BaseManager();
   dispatch(setLoading(true));
 
@@ -32,7 +31,6 @@ export const getHastane = () => dispatch => {
 };
 
 export const getHastaneById = id => dispatch => {
-  console.log('employee');
   const manager = new BaseManager();
   dispatch(setLoading(true));
 
@@ -55,7 +53,6 @@ export const getHastaneById = id => dispatch => {
 };
 
 export const addHastane = model => dispatch => {
-  console.log('add employee');
   const manager = new BaseManager();
 
   manager
@@ -75,7 +72,6 @@ export const addHastane = model => dispatch => {
 };
 
 export const updateHastane = model => dispatch => {
-  console.log('update employee');
   const manager = new BaseManager();
 
   manager
@@ -95,7 +91,6 @@ export const updateHastane = model => dispatch => {
 };
 
 export const deleteHastane = id => dispatch => {
-  console.log('delete employee');
   const manager = new BaseManager();
 
   manager
@@ -115,7 +110,6 @@ export const deleteHastane = id => dispatch => {
 };
 
 export const setLoading = loading => dispatch => {
-  console.log('set loading ================> hospital');
   dispatch({
     type: SET_LOADING,
     payload: loading,
@@ -123,7 +117,6 @@ export const setLoading = loading => dispatch => {
 };
 
 export const setOpenModal = openModal => dispatch => {
-  console.log('set open modal ================> hospital');
   dispatch({
     type: OPEN_MODAL,
     payload: openModal,
