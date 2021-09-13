@@ -391,6 +391,10 @@ export class BaseManager {
 
   getRandevu(hastaneId) {
     return new Promise((resolve, reject) => {
+      if (!hastaneId) {
+        reject(false);
+        return;
+      }
       this.sqlite
         .openDatabase({
           name: 'awe3',
@@ -495,6 +499,10 @@ export class BaseManager {
 
   getRandevuById(id) {
     return new Promise((resolve, reject) => {
+      if (!id) {
+        reject(false);
+        return;
+      }
       this.sqlite
         .openDatabase({
           name: 'awe3',
@@ -521,6 +529,10 @@ export class BaseManager {
 
   getIlacById(id) {
     return new Promise((resolve, reject) => {
+      if (!id) {
+        reject(false);
+        return;
+      }
       this.sqlite
         .openDatabase({
           name: 'awe3',
@@ -547,6 +559,10 @@ export class BaseManager {
 
   getGorevById(id) {
     return new Promise((resolve, reject) => {
+      if (!id) {
+        reject(false);
+        return;
+      }
       this.sqlite
         .openDatabase({
           name: 'awe3',
