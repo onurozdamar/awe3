@@ -37,7 +37,7 @@ const HastaneDetail = ({navigation, route, ...props}) => {
 
   return (
     <ScrollView style={styles.container}>
-      <Text style={styles.title}>{hastane.title}</Text>
+      <Text style={styles.title}>{hastane?.title}</Text>
 
       <MyList
         component={<RandevuCard />}
