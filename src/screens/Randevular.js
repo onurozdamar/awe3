@@ -48,6 +48,7 @@ const styles = StyleSheet.create({
     display: 'flex',
     flexDirection: 'column',
     flex: 1,
+    paddingTop: 5,
   },
   buttonContainer: {
     display: 'flex',
