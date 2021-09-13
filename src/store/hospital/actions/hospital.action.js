@@ -41,15 +41,15 @@ export const getHastaneById = id => dispatch => {
     .then(res => {
       dispatch(setLoading(false));
       dispatch({
-        type: GET_HOSPITALS,
-        payload: res,
+        type: GET_HOSPITAL_BY_ID,
+        payload: res[0],
       });
     })
     .catch(e => {
       dispatch(setLoading(false));
       dispatch({
-        type: GET_HOSPITALS,
-        payload: [],
+        type: GET_HOSPITAL_BY_ID,
+        payload: {},
       });
     });
 };
