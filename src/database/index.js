@@ -18,7 +18,7 @@ export class BaseManager {
         .then(db => {
           db.executeSql(
             'CREATE TABLE IF NOT EXISTS Hastane (' +
-              'id INTEGER PRIMARY KEY NOT NULL ,' +
+              'hastaneId INTEGER PRIMARY KEY NOT NULL ,' +
               'title TEXT, date TEXT);',
           )
             .then(val => {
@@ -210,7 +210,7 @@ export class BaseManager {
           db.executeSql(
             'UPDATE Hastane SET ' +
               `title = '${model.title}'
-               where id = ${model.id};`,
+               where hastaneId = ${model.id};`,
           )
             .then(val => {
               resolve(true);
@@ -360,6 +360,7 @@ export class BaseManager {
           db.executeSql('SELECT * FROM Hastane')
             .then(([values]) => {
               var array = [];
+              console.log('allrandevu', values);
               if (values.rows.length === 0) {
                 resolve(array);
                 return;
@@ -367,20 +368,20 @@ export class BaseManager {
 
               for (let index = 0; index < values.rows.length - 1; index++) {
                 const element = values.rows.item(index);
-                this.getRandevu(element.id).then(res => {
+                this.getRandevu(element.hastaneId).then(res => {
                   res.map(data => {
                     array.push(data);
                   });
                 });
               }
-              this.getRandevu(values.rows.item(values.rows.length - 1).id).then(
-                res => {
-                  res.map(data => {
-                    array.push(data);
-                  });
-                  resolve(array);
-                },
-              );
+              this.getRandevu(
+                values.rows.item(values.rows.length - 1).hastaneId,
+              ).then(res => {
+                res.map(data => {
+                  array.push(data);
+                });
+                resolve(array);
+              });
             })
             .catch(err => {
               reject(false);
@@ -479,7 +480,7 @@ export class BaseManager {
           location: 'default',
         })
         .then(db => {
-          db.executeSql('SELECT * FROM Hastane where id=' + id)
+          db.executeSql('SELECT * FROM Hastane where hastaneId=' + id)
             .then(([values]) => {
               var array = [];
 
@@ -595,7 +596,7 @@ export class BaseManager {
           location: 'default',
         })
         .then(db => {
-          db.executeSql('DELETE FROM Hastane where id=' + id)
+          db.executeSql('DELETE FROM Hastane where hastaneId=' + id)
             .then(val => {
               this.deleteRandevuByHastaneId(id);
               this.deleteIlacByHastaneId(id);
