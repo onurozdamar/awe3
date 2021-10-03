@@ -27,7 +27,7 @@ export default function AddYeniKayit({navigation, route, ...props}) {
     <ScrollView style={styles.container}>
       <MyModal
         onSuccess={() => {
-          dispatch(deleteHastane(data.id));
+          dispatch(deleteHastane(data.hastaneId));
           navigation.navigate('Ana Sayfa');
         }}
       />
@@ -49,7 +49,7 @@ export default function AddYeniKayit({navigation, route, ...props}) {
         disabled={inputValue === ''}
         onPress={() => {
           if (editing) {
-            dispatch(updateHastane({title: inputValue, id: data.id}));
+            dispatch(updateHastane({title: inputValue, id: data.hastaneId}));
             navigation.navigate('Ana Sayfa');
           } else {
             dispatch(addHastane({title: inputValue}));
