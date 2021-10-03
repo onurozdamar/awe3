@@ -10,14 +10,13 @@ import {
 import DateTimePicker from '@react-native-community/datetimepicker';
 
 export default MyDatePicker = props => {
-  const {date, onChange, fieldName} = props;
+  const {date, onChange, fieldName, showDate = true, showTime = true} = props;
   const [mode, setMode] = useState('date');
   const [show, setShow] = useState(false);
 
   const onChangeDate = (event, selectedDate) => {
     const currentDate = selectedDate || date;
     setShow(Platform.OS === 'ios');
-    console.log('currentDate', currentDate);
     onChange(fieldName, currentDate);
   };
 
@@ -61,20 +60,24 @@ export default MyDatePicker = props => {
 
   return (
     <View>
-      <View style={styles.datePickerRow}>
-        <Text style={styles.date}>{formatDate(date)}</Text>
-        <TouchableOpacity style={styles.addButton} onPress={showDatepicker}>
-          <Text style={styles.addButtonText}>Tarih Seç</Text>
-        </TouchableOpacity>
-      </View>
+      {showDate && (
+        <View style={styles.datePickerRow}>
+          <Text style={styles.date}>{formatDate(date)}</Text>
+          <TouchableOpacity style={styles.addButton} onPress={showDatepicker}>
+            <Text style={styles.addButtonText}>Tarih Seç</Text>
+          </TouchableOpacity>
+        </View>
+      )}
 
-      <View style={styles.datePickerRow}>
-        <Text style={styles.date}>{formatTime(date)}</Text>
+      {showTime && (
+        <View style={styles.datePickerRow}>
+          <Text style={styles.date}>{formatTime(date)}</Text>
 
-        <TouchableOpacity style={styles.addButton} onPress={showTimepicker}>
-          <Text style={styles.addButtonText}>Saat Seç</Text>
-        </TouchableOpacity>
-      </View>
+          <TouchableOpacity style={styles.addButton} onPress={showTimepicker}>
+            <Text style={styles.addButtonText}>Saat Seç</Text>
+          </TouchableOpacity>
+        </View>
+      )}
       {show && (
         <DateTimePicker
           testID="dateTimePicker"
