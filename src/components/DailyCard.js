@@ -24,6 +24,7 @@ export default function DailyCard(props) {
       onPress={onPress}
       onLongPress={onLongPress}>
       <Text style={styles.text}>{data?.title}</Text>
+      <Text style={styles.dateInfo}>Eklenme Tarihi</Text>
       <Text style={styles.date}>{formatDate(data?.date)}</Text>
     </TouchableOpacity>
   );
@@ -38,12 +39,21 @@ const styles = StyleSheet.create({
   },
   text: {
     margin: 5,
-    fontSize: 16,
+    fontSize: 18,
+    fontWeight: '400',
   },
   date: {
     color: 'rgb(11,51,10)',
     textAlign: 'right',
     marginTop: 5,
     marginRight: 3,
+    fontWeight: '300',
+  },
+  dateInfo: {
+    color: 'rgb(61,51,60)',
+    textAlign: 'right',
+    marginTop: 5,
+    marginRight: 3,
+    fontWeight: '200',
   },
 });

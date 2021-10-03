@@ -32,8 +32,8 @@ export default function IlacCard(props) {
           flex: 1,
           justifyContent: 'space-between',
         }}>
-        <Text style={styles.endDate}>İlaç Bitiş Tarihi</Text>
-        <Text style={styles.date}>Eklenme Tarihi</Text>
+        <Text style={styles.dateInfo}>İlaç Bitiş Tarihi</Text>
+        <Text style={styles.dateInfo}>Eklenme Tarihi</Text>
       </View>
 
       <View
@@ -43,7 +43,7 @@ export default function IlacCard(props) {
           flex: 1,
           justifyContent: 'space-between',
         }}>
-        <Text style={styles.endDate}>{formatDate(data?.endDate)}</Text>
+        <Text style={styles.date}>{formatDate(data?.endDate)}</Text>
         <Text style={styles.date}>{formatDate(data?.date)}</Text>
       </View>
     </TouchableOpacity>
@@ -65,14 +65,16 @@ const styles = StyleSheet.create({
     textAlign: 'justify',
   },
   date: {
-    color: 'rgb(11,51,10)',
-    marginTop: 5,
-    marginRight: 3,
-  },
-  endDate: {
     color: 'rgb(11,11,10)',
     marginTop: 5,
     marginLeft: 3,
+    fontWeight: '300',
+  },
+  dateInfo: {
+    color: 'rgb(11,11,10)',
+    marginTop: 5,
+    marginLeft: 3,
+    fontWeight: '200',
   },
   frequency: {
     margin: 5,

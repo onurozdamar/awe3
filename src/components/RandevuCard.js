@@ -46,9 +46,9 @@ export default function RandevuCard(props) {
           flex: 1,
           justifyContent: 'space-between',
         }}>
-        <Text style={styles.rezDate}>Randevu Tarihi</Text>
-        <Text style={styles.rezDate}>Randevu Saati</Text>
-        <Text style={styles.date}>Eklenme Tarihi</Text>
+        <Text style={styles.dateInfo}>Randevu Tarihi</Text>
+        <Text style={styles.dateInfo}>Randevu Saati</Text>
+        <Text style={styles.dateInfo}>Eklenme Tarihi</Text>
       </View>
       <View
         style={{
@@ -57,13 +57,13 @@ export default function RandevuCard(props) {
           flex: 1,
           justifyContent: 'space-between',
         }}>
-        <Text style={styles.rezDate}>{formatDate(data?.rezDate)}</Text>
-        <Text style={styles.rezDate}>{formatTime(data?.rezDate)}</Text>
+        <Text style={styles.date}>{formatDate(data?.rezDate)}</Text>
+        <Text style={styles.date}>{formatTime(data?.rezDate)}</Text>
         <Text style={styles.date}>{formatDate(data?.date)}</Text>
       </View>
       <Icon
-        name={active ? 'check' : 'close'}
-        size={25}
+        name={active ? 'check' : 'pause'}
+        size={20}
         color={active ? 'green' : 'red'}
         style={styles.active}
       />
@@ -86,19 +86,20 @@ const styles = StyleSheet.create({
     textAlign: 'justify',
   },
   date: {
-    color: 'rgb(11,51,10)',
-    marginTop: 5,
-    marginRight: 3,
-  },
-  rezDate: {
     color: 'rgb(11,11,10)',
     marginTop: 5,
     marginLeft: 3,
+    fontWeight: '300',
+  },
+  dateInfo: {
+    color: 'rgb(11,11,10)',
+    marginTop: 5,
+    marginLeft: 3,
+    fontWeight: '200',
   },
   active: {
     position: 'absolute',
-    top: 0,
-    right: 0,
-    margin: 5,
+    top: 10,
+    right: 10,
   },
 });

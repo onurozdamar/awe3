@@ -86,6 +86,8 @@ const styles = StyleSheet.create({
   },
   inputLabel: {
     marginBottom: 5,
+    fontWeight: '500',
+    fontSize: 20,
   },
   addButton: {
     padding: 5,
