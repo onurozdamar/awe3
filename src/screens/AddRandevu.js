@@ -17,7 +17,7 @@ import {
   updateRandevu,
 } from '../store/randevu/actions';
 import MyModal from '../components/MyModal';
-import DateTimePicker from '@react-native-community/datetimepicker';
+import MyDatePicker from '../components/MyDatePicker';
 
 export default function AddRandevu({navigation, route, ...props}) {
   const editing = route?.params?.editing;
@@ -29,21 +29,6 @@ export default function AddRandevu({navigation, route, ...props}) {
   useEffect(() => {
     dispatch(getRandevuById(data.id));
   }, []);
-
-  const [show, setShow] = useState(false);
-
-  function formatDate(dateStr) {
-    if (!dateStr) {
-      return '';
-    }
-
-    var date = new Date(dateStr);
-    var dd = String(date.getDate()).padStart(2, '0');
-    var mm = String(date.getMonth() + 1).padStart(2, '0');
-    var yyyy = date.getFullYear();
-
-    return dd + '/' + mm + '/' + yyyy;
-  }
 
   return (
     <ScrollView style={styles.container}>
@@ -88,48 +73,12 @@ export default function AddRandevu({navigation, route, ...props}) {
 
             <View style={styles.inputContainer}>
               <Text style={styles.inputLabel}>Randevu Tarihi</Text>
-              <View
-                style={{
-                  display: 'flex',
-                  flexDirection: 'row',
-                }}>
-                <View
-                  style={{
-                    display: 'flex',
-                    flex: 1,
-                    alignItems: 'center',
-                    justifyContent: 'center',
-                  }}>
-                  <Text
-                    style={{
-                      fontSize: 15,
-                    }}>
-                    {formatDate(values.rezDate)}
-                  </Text>
-                </View>
-                <TouchableOpacity
-                  style={[styles.addButton, {flex: 1}]}
-                  onPress={() => {
-                    setShow(true);
-                  }}>
-                  <Text style={styles.addButtonText}>Tarih Seç</Text>
-                </TouchableOpacity>
-              </View>
-              {show && (
-                <DateTimePicker
-                  testID="dateTimePicker"
-                  value={values.rezDate}
-                  display="default"
-                  mode="date"
-                  onChange={val => {
-                    setFieldValue(
-                      'rezDate',
-                      val.nativeEvent.timestamp || values.rezDate,
-                    );
-                    setShow(false);
-                  }}
-                />
-              )}
+
+              <MyDatePicker
+                date={values.rezDate}
+                onChange={setFieldValue}
+                fieldName="rezDate"
+              />
             </View>
 
             <TouchableOpacity style={styles.addButton} onPress={handleSubmit}>
@@ -166,6 +115,8 @@ const styles = StyleSheet.create({
   },
   inputLabel: {
     marginBottom: 5,
+    fontWeight: '500',
+    fontSize: 20,
   },
   addButton: {
     padding: 5,
