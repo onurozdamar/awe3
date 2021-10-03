@@ -22,6 +22,18 @@ export default function GorevCard(props) {
     return dd + '/' + mm + '/' + yyyy;
   }
 
+  function formatTime(dateStr) {
+    if (!dateStr) {
+      return '';
+    }
+
+    var date = new Date(dateStr);
+    var h = String(date.getHours()).padStart(2, '0');
+    var m = String(date.getMinutes()).padStart(2, '0');
+
+    return h + ':' + m;
+  }
+
   return (
     <TouchableOpacity
       style={styles.card}
@@ -43,6 +55,19 @@ export default function GorevCard(props) {
           );
         }}
       />
+
+      <View
+        style={{
+          display: 'flex',
+          flexDirection: 'row',
+          flex: 1,
+          justifyContent: 'space-between',
+        }}>
+        <Text style={styles.endDate}>Görev Tarihi</Text>
+        <Text style={styles.endDate}>Görev Saati</Text>
+        <Text style={styles.date}>Eklenme Tarihi</Text>
+      </View>
+
       <View
         style={{
           display: 'flex',
@@ -51,6 +76,7 @@ export default function GorevCard(props) {
           justifyContent: 'space-between',
         }}>
         <Text style={styles.endDate}>{formatDate(data?.endDate)}</Text>
+        <Text style={styles.date}>{formatTime(data?.endDate)}</Text>
         <Text style={styles.date}>{formatDate(data?.date)}</Text>
       </View>
     </TouchableOpacity>

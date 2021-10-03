@@ -21,6 +21,18 @@ export default function RandevuCard(props) {
     return dd + '/' + mm + '/' + yyyy;
   }
 
+  function formatTime(dateStr) {
+    if (!dateStr) {
+      return '';
+    }
+
+    var date = new Date(dateStr);
+    var h = String(date.getHours()).padStart(2, '0');
+    var m = String(date.getMinutes()).padStart(2, '0');
+
+    return h + ':' + m;
+  }
+
   return (
     <TouchableOpacity
       style={styles.card}
@@ -34,7 +46,19 @@ export default function RandevuCard(props) {
           flex: 1,
           justifyContent: 'space-between',
         }}>
+        <Text style={styles.rezDate}>Randevu Tarihi</Text>
+        <Text style={styles.rezDate}>Randevu Saati</Text>
+        <Text style={styles.date}>Eklenme Tarihi</Text>
+      </View>
+      <View
+        style={{
+          display: 'flex',
+          flexDirection: 'row',
+          flex: 1,
+          justifyContent: 'space-between',
+        }}>
         <Text style={styles.rezDate}>{formatDate(data?.rezDate)}</Text>
+        <Text style={styles.rezDate}>{formatTime(data?.rezDate)}</Text>
         <Text style={styles.date}>{formatDate(data?.date)}</Text>
       </View>
       <Icon

@@ -24,6 +24,18 @@ export default function IlacCard(props) {
       onLongPress={onLongPress}>
       <Text style={styles.text}>{data?.title}</Text>
       <Text style={styles.frequency}>{data?.frequency}</Text>
+
+      <View
+        style={{
+          display: 'flex',
+          flexDirection: 'row',
+          flex: 1,
+          justifyContent: 'space-between',
+        }}>
+        <Text style={styles.endDate}>İlaç Bitiş Tarihi</Text>
+        <Text style={styles.date}>Eklenme Tarihi</Text>
+      </View>
+
       <View
         style={{
           display: 'flex',
