@@ -1,12 +1,11 @@
-import axios from 'axios';
-import React, {useState} from 'react';
-import {Button, StyleSheet, Text, TouchableOpacity, View} from 'react-native';
+import React from 'react';
+import {StyleSheet, Text, TouchableOpacity, View} from 'react-native';
 import Icon from 'react-native-vector-icons/FontAwesome';
 
 export default function RandevuCard(props) {
   const {data, onPress, onLongPress} = props;
 
-  const [active, setActive] = useState(data.active === 'true');
+  const active = new Date(data?.rezDate) < new Date();
 
   function formatDate(dateStr) {
     if (!dateStr) {
@@ -39,6 +38,7 @@ export default function RandevuCard(props) {
       onPress={onPress}
       onLongPress={onLongPress}>
       <Text style={styles.text}>{data?.title}</Text>
+      {data?.doctor !== '' && <Text style={styles.text}>{data?.doctor}</Text>}
       <View
         style={{
           display: 'flex',
