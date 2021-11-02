@@ -41,6 +41,7 @@ export default function AddRandevu({navigation, route, ...props}) {
       <Formik
         initialValues={{
           title: data.id ? randevu?.title : '',
+          doctor: data.id ? randevu?.doctor : '',
           rezDate: data.id ? new Date(randevu?.rezDate) : new Date(),
         }}
         onSubmit={values => {
@@ -68,6 +69,16 @@ export default function AddRandevu({navigation, route, ...props}) {
                 value={values.title}
                 onBlur={handleBlur('title')}
                 onChangeText={handleChange('title')}
+              />
+            </View>
+
+            <View style={styles.inputContainer}>
+              <Text style={styles.inputLabel}>Doktor</Text>
+              <TextInput
+                style={styles.input}
+                value={values.doctor}
+                onBlur={handleBlur('doctor')}
+                onChangeText={handleChange('doctor')}
               />
             </View>
 
