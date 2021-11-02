@@ -45,7 +45,7 @@ export class BaseManager {
           db.executeSql(
             'CREATE TABLE IF NOT EXISTS Randevu (' +
               'id INTEGER PRIMARY KEY NOT NULL ,' +
-              'title TEXT , date TEXT, rezDate TEXT,active INTEGER, hastaneId INTEGER);',
+              'title TEXT , date TEXT, rezDate TEXT,doctor TEXT, hastaneId INTEGER);',
           )
             .then(val => {
               resolve(true);
@@ -133,13 +133,11 @@ export class BaseManager {
           location: 'default',
         })
         .then(db => {
-          let active = new Date(model.rezDate) < new Date();
-
           db.executeSql(
-            'INSERT INTO Randevu (title,date,rezDate,active,hastaneId)' +
-              `VALUES('${model.title}','${new Date()}','${
-                model.rezDate
-              }','${active}','${model.hastaneId}')`,
+            'INSERT INTO Randevu (title,date,rezDate,doctor,hastaneId)' +
+              `VALUES('${model.title}','${new Date()}','${model.rezDate}','${
+                model.doctor
+              }','${model.hastaneId}')`,
           )
             .then(val => {
               resolve(true);
@@ -230,13 +228,11 @@ export class BaseManager {
           location: 'default',
         })
         .then(db => {
-          let active = new Date(model.rezDate) < model.date;
-
           db.executeSql(
             'UPDATE Randevu SET ' +
               `title = '${model.title}',
                rezDate = '${model.rezDate}',
-               active = '${active}'
+               doctor = '${model.doctor}'
                where id = ${model.id};`,
           )
             .then(val => {
@@ -357,31 +353,18 @@ export class BaseManager {
           location: 'default',
         })
         .then(db => {
-          db.executeSql('SELECT * FROM Hastane')
+          db.executeSql(
+            'SELECT * FROM Hastane INNER JOIN Randevu ON Hastane.hastaneId = Randevu.hastaneId ORDER BY Randevu.rezDate',
+          )
             .then(([values]) => {
               var array = [];
-              console.log('allrandevu', values);
-              if (values.rows.length === 0) {
-                resolve(array);
-                return;
+
+              for (let index = 0; index < values.rows.length; index++) {
+                const element = values.rows.item(index);
+                array.push(element);
               }
 
-              for (let index = 0; index < values.rows.length - 1; index++) {
-                const element = values.rows.item(index);
-                this.getRandevu(element.hastaneId).then(res => {
-                  res.map(data => {
-                    array.push(data);
-                  });
-                });
-              }
-              this.getRandevu(
-                values.rows.item(values.rows.length - 1).hastaneId,
-              ).then(res => {
-                res.map(data => {
-                  array.push(data);
-                });
-                resolve(array);
-              });
+              resolve(array);
             })
             .catch(err => {
               reject(false);
