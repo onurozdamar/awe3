@@ -354,7 +354,7 @@ export class BaseManager {
         })
         .then(db => {
           db.executeSql(
-            'SELECT * FROM Hastane INNER JOIN Randevu ON Hastane.hastaneId = Randevu.hastaneId ORDER BY Randevu.rezDate',
+            'SELECT * FROM Hastane INNER JOIN Randevu ON Hastane.hastaneId = Randevu.hastaneId',
           )
             .then(([values]) => {
               var array = [];
@@ -364,7 +364,9 @@ export class BaseManager {
                 array.push(element);
               }
 
-              resolve(array);
+              resolve(
+                array.sort((a, b) => new Date(b.rezDate) - new Date(a.rezDate)),
+              );
             })
             .catch(err => {
               reject(false);
