@@ -38,7 +38,17 @@ export default function App() {
           component={Home}
           options={{header: () => {}}}
         />
-        <Stack.Screen name="Detail" component={Detail} />
+        <Stack.Screen
+          name="Detail"
+          component={Detail}
+          options={({navigation, route}) => ({
+            headerRight: () => (
+              <Text style={{fontSize: 14, margin: 10}}>
+                {route.params.date}
+              </Text>
+            ),
+          })}
+        />
         <Stack.Screen name="Yeni Kayıt" component={AddYeniKayit} />
         <Stack.Screen name="Yeni Randevu" component={AddRandevu} />
         <Stack.Screen name="Yeni İlaç" component={AddIlac} />
