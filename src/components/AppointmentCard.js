@@ -1,13 +1,11 @@
-import CheckBox from '@react-native-community/checkbox';
-import React, {useState} from 'react';
+import React from 'react';
 import {StyleSheet, Text, TouchableOpacity, View} from 'react-native';
-import {useDispatch} from 'react-redux';
-import {updateGorevComplete} from '../store/gorev/actions';
+import Icon from 'react-native-vector-icons/FontAwesome';
 
-export default function GorevCard(props) {
+export default function AppointmentCard(props) {
   const {data, onPress, onLongPress} = props;
 
-  const dispatch = useDispatch();
+  const active = new Date(data?.rezDate) < new Date();
 
   function formatDate(dateStr) {
     if (!dateStr) {
@@ -40,22 +38,7 @@ export default function GorevCard(props) {
       onPress={onPress}
       onLongPress={onLongPress}>
       <Text style={styles.text}>{data?.title}</Text>
-      <Text style={styles.desc}>{data?.desc}</Text>
-      <CheckBox
-        style={styles.checkbox}
-        value={data.complete === 'true'}
-        hitSlop={{top: 20, bottom: 20, left: 20, right: 20}}
-        onValueChange={() => {
-          dispatch(
-            updateGorevComplete({
-              id: data.id,
-              complete: data.complete === 'false',
-              hastaneId: data.hastaneId,
-            }),
-          );
-        }}
-      />
-
+      {data?.doctor !== '' && <Text style={styles.text}>{data?.doctor}</Text>}
       <View
         style={{
           display: 'flex',
@@ -63,11 +46,10 @@ export default function GorevCard(props) {
           flex: 1,
           justifyContent: 'space-between',
         }}>
-        <Text style={styles.dateInfo}>Görev Tarihi</Text>
-        <Text style={styles.dateInfo}>Görev Saati</Text>
+        <Text style={styles.dateInfo}>Appointment Tarihi</Text>
+        <Text style={styles.dateInfo}>Appointment Saati</Text>
         <Text style={styles.dateInfo}>Eklenme Tarihi</Text>
       </View>
-
       <View
         style={{
           display: 'flex',
@@ -75,10 +57,16 @@ export default function GorevCard(props) {
           flex: 1,
           justifyContent: 'space-between',
         }}>
-        <Text style={styles.date}>{formatDate(data?.endDate)}</Text>
-        <Text style={styles.date}>{formatTime(data?.endDate)}</Text>
+        <Text style={styles.date}>{formatDate(data?.rezDate)}</Text>
+        <Text style={styles.date}>{formatTime(data?.rezDate)}</Text>
         <Text style={styles.date}>{formatDate(data?.date)}</Text>
       </View>
+      <Icon
+        name={active ? 'check' : 'pause'}
+        size={20}
+        color={active ? 'green' : 'red'}
+        style={styles.active}
+      />
     </TouchableOpacity>
   );
 }
@@ -109,18 +97,9 @@ const styles = StyleSheet.create({
     marginLeft: 3,
     fontWeight: '200',
   },
-  desc: {
-    margin: 5,
-    fontSize: 16,
-    paddingRight: 40,
-    color: 'red',
-    textAlign: 'justify',
-  },
-  checkbox: {
+  active: {
     position: 'absolute',
-    top: 0,
-    right: 0,
-    padding: 10,
-    margin: 10,
+    top: 10,
+    right: 10,
   },
 });

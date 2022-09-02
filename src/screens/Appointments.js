@@ -1,15 +1,15 @@
 import React, {useEffect} from 'react';
-import {StyleSheet, TouchableOpacity, View} from 'react-native';
+import {StyleSheet, View} from 'react-native';
 import {useDispatch, useSelector} from 'react-redux';
 import MyFlatlist from '../components/MyFlatlist';
-import RandevuCard from '../components/RandevuCard';
-import {getAllRandevus} from '../store/randevu/actions';
+import AppointmentCard from '../components/AppointmentCard';
+import {getAllAppointments} from '../store/appointment/actions';
 
-const Randevular = ({navigation}) => {
+const Appointments = ({navigation}) => {
   const dispatch = useDispatch();
 
   const data = useSelector(state => {
-    return state.randevuReducer.allData;
+    return state.appointmentReducer.allData;
   });
 
   const loading = useSelector(state => {
@@ -22,7 +22,7 @@ const Randevular = ({navigation}) => {
     }
 
     const willFocusSubscription = navigation.addListener('focus', () => {
-      dispatch(getAllRandevus());
+      dispatch(getAllAppointments());
     });
 
     return willFocusSubscription;
@@ -35,13 +35,13 @@ const Randevular = ({navigation}) => {
         loading={loading}
         onPressPath="Detail"
         navigation={navigation}
-        component={<RandevuCard />}
+        component={<AppointmentCard />}
       />
     </View>
   );
 };
 
-export default Randevular;
+export default Appointments;
 
 const styles = StyleSheet.create({
   container: {

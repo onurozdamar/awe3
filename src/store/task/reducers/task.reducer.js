@@ -1,4 +1,4 @@
-import * as Actions from '../actions/index';
+import * as Actions from '../actions';
 
 const initialState = {
   data: [],
@@ -8,19 +8,19 @@ const initialState = {
 
 const hospitalReducer = function (state = initialState, action) {
   switch (action.type) {
-    case Actions.GET_ILACS:
+    case Actions.GET_TASKS:
       return {...state, data: action.payload};
 
-    case Actions.POST_ILAC:
+    case Actions.POST_TASK:
       return {...state};
 
-    case Actions.UPDATE_ILAC:
+    case Actions.UPDATE_TASK:
       return {...state};
 
-    case Actions.DELETE_ILAC:
+    case Actions.DELETE_TASK:
       return {...state};
 
-    case Actions.GET_ILAC_BY_ID:
+    case Actions.GET_TASK_BY_ID:
       return {...state, item: action.payload};
 
     case Actions.SET_LOADING:

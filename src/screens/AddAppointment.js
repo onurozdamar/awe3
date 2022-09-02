@@ -1,7 +1,7 @@
 import {Formik} from 'formik';
 import React, {useEffect, useState} from 'react';
 import {
-  Modal,
+  Button,
   ScrollView,
   StyleSheet,
   Text,
@@ -10,58 +10,52 @@ import {
   View,
 } from 'react-native';
 import {useDispatch, useSelector} from 'react-redux';
-import MyModal from '../components/MyModal';
 import {
-  addIlac,
-  deleteIlac,
-  getIlacById,
-  updateIlac,
-} from '../store/ilac/actions';
-import DateTimePicker from '@react-native-community/datetimepicker';
+  addAppointment,
+  deleteAppointment,
+  getAppointmentById,
+  updateAppointment,
+} from '../store/appointment/actions';
+import MyModal from '../components/MyModal';
 import MyDatePicker from '../components/MyDatePicker';
 
-export default function AddIlac({navigation, route, ...props}) {
+export default function AddAppointment({navigation, route, ...props}) {
   const editing = route?.params?.editing;
   const data = route?.params?.data;
 
   const dispatch = useDispatch();
-  const ilac = useSelector(state => state.ilacReducer.item);
+  const appointment = useSelector(state => state.appointmentReducer.item);
 
   useEffect(() => {
-    dispatch(getIlacById(data.id));
+    dispatch(getAppointmentById(data.id));
   }, []);
 
   return (
     <ScrollView style={styles.container}>
       <MyModal
         onSuccess={() => {
-          dispatch(deleteIlac(data.id));
+          dispatch(deleteAppointment(data.id));
           navigation.goBack();
         }}
       />
       <Formik
         initialValues={{
-          title: data.id ? ilac?.title : '',
-          frequency: data.id ? ilac?.frequency : '',
-          endDate: data.id ? new Date(ilac?.endDate) : new Date(),
+          title: data.id ? appointment?.title : '',
+          doctor: data.id ? appointment?.doctor : '',
+          rezDate: data.id ? new Date(appointment?.rezDate) : new Date(),
         }}
         onSubmit={values => {
           if (data?.id) {
             dispatch(
-              updateIlac({
+              updateAppointment({
                 ...values,
-                hastaneId: data.hastaneId,
+                hospitalId: data.hospitalId,
                 id: data.id,
               }),
             );
             navigation.goBack();
           } else {
-            dispatch(
-              addIlac({
-                ...values,
-                hastaneId: data.hastaneId,
-              }),
-            );
+            dispatch(addAppointment({...values, hospitalId: data.hospitalId}));
             navigation.goBack();
           }
         }}
@@ -79,22 +73,22 @@ export default function AddIlac({navigation, route, ...props}) {
             </View>
 
             <View style={styles.inputContainer}>
-              <Text style={styles.inputLabel}>Kullanım Sıklığı</Text>
+              <Text style={styles.inputLabel}>Doktor</Text>
               <TextInput
                 style={styles.input}
-                value={values.frequency}
-                onBlur={handleBlur('frequency')}
-                onChangeText={handleChange('frequency')}
+                value={values.doctor}
+                onBlur={handleBlur('doctor')}
+                onChangeText={handleChange('doctor')}
               />
             </View>
 
             <View style={styles.inputContainer}>
-              <Text style={styles.inputLabel}>Kullanma Tarihi</Text>
+              <Text style={styles.inputLabel}>Appointment Tarihi</Text>
+
               <MyDatePicker
-                date={values.endDate}
+                date={values.rezDate}
                 onChange={setFieldValue}
-                fieldName="endDate"
-                showTime={false}
+                fieldName="rezDate"
               />
             </View>
 

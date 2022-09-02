@@ -8,12 +8,12 @@ export const OPEN_MODAL = 'OPEN_MODAL';
 
 import {BaseManager} from '../../../database';
 
-export const getHastane = () => dispatch => {
+export const getHospital = () => dispatch => {
   const manager = new BaseManager();
   dispatch(setLoading(true));
 
   manager
-    .getHastane()
+    .getHospital()
     .then(res => {
       dispatch(setLoading(false));
       dispatch({
@@ -30,12 +30,12 @@ export const getHastane = () => dispatch => {
     });
 };
 
-export const getHastaneById = id => dispatch => {
+export const getHospitalById = id => dispatch => {
   const manager = new BaseManager();
   dispatch(setLoading(true));
 
   manager
-    .getHastaneById(id)
+    .getHospitalById(id)
     .then(res => {
       dispatch(setLoading(false));
       dispatch({
@@ -52,11 +52,11 @@ export const getHastaneById = id => dispatch => {
     });
 };
 
-export const addHastane = model => dispatch => {
+export const addHospital = model => dispatch => {
   const manager = new BaseManager();
 
   manager
-    .addHastane(model)
+    .addHospital(model)
     .then(res => {
       dispatch({
         type: POST_HOSPITAL,
@@ -71,11 +71,11 @@ export const addHastane = model => dispatch => {
     });
 };
 
-export const updateHastane = model => dispatch => {
+export const updateHospital = model => dispatch => {
   const manager = new BaseManager();
 
   manager
-    .updateHastane(model)
+    .updateHospital(model)
     .then(res => {
       dispatch({
         type: UPDATE_HOSPITAL,
@@ -90,11 +90,11 @@ export const updateHastane = model => dispatch => {
     });
 };
 
-export const deleteHastane = id => dispatch => {
+export const deleteHospital = id => dispatch => {
   const manager = new BaseManager();
 
   manager
-    .deleteHastane(id)
+    .deleteHospital(id)
     .then(res => {
       dispatch({
         type: DELETE_HOSPITAL,

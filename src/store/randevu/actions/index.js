@@ -1,1 +1,0 @@
-export * from './randevu.action';

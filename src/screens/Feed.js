@@ -1,19 +1,11 @@
-import React, {useEffect, useState} from 'react';
-import {
-  FlatList,
-  StyleSheet,
-  Text,
-  TouchableHighlight,
-  TouchableOpacity,
-  View,
-} from 'react-native';
-import Icon from 'react-native-vector-icons/FontAwesome';
+import React, {useEffect} from 'react';
+import {StyleSheet, View} from 'react-native';
 import {useDispatch, useSelector} from 'react-redux';
 import DailyCard from '../components/DailyCard';
 import MyFlatlist from '../components/MyFlatlist';
 import AddButton from '../components/AddButton';
 import {BaseManager} from '../database/index';
-import {getHastane as getHastaneAction} from '../store/hospital/actions/hospital.action';
+import {getHospital as getHospitalAction} from '../store/hospital/actions/hospital.action';
 
 const Feed = ({navigation}) => {
   const manager = new BaseManager();
@@ -29,10 +21,10 @@ const Feed = ({navigation}) => {
   });
 
   useEffect(() => {
-    manager.createHastaneTable();
-    manager.createRandevuTable();
-    manager.createIlacTable();
-    manager.createGorevTable();
+    manager.createHospitalTable();
+    manager.createAppointmentTable();
+    manager.createDragTable();
+    manager.createTaskTable();
   }, []);
 
   useEffect(() => {
@@ -41,7 +33,7 @@ const Feed = ({navigation}) => {
     }
 
     const willFocusSubscription = navigation.addListener('focus', () => {
-      dispatch(getHastaneAction());
+      dispatch(getHospitalAction());
     });
 
     return willFocusSubscription;
@@ -56,7 +48,7 @@ const Feed = ({navigation}) => {
         onLongPressPath="Kayıt Güncelle"
         navigation={navigation}
         component={<DailyCard />}
-        onRefresh={() => dispatch(getHastaneAction())}
+        onRefresh={() => dispatch(getHospitalAction())}
       />
       <AddButton navigation={navigation} />
     </View>

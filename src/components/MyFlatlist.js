@@ -35,7 +35,7 @@ const MyFlatlist = props => {
                   return;
                 }
                 navigation.navigate(onPressPath, {
-                  data: {hastaneId: data.item.hastaneId},
+                  data: {hospitalId: data.item.hospitalId},
                 });
               }}
               onLongPress={() => {

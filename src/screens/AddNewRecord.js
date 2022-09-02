@@ -9,13 +9,13 @@ import {
 } from 'react-native';
 import {useDispatch} from 'react-redux';
 import {
-  addHastane,
-  deleteHastane,
-  updateHastane,
+  addHospital,
+  deleteHospital,
+  updateHospital,
 } from '../store/hospital/actions';
 import MyModal from '../components/MyModal';
 
-export default function AddYeniKayit({navigation, route, ...props}) {
+export default function AddNewRecord({navigation, route, ...props}) {
   const editing = route?.params?.editing;
   const data = route?.params?.data;
 
@@ -27,7 +27,7 @@ export default function AddYeniKayit({navigation, route, ...props}) {
     <ScrollView style={styles.container}>
       <MyModal
         onSuccess={() => {
-          dispatch(deleteHastane(data.hastaneId));
+          dispatch(deleteHospital(data.hospitalId));
           navigation.navigate('Ana Sayfa');
         }}
       />
@@ -49,10 +49,10 @@ export default function AddYeniKayit({navigation, route, ...props}) {
         disabled={inputValue === ''}
         onPress={() => {
           if (editing) {
-            dispatch(updateHastane({title: inputValue, id: data.hastaneId}));
+            dispatch(updateHospital({title: inputValue, id: data.hospitalId}));
             navigation.navigate('Ana Sayfa');
           } else {
-            dispatch(addHastane({title: inputValue}));
+            dispatch(addHospital({title: inputValue}));
             navigation.navigate('Ana Sayfa');
           }
         }}>

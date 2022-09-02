@@ -1,131 +1,131 @@
-export const GET_RANDEVUS = 'GET_RANDEVUS';
-export const GET_ALL_RANDEVUS = 'GET_ALL_RANDEVUS';
-export const POST_RANDEVU = 'POST_RANDEVU';
-export const UPDATE_RANDEVU = 'UPDATE_RANDEVU';
-export const DELETE_RANDEVU = 'DELETE_RANDEVU';
-export const GET_RANDEVU_BY_ID = 'GET_RANDEVU_BY_ID';
+export const GET_APPOINTMENTS = 'GET_APPOINTMENTS';
+export const GET_ALL_APPOINTMENTS = 'GET_ALL_APPOINTMENTS';
+export const POST_APPOINTMENT = 'POST_APPOINTMENT';
+export const UPDATE_APPOINTMENT = 'UPDATE_APPOINTMENT';
+export const DELETE_APPOINTMENT = 'DELETE_APPOINTMENT';
+export const GET_APPOINTMENT_BY_ID = 'GET_APPOINTMENT_BY_ID';
 export const SET_LOADING = 'SET_LOADING';
 
 import {BaseManager} from '../../../database';
 
-export const getRandevu = hastaneId => dispatch => {
+export const getAppointment = hospitalId => dispatch => {
   const manager = new BaseManager();
   dispatch(setLoading(true));
 
   manager
-    .getRandevu(hastaneId)
+    .getAppointment(hospitalId)
     .then(res => {
       dispatch(setLoading(false));
       dispatch({
-        type: GET_RANDEVUS,
+        type: GET_APPOINTMENTS,
         payload: res,
       });
     })
     .catch(e => {
       dispatch(setLoading(false));
       dispatch({
-        type: GET_RANDEVUS,
+        type: GET_APPOINTMENTS,
         payload: [],
       });
     });
 };
 
-export const getAllRandevus = hastaneId => dispatch => {
+export const getAllAppointments = hospitalId => dispatch => {
   const manager = new BaseManager();
   dispatch(setLoading(true));
 
   manager
-    .getAllRandevus()
+    .getAllAppointments()
     .then(res => {
       dispatch(setLoading(false));
       dispatch({
-        type: GET_ALL_RANDEVUS,
+        type: GET_ALL_APPOINTMENTS,
         payload: res,
       });
     })
     .catch(e => {
       dispatch(setLoading(false));
       dispatch({
-        type: GET_ALL_RANDEVUS,
+        type: GET_ALL_APPOINTMENTS,
         payload: [],
       });
     });
 };
 
-export const getRandevuById = id => dispatch => {
+export const getAppointmentById = id => dispatch => {
   const manager = new BaseManager();
   dispatch(setLoading(true));
 
   manager
-    .getRandevuById(id)
+    .getAppointmentById(id)
     .then(res => {
       dispatch(setLoading(false));
       dispatch({
-        type: GET_RANDEVU_BY_ID,
+        type: GET_APPOINTMENT_BY_ID,
         payload: res[0],
       });
     })
     .catch(e => {
       dispatch(setLoading(false));
       dispatch({
-        type: GET_RANDEVU_BY_ID,
+        type: GET_APPOINTMENT_BY_ID,
         payload: {},
       });
     });
 };
 
-export const addRandevu = model => dispatch => {
+export const addAppointment = model => dispatch => {
   const manager = new BaseManager();
 
   manager
-    .addRandevu(model)
+    .addAppointment(model)
     .then(res => {
       dispatch({
-        type: POST_RANDEVU,
+        type: POST_APPOINTMENT,
         payload: res,
       });
     })
     .catch(e => {
       dispatch({
-        type: POST_RANDEVU,
+        type: POST_APPOINTMENT,
         payload: [],
       });
     });
 };
 
-export const updateRandevu = model => dispatch => {
+export const updateAppointment = model => dispatch => {
   const manager = new BaseManager();
 
   manager
-    .updateRandevu(model)
+    .updateAppointment(model)
     .then(res => {
       dispatch({
-        type: UPDATE_RANDEVU,
+        type: UPDATE_APPOINTMENT,
         payload: res,
       });
     })
     .catch(e => {
       dispatch({
-        type: UPDATE_RANDEVU,
+        type: UPDATE_APPOINTMENT,
         payload: [],
       });
     });
 };
 
-export const deleteRandevu = id => dispatch => {
+export const deleteAppointment = id => dispatch => {
   const manager = new BaseManager();
 
   manager
-    .deleteRandevu(id)
+    .deleteAppointment(id)
     .then(res => {
       dispatch({
-        type: DELETE_RANDEVU,
+        type: DELETE_APPOINTMENT,
         payload: res,
       });
     })
     .catch(e => {
       dispatch({
-        type: DELETE_RANDEVU,
+        type: DELETE_APPOINTMENT,
         payload: [],
       });
     });

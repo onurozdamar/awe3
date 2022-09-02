@@ -1,11 +1,8 @@
 import React from 'react';
 import {StyleSheet, Text, TouchableOpacity, View} from 'react-native';
-import Icon from 'react-native-vector-icons/FontAwesome';
 
-export default function RandevuCard(props) {
+export default function DragCard(props) {
   const {data, onPress, onLongPress} = props;
-
-  const active = new Date(data?.rezDate) < new Date();
 
   function formatDate(dateStr) {
     if (!dateStr) {
@@ -20,25 +17,14 @@ export default function RandevuCard(props) {
     return dd + '/' + mm + '/' + yyyy;
   }
 
-  function formatTime(dateStr) {
-    if (!dateStr) {
-      return '';
-    }
-
-    var date = new Date(dateStr);
-    var h = String(date.getHours()).padStart(2, '0');
-    var m = String(date.getMinutes()).padStart(2, '0');
-
-    return h + ':' + m;
-  }
-
   return (
     <TouchableOpacity
       style={styles.card}
       onPress={onPress}
       onLongPress={onLongPress}>
       <Text style={styles.text}>{data?.title}</Text>
-      {data?.doctor !== '' && <Text style={styles.text}>{data?.doctor}</Text>}
+      <Text style={styles.frequency}>{data?.frequency}</Text>
+
       <View
         style={{
           display: 'flex',
@@ -46,10 +32,10 @@ export default function RandevuCard(props) {
           flex: 1,
           justifyContent: 'space-between',
         }}>
-        <Text style={styles.dateInfo}>Randevu Tarihi</Text>
-        <Text style={styles.dateInfo}>Randevu Saati</Text>
+        <Text style={styles.dateInfo}>İlaç Bitiş Tarihi</Text>
         <Text style={styles.dateInfo}>Eklenme Tarihi</Text>
       </View>
+
       <View
         style={{
           display: 'flex',
@@ -57,16 +43,9 @@ export default function RandevuCard(props) {
           flex: 1,
           justifyContent: 'space-between',
         }}>
-        <Text style={styles.date}>{formatDate(data?.rezDate)}</Text>
-        <Text style={styles.date}>{formatTime(data?.rezDate)}</Text>
+        <Text style={styles.date}>{formatDate(data?.endDate)}</Text>
         <Text style={styles.date}>{formatDate(data?.date)}</Text>
       </View>
-      <Icon
-        name={active ? 'check' : 'pause'}
-        size={20}
-        color={active ? 'green' : 'red'}
-        style={styles.active}
-      />
     </TouchableOpacity>
   );
 }
@@ -97,9 +76,11 @@ const styles = StyleSheet.create({
     marginLeft: 3,
     fontWeight: '200',
   },
-  active: {
-    position: 'absolute',
-    top: 10,
-    right: 10,
+  frequency: {
+    margin: 5,
+    fontSize: 16,
+    paddingRight: 40,
+    color: 'red',
+    textAlign: 'justify',
   },
 });

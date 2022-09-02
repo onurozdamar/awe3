@@ -1,6 +1,6 @@
 import CheckBox from '@react-native-community/checkbox';
 import {Formik} from 'formik';
-import React, {useEffect, useState} from 'react';
+import React, {useEffect} from 'react';
 import {
   ScrollView,
   StyleSheet,
@@ -12,54 +12,53 @@ import {
 import {useDispatch, useSelector} from 'react-redux';
 import MyModal from '../components/MyModal';
 import {
-  addGorev,
-  deleteGorev,
-  getGorevById,
-  updateGorev,
-} from '../store/gorev/actions';
-import DateTimePicker from '@react-native-community/datetimepicker';
+  addTask,
+  deleteTask,
+  getTaskById,
+  updateTask,
+} from '../store/task/actions';
 
-export default function AddGorev({navigation, route, ...props}) {
+export default function AddTask({navigation, route, ...props}) {
   const editing = route?.params?.editing;
   const data = route?.params?.data;
 
   const dispatch = useDispatch();
-  const gorev = useSelector(state => state.gorevReducer.item);
+  const task = useSelector(state => state.taskReducer.item);
 
   useEffect(() => {
-    dispatch(getGorevById(data.id));
+    dispatch(getTaskById(data.id));
   }, []);
 
   return (
     <ScrollView style={styles.container}>
       <MyModal
         onSuccess={() => {
-          dispatch(deleteGorev(data.id));
+          dispatch(deleteTask(data.id));
           navigation.goBack();
         }}
       />
       <Formik
         initialValues={{
-          title: data.id ? gorev?.title : '',
-          desc: data.id ? gorev?.desc : '',
-          endDate: data.id ? new Date(gorev?.endDate) : new Date(),
-          complete: data.id ? gorev?.complete === 'true' : false,
+          title: data.id ? task?.title : '',
+          desc: data.id ? task?.desc : '',
+          endDate: data.id ? new Date(task?.endDate) : new Date(),
+          complete: data.id ? task?.complete === 'true' : false,
         }}
         onSubmit={values => {
           if (data?.id) {
             dispatch(
-              updateGorev({
+              updateTask({
                 ...values,
-                hastaneId: data.hastaneId,
+                hospitalId: data.hospitalId,
                 id: data.id,
               }),
             );
             navigation.goBack();
           } else {
             dispatch(
-              addGorev({
+              addTask({
                 ...values,
-                hastaneId: data.hastaneId,
+                hospitalId: data.hospitalId,
               }),
             );
             navigation.goBack();

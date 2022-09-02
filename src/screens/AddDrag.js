@@ -1,7 +1,7 @@
 import {Formik} from 'formik';
 import React, {useEffect, useState} from 'react';
 import {
-  Button,
+  Modal,
   ScrollView,
   StyleSheet,
   Text,
@@ -10,52 +10,58 @@ import {
   View,
 } from 'react-native';
 import {useDispatch, useSelector} from 'react-redux';
-import {
-  addRandevu,
-  deleteRandevu,
-  getRandevuById,
-  updateRandevu,
-} from '../store/randevu/actions';
 import MyModal from '../components/MyModal';
+import {
+  addDrag,
+  deleteDrag,
+  getDragById,
+  updateDrag,
+} from '../store/drag/actions';
+import DateTimePicker from '@react-native-community/datetimepicker';
 import MyDatePicker from '../components/MyDatePicker';
 
-export default function AddRandevu({navigation, route, ...props}) {
+export default function AddDrag({navigation, route, ...props}) {
   const editing = route?.params?.editing;
   const data = route?.params?.data;
 
   const dispatch = useDispatch();
-  const randevu = useSelector(state => state.randevuReducer.item);
+  const drag = useSelector(state => state.dragReducer.item);
 
   useEffect(() => {
-    dispatch(getRandevuById(data.id));
+    dispatch(getDragById(data.id));
   }, []);
 
   return (
     <ScrollView style={styles.container}>
       <MyModal
         onSuccess={() => {
-          dispatch(deleteRandevu(data.id));
+          dispatch(deleteDrag(data.id));
           navigation.goBack();
         }}
       />
       <Formik
         initialValues={{
-          title: data.id ? randevu?.title : '',
-          doctor: data.id ? randevu?.doctor : '',
-          rezDate: data.id ? new Date(randevu?.rezDate) : new Date(),
+          title: data.id ? drag?.title : '',
+          frequency: data.id ? drag?.frequency : '',
+          endDate: data.id ? new Date(drag?.endDate) : new Date(),
         }}
         onSubmit={values => {
           if (data?.id) {
             dispatch(
-              updateRandevu({
+              updateDrag({
                 ...values,
-                hastaneId: data.hastaneId,
+                hospitalId: data.hospitalId,
                 id: data.id,
               }),
             );
             navigation.goBack();
           } else {
-            dispatch(addRandevu({...values, hastaneId: data.hastaneId}));
+            dispatch(
+              addDrag({
+                ...values,
+                hospitalId: data.hospitalId,
+              }),
+            );
             navigation.goBack();
           }
         }}
@@ -73,22 +79,22 @@ export default function AddRandevu({navigation, route, ...props}) {
             </View>
 
             <View style={styles.inputContainer}>
-              <Text style={styles.inputLabel}>Doktor</Text>
+              <Text style={styles.inputLabel}>Kullanım Sıklığı</Text>
               <TextInput
                 style={styles.input}
-                value={values.doctor}
-                onBlur={handleBlur('doctor')}
-                onChangeText={handleChange('doctor')}
+                value={values.frequency}
+                onBlur={handleBlur('frequency')}
+                onChangeText={handleChange('frequency')}
               />
             </View>
 
             <View style={styles.inputContainer}>
-              <Text style={styles.inputLabel}>Randevu Tarihi</Text>
-
+              <Text style={styles.inputLabel}>Kullanma Tarihi</Text>
               <MyDatePicker
-                date={values.rezDate}
+                date={values.endDate}
                 onChange={setFieldValue}
-                fieldName="rezDate"
+                fieldName="endDate"
+                showTime={false}
               />
             </View>
 

@@ -1,26 +1,26 @@
 import React, {useEffect} from 'react';
 import {ScrollView, StyleSheet, Text, View} from 'react-native';
-import GorevCard from '../components/GorevCard';
-import IlacCard from '../components/IlacCard';
+import TaskCard from '../components/TaskCard';
+import DragCard from '../components/DragCard';
 import MyList from '../components/MyList';
-import RandevuCard from '../components/RandevuCard';
-import {addRandevu, getRandevu} from '../store/randevu/actions';
-import {addGorev, getGorev} from '../store/gorev/actions';
-import {addIlac, getIlac} from '../store/ilac/actions';
+import AppointmentCard from '../components/AppointmentCard';
+import {addAppointment, getAppointment} from '../store/appointment/actions';
+import {addTask, getTask} from '../store/task/actions';
+import {addDrag, getDrag} from '../store/drag/actions';
 import {useDispatch, useSelector} from 'react-redux';
-import {getHastaneById} from '../store/hospital/actions/hospital.action';
+import {getHospitalById} from '../store/hospital/actions/hospital.action';
 import moment from 'moment';
 import 'moment/locale/tr';
 import MyPicker from '../components/MyPicker';
 moment.locale('tr');
 
-const HastaneDetail = ({navigation, route, ...props}) => {
+const HospitalDetail = ({navigation, route, ...props}) => {
   const {data} = route.params;
 
   const dispatch = useDispatch();
-  const hastane = useSelector(state => state.hospitalReducer.item);
+  const hospital = useSelector(state => state.hospitalReducer.item);
   const buttons = [
-    {navigate: 'Yeni Randevu', label: 'Randevu Ekle'},
+    {navigate: 'Yeni Appointment', label: 'Appointment Ekle'},
     {navigate: 'Yeni İlaç', label: 'İlaç Ekle'},
     {navigate: 'Yeni Görev', label: 'Görev Ekle'},
   ];
@@ -30,12 +30,12 @@ const HastaneDetail = ({navigation, route, ...props}) => {
       label: 'Kan Ekle',
       onChange: () =>
         dispatch(
-          addGorev({
+          addTask({
             title: 'Kan',
             desc: 'Kan Verilecek',
             endDate: new Date(),
             complete: false,
-            hastaneId: hastane.hastaneId,
+            hospitalId: hospital.hospitalId,
           }),
         ),
     },
@@ -43,24 +43,24 @@ const HastaneDetail = ({navigation, route, ...props}) => {
       label: 'İlaç Ekle',
       onChange: () =>
         dispatch(
-          addIlac({
+          addDrag({
             title: 'İlaç verilecek',
             desc: '2 tane potasyum ilacı verilecek',
             endDate: moment().add(2, 'days').format(),
             frequency: 'Günde 1',
-            hastaneId: hastane.hastaneId,
+            hospitalId: hospital.hospitalId,
           }),
         ),
     },
     {
-      label: 'Randevu Ekle',
+      label: 'Appointment Ekle',
       onChange: () =>
         dispatch(
-          addRandevu({
+          addAppointment({
             title: 'Kemoterapi',
             rezDate: moment().add(21, 'days').format(),
             doctor: 'Hülya Ertaş',
-            hastaneId: hastane.hastaneId,
+            hospitalId: hospital.hospitalId,
           }),
         ),
     },
@@ -72,7 +72,7 @@ const HastaneDetail = ({navigation, route, ...props}) => {
     }
 
     const willFocusSubscription = navigation.addListener('focus', () => {
-      dispatch(getHastaneById(data.hastaneId));
+      dispatch(getHospitalById(data.hospitalId));
     });
 
     return willFocusSubscription;
@@ -83,12 +83,12 @@ const HastaneDetail = ({navigation, route, ...props}) => {
       return;
     }
 
-    navigation.setParams({date: moment(new Date(hastane.date)).format('LLL')});
-  }, [hastane]);
+    navigation.setParams({date: moment(new Date(hospital.date)).format('LLL')});
+  }, [hospital]);
 
   return (
     <ScrollView style={styles.container}>
-      <Text style={styles.title}>{hastane?.title}</Text>
+      <Text style={styles.title}>{hospital?.title}</Text>
 
       <View style={styles.pickerGroup}>
         <MyPicker
@@ -96,7 +96,7 @@ const HastaneDetail = ({navigation, route, ...props}) => {
           label="Ayrıntılı Ekle"
           onChange={val => {
             navigation.navigate(val.navigate, {
-              data: {hastaneId: data.hastaneId},
+              data: {hospitalId: data.hospitalId},
             });
           }}
           component={({item}) => (
@@ -116,39 +116,39 @@ const HastaneDetail = ({navigation, route, ...props}) => {
       </View>
 
       <MyList
-        component={<RandevuCard />}
-        headerText="Randevular"
-        onLongPressPath="Randevu Güncelle"
+        component={<AppointmentCard />}
+        headerText="Appointments"
+        onLongPressPath="Appointment Güncelle"
         navigation={navigation}
-        reducer={'randevuReducer'}
-        getData={getRandevu}
-        hastaneId={data.hastaneId}
+        reducer={'appointmentReducer'}
+        getData={getAppointment}
+        hospitalId={data.hospitalId}
       />
 
       <MyList
-        component={<IlacCard />}
+        component={<DragCard />}
         headerText="İlaçlar"
         onLongPressPath="İlaç Güncelle"
         navigation={navigation}
-        reducer={'ilacReducer'}
-        getData={getIlac}
-        hastaneId={data.hastaneId}
+        reducer={'dragReducer'}
+        getData={getDrag}
+        hospitalId={data.hospitalId}
       />
 
       <MyList
-        component={<GorevCard />}
+        component={<TaskCard />}
         headerText="Görevler"
         onLongPressPath="Görev Güncelle"
         navigation={navigation}
-        reducer={'gorevReducer'}
-        getData={getGorev}
-        hastaneId={data.hastaneId}
+        reducer={'taskReducer'}
+        getData={getTask}
+        hospitalId={data.hospitalId}
       />
     </ScrollView>
   );
 };
 
-export default HastaneDetail;
+export default HospitalDetail;
 
 const styles = StyleSheet.create({
   container: {

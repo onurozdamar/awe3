@@ -1,131 +1,131 @@
-export const GET_GOREVS = 'GET_GOREVS';
-export const POST_GOREV = 'POST_GOREV';
-export const UPDATE_GOREV = 'UPDATE_GOREV';
-export const DELETE_GOREV = 'DELETE_GOREV';
-export const GET_GOREV_BY_ID = 'GET_GOREV_BY_ID';
-export const UPDATE_GOREV_COMPLETE = 'UPDATE_GOREV_COMPLETE';
+export const GET_TASKS = 'GET_TASKS';
+export const POST_TASK = 'POST_TASK';
+export const UPDATE_TASK = 'UPDATE_TASK';
+export const DELETE_TASK = 'DELETE_TASK';
+export const GET_TASK_BY_ID = 'GET_TASK_BY_ID';
+export const UPDATE_TASK_COMPLETE = 'UPDATE_TASK_COMPLETE';
 export const SET_LOADING = 'SET_LOADING';
 
 import {BaseManager} from '../../../database';
 
-export const getGorev = hastaneId => dispatch => {
+export const getTask = hospitalId => dispatch => {
   const manager = new BaseManager();
   dispatch(setLoading(true));
 
   manager
-    .getGorev(hastaneId)
+    .getTask(hospitalId)
     .then(res => {
       dispatch(setLoading(false));
       dispatch({
-        type: GET_GOREVS,
+        type: GET_TASKS,
         payload: res,
       });
     })
     .catch(e => {
       dispatch(setLoading(false));
       dispatch({
-        type: GET_GOREVS,
+        type: GET_TASKS,
         payload: [],
       });
     });
 };
 
-export const getGorevById = id => dispatch => {
+export const getTaskById = id => dispatch => {
   const manager = new BaseManager();
   dispatch(setLoading(true));
 
   return manager
-    .getGorevById(id)
+    .getTaskById(id)
     .then(res => {
       dispatch(setLoading(false));
       dispatch({
-        type: GET_GOREV_BY_ID,
+        type: GET_TASK_BY_ID,
         payload: res[0],
       });
     })
     .catch(e => {
       dispatch(setLoading(false));
       dispatch({
-        type: GET_GOREV_BY_ID,
+        type: GET_TASK_BY_ID,
         payload: {},
       });
     });
 };
 
-export const addGorev = model => dispatch => {
+export const addTask = model => dispatch => {
   const manager = new BaseManager();
 
   manager
-    .addGorev(model)
+    .addTask(model)
     .then(res => {
       dispatch({
-        type: POST_GOREV,
+        type: POST_TASK,
         payload: res,
       });
-      dispatch(getGorev(model.hastaneId));
+      dispatch(getTask(model.hospitalId));
     })
     .catch(e => {
       dispatch({
-        type: POST_GOREV,
+        type: POST_TASK,
         payload: [],
       });
     });
 };
 
-export const updateGorev = model => dispatch => {
+export const updateTask = model => dispatch => {
   const manager = new BaseManager();
 
   manager
-    .updateGorev(model)
+    .updateTask(model)
     .then(res => {
       dispatch({
-        type: UPDATE_GOREV,
+        type: UPDATE_TASK,
         payload: res,
       });
     })
     .catch(e => {
       dispatch({
-        type: UPDATE_GOREV,
+        type: UPDATE_TASK,
         payload: [],
       });
     });
 };
 
-export const updateGorevComplete = model => dispatch => {
+export const updateTaskComplete = model => dispatch => {
   const manager = new BaseManager();
 
   manager
-    .updateGorevComplete(model)
+    .updateTaskComplete(model)
     .then(res => {
       dispatch({
-        type: UPDATE_GOREV_COMPLETE,
+        type: UPDATE_TASK_COMPLETE,
         payload: res,
       });
-      dispatch(getGorevById(model.id));
-      dispatch(getGorev(model.hastaneId));
+      dispatch(getTaskById(model.id));
+      dispatch(getTask(model.hospitalId));
     })
     .catch(e => {
       dispatch({
-        type: UPDATE_GOREV_COMPLETE,
+        type: UPDATE_TASK_COMPLETE,
         payload: {},
       });
     });
 };
 
-export const deleteGorev = id => dispatch => {
+export const deleteTask = id => dispatch => {
   const manager = new BaseManager();
 
   manager
-    .deleteGorev(id)
+    .deleteTask(id)
     .then(res => {
       dispatch({
-        type: DELETE_GOREV,
+        type: DELETE_TASK,
         payload: res,
       });
     })
     .catch(e => {
       dispatch({
-        type: DELETE_GOREV,
+        type: DELETE_TASK,
         payload: [],
       });
     });

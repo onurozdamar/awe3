@@ -1,109 +1,109 @@
-export const GET_ILACS = 'GET_ILACS';
-export const POST_ILAC = 'POST_ILAC';
-export const UPDATE_ILAC = 'UPDATE_ILAC';
-export const DELETE_ILAC = 'DELETE_ILAC';
-export const GET_ILAC_BY_ID = 'GET_ILAC_BY_ID';
+export const GET_DRAGS = 'GET_DRAGS';
+export const POST_DRAG = 'POST_DRAG';
+export const UPDATE_DRAG = 'UPDATE_DRAG';
+export const DELETE_DRAG = 'DELETE_DRAG';
+export const GET_DRAG_BY_ID = 'GET_DRAG_BY_ID';
 export const SET_LOADING = 'SET_LOADING';
 
 import {BaseManager} from '../../../database';
 
-export const getIlac = hastaneId => dispatch => {
+export const getDrag = hospitalId => dispatch => {
   const manager = new BaseManager();
   dispatch(setLoading(true));
 
   manager
-    .getIlac(hastaneId)
+    .getDrag(hospitalId)
     .then(res => {
       dispatch(setLoading(false));
       dispatch({
-        type: GET_ILACS,
+        type: GET_DRAGS,
         payload: res,
       });
     })
     .catch(e => {
       dispatch(setLoading(false));
       dispatch({
-        type: GET_ILACS,
+        type: GET_DRAGS,
         payload: [],
       });
     });
 };
 
-export const getIlacById = id => dispatch => {
+export const getDragById = id => dispatch => {
   const manager = new BaseManager();
   dispatch(setLoading(true));
 
   return manager
-    .getIlacById(id)
+    .getDragById(id)
     .then(res => {
       dispatch(setLoading(false));
       dispatch({
-        type: GET_ILAC_BY_ID,
+        type: GET_DRAG_BY_ID,
         payload: res[0],
       });
     })
     .catch(e => {
       dispatch(setLoading(false));
       dispatch({
-        type: GET_ILAC_BY_ID,
+        type: GET_DRAG_BY_ID,
         payload: {},
       });
     });
 };
 
-export const addIlac = model => dispatch => {
+export const addDrag = model => dispatch => {
   const manager = new BaseManager();
 
   manager
-    .addIlac(model)
+    .addDrag(model)
     .then(res => {
       dispatch({
-        type: POST_ILAC,
+        type: POST_DRAG,
         payload: res,
       });
     })
     .catch(e => {
       dispatch({
-        type: POST_ILAC,
+        type: POST_DRAG,
         payload: [],
       });
     });
 };
 
-export const updateIlac = model => dispatch => {
+export const updateDrag = model => dispatch => {
   const manager = new BaseManager();
 
   manager
-    .updateIlac(model)
+    .updateDrag(model)
     .then(res => {
       dispatch({
-        type: UPDATE_ILAC,
+        type: UPDATE_DRAG,
         payload: res,
       });
-      getIlac(model.hastaneId);
+      getDrag(model.hospitalId);
     })
     .catch(e => {
       dispatch({
-        type: UPDATE_ILAC,
+        type: UPDATE_DRAG,
         payload: [],
       });
     });
 };
 
-export const deleteIlac = id => dispatch => {
+export const deleteDrag = id => dispatch => {
   const manager = new BaseManager();
 
   manager
-    .deleteIlac(id)
+    .deleteDrag(id)
     .then(res => {
       dispatch({
-        type: DELETE_ILAC,
+        type: DELETE_DRAG,
         payload: res,
       });
     })
     .catch(e => {
       dispatch({
-        type: DELETE_ILAC,
+        type: DELETE_DRAG,
         payload: [],
       });
     });

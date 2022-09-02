@@ -7,7 +7,7 @@ export class BaseManager {
     this.sqlite.enablePromise(true);
   }
 
-  createHastaneTable() {
+  createHospitalTable() {
     return new Promise((resolve, reject) => {
       this.sqlite
         .openDatabase({
@@ -16,8 +16,8 @@ export class BaseManager {
         })
         .then(db => {
           db.executeSql(
-            'CREATE TABLE IF NOT EXISTS Hastane (' +
-              'hastaneId INTEGER PRIMARY KEY NOT NULL ,' +
+            'CREATE TABLE IF NOT EXISTS Hospital (' +
+              'hospitalId INTEGER PRIMARY KEY NOT NULL ,' +
               'title TEXT, date TEXT);',
           )
             .then(val => {
@@ -33,7 +33,7 @@ export class BaseManager {
     });
   }
 
-  createRandevuTable() {
+  createAppointmentTable() {
     return new Promise((resolve, reject) => {
       this.sqlite
         .openDatabase({
@@ -42,9 +42,9 @@ export class BaseManager {
         })
         .then(db => {
           db.executeSql(
-            'CREATE TABLE IF NOT EXISTS Randevu (' +
+            'CREATE TABLE IF NOT EXISTS Appointment (' +
               'id INTEGER PRIMARY KEY NOT NULL ,' +
-              'title TEXT , date TEXT, rezDate TEXT,doctor TEXT, hastaneId INTEGER);',
+              'title TEXT , date TEXT, rezDate TEXT,doctor TEXT, hospitalId INTEGER);',
           )
             .then(val => {
               resolve(true);
@@ -56,7 +56,7 @@ export class BaseManager {
     });
   }
 
-  createIlacTable() {
+  createDragTable() {
     return new Promise((resolve, reject) => {
       this.sqlite
         .openDatabase({
@@ -65,9 +65,9 @@ export class BaseManager {
         })
         .then(db => {
           db.executeSql(
-            'CREATE TABLE IF NOT EXISTS Ilac (' +
+            'CREATE TABLE IF NOT EXISTS Drag (' +
               'id INTEGER PRIMARY KEY NOT NULL ,' +
-              'title TEXT, date TEXT, endDate TEXT, frequency TEXT, hastaneID INTEGER);',
+              'title TEXT, date TEXT, endDate TEXT, frequency TEXT, hospitalID INTEGER);',
           )
             .then(val => {
               resolve(true);
@@ -79,7 +79,7 @@ export class BaseManager {
     });
   }
 
-  createGorevTable() {
+  createTaskTable() {
     return new Promise((resolve, reject) => {
       this.sqlite
         .openDatabase({
@@ -88,9 +88,9 @@ export class BaseManager {
         })
         .then(db => {
           db.executeSql(
-            'CREATE TABLE IF NOT EXISTS Gorev (' +
+            'CREATE TABLE IF NOT EXISTS Task (' +
               'id INTEGER PRIMARY KEY NOT NULL ,' +
-              'title TEXT, date TEXT,endDate TEXT, desc TEXT, hastaneId INTEGER, complete TEXT);',
+              'title TEXT, date TEXT,endDate TEXT, desc TEXT, hospitalId INTEGER, complete TEXT);',
           )
             .then(val => {
               resolve(true);
@@ -102,7 +102,7 @@ export class BaseManager {
     });
   }
 
-  addHastane(model) {
+  addHospital(model) {
     return new Promise((resolve, reject) => {
       this.sqlite
         .openDatabase({
@@ -111,7 +111,7 @@ export class BaseManager {
         })
         .then(db => {
           db.executeSql(
-            'INSERT INTO Hastane (title,date)' +
+            'INSERT INTO Hospital (title,date)' +
               `VALUES('${model.title}','${new Date()}')`,
           )
             .then(val => {
@@ -124,7 +124,7 @@ export class BaseManager {
     });
   }
 
-  addRandevu(model) {
+  addAppointment(model) {
     return new Promise((resolve, reject) => {
       this.sqlite
         .openDatabase({
@@ -133,10 +133,10 @@ export class BaseManager {
         })
         .then(db => {
           db.executeSql(
-            'INSERT INTO Randevu (title,date,rezDate,doctor,hastaneId)' +
+            'INSERT INTO Appointment (title,date,rezDate,doctor,hospitalId)' +
               `VALUES('${model.title}','${new Date()}','${model.rezDate}','${
                 model.doctor
-              }','${model.hastaneId}')`,
+              }','${model.hospitalId}')`,
           )
             .then(val => {
               resolve(true);
@@ -148,7 +148,7 @@ export class BaseManager {
     });
   }
 
-  addIlac(model) {
+  addDrag(model) {
     return new Promise((resolve, reject) => {
       this.sqlite
         .openDatabase({
@@ -157,10 +157,10 @@ export class BaseManager {
         })
         .then(db => {
           db.executeSql(
-            'INSERT INTO Ilac (title,date,endDate,frequency,hastaneId)' +
+            'INSERT INTO Drag (title,date,endDate,frequency,hospitalId)' +
               `VALUES('${model.title}','${new Date()}','${model.endDate}','${
                 model.frequency
-              }','${model.hastaneId}')`,
+              }','${model.hospitalId}')`,
           )
             .then(val => {
               resolve(true);
@@ -172,7 +172,7 @@ export class BaseManager {
     });
   }
 
-  addGorev(model) {
+  addTask(model) {
     return new Promise((resolve, reject) => {
       this.sqlite
         .openDatabase({
@@ -181,10 +181,10 @@ export class BaseManager {
         })
         .then(db => {
           db.executeSql(
-            'INSERT INTO Gorev (title,date,endDate,desc,complete,hastaneId)' +
+            'INSERT INTO Task (title,date,endDate,desc,complete,hospitalId)' +
               `VALUES('${model.title}','${new Date()}','${model.endDate}','${
                 model.desc
-              }','${model.complete}','${model.hastaneId}')`,
+              }','${model.complete}','${model.hospitalId}')`,
           )
             .then(val => {
               resolve(true);
@@ -196,7 +196,7 @@ export class BaseManager {
     });
   }
 
-  updateHastane(model) {
+  updateHospital(model) {
     return new Promise((resolve, reject) => {
       this.sqlite
         .openDatabase({
@@ -205,9 +205,9 @@ export class BaseManager {
         })
         .then(db => {
           db.executeSql(
-            'UPDATE Hastane SET ' +
+            'UPDATE Hospital SET ' +
               `title = '${model.title}'
-               where hastaneId = ${model.id};`,
+               where hospitalId = ${model.id};`,
           )
             .then(val => {
               resolve(true);
@@ -219,7 +219,7 @@ export class BaseManager {
     });
   }
 
-  updateRandevu(model) {
+  updateAppointment(model) {
     return new Promise((resolve, reject) => {
       this.sqlite
         .openDatabase({
@@ -228,7 +228,7 @@ export class BaseManager {
         })
         .then(db => {
           db.executeSql(
-            'UPDATE Randevu SET ' +
+            'UPDATE Appointment SET ' +
               `title = '${model.title}',
                rezDate = '${model.rezDate}',
                doctor = '${model.doctor}'
@@ -244,7 +244,7 @@ export class BaseManager {
     });
   }
 
-  updateIlac(model) {
+  updateDrag(model) {
     return new Promise((resolve, reject) => {
       this.sqlite
         .openDatabase({
@@ -253,7 +253,7 @@ export class BaseManager {
         })
         .then(db => {
           db.executeSql(
-            'UPDATE Ilac SET ' +
+            'UPDATE Drag SET ' +
               `title = '${model.title}',
                endDate = '${model.endDate}',
                frequency = '${model.frequency}'
@@ -269,7 +269,7 @@ export class BaseManager {
     });
   }
 
-  updateGorev(model) {
+  updateTask(model) {
     return new Promise((resolve, reject) => {
       this.sqlite
         .openDatabase({
@@ -278,7 +278,7 @@ export class BaseManager {
         })
         .then(db => {
           db.executeSql(
-            'UPDATE Gorev SET ' +
+            'UPDATE Task SET ' +
               `title = '${model.title}',
              endDate = '${model.endDate}',
              desc = '${model.desc}',
@@ -295,7 +295,7 @@ export class BaseManager {
     });
   }
 
-  updateGorevComplete(model) {
+  updateTaskComplete(model) {
     return new Promise((resolve, reject) => {
       this.sqlite
         .openDatabase({
@@ -304,7 +304,7 @@ export class BaseManager {
         })
         .then(db => {
           db.executeSql(
-            'UPDATE Gorev SET ' +
+            'UPDATE Task SET ' +
               `complete = '${model.complete}'
              where id = ${model.id};`,
           )
@@ -318,7 +318,7 @@ export class BaseManager {
     });
   }
 
-  getHastane() {
+  getHospital() {
     return new Promise((resolve, reject) => {
       this.sqlite
         .openDatabase({
@@ -326,7 +326,7 @@ export class BaseManager {
           location: 'default',
         })
         .then(db => {
-          db.executeSql('SELECT * FROM Hastane ORDER BY date')
+          db.executeSql('SELECT * FROM Hospital ORDER BY date')
             .then(([values]) => {
               var array = [];
 
@@ -344,7 +344,7 @@ export class BaseManager {
     });
   }
 
-  getAllRandevus() {
+  getAllAppointments() {
     return new Promise((resolve, reject) => {
       this.sqlite
         .openDatabase({
@@ -353,7 +353,7 @@ export class BaseManager {
         })
         .then(db => {
           db.executeSql(
-            'SELECT * FROM Hastane INNER JOIN Randevu ON Hastane.hastaneId = Randevu.hastaneId',
+            'SELECT * FROM Hospital INNER JOIN Appointment ON Hospital.hospitalId = Appointment.hospitalId',
           )
             .then(([values]) => {
               var array = [];
@@ -374,9 +374,9 @@ export class BaseManager {
     });
   }
 
-  getRandevu(hastaneId) {
+  getAppointment(hospitalId) {
     return new Promise((resolve, reject) => {
-      if (!hastaneId) {
+      if (!hospitalId) {
         reject(false);
         return;
       }
@@ -386,7 +386,9 @@ export class BaseManager {
           location: 'default',
         })
         .then(db => {
-          db.executeSql('SELECT * FROM Randevu where hastaneId=' + hastaneId)
+          db.executeSql(
+            'SELECT * FROM Appointment where hospitalId=' + hospitalId,
+          )
             .then(([values]) => {
               var array = [];
 
@@ -404,7 +406,7 @@ export class BaseManager {
     });
   }
 
-  getIlac(hastaneId) {
+  getDrag(hospitalId) {
     return new Promise((resolve, reject) => {
       this.sqlite
         .openDatabase({
@@ -412,7 +414,7 @@ export class BaseManager {
           location: 'default',
         })
         .then(db => {
-          db.executeSql('SELECT * FROM Ilac where hastaneId=' + hastaneId)
+          db.executeSql('SELECT * FROM Drag where hospitalId=' + hospitalId)
             .then(([values]) => {
               var array = [];
 
@@ -430,7 +432,7 @@ export class BaseManager {
     });
   }
 
-  getGorev(hastaneId) {
+  getTask(hospitalId) {
     return new Promise((resolve, reject) => {
       this.sqlite
         .openDatabase({
@@ -438,7 +440,7 @@ export class BaseManager {
           location: 'default',
         })
         .then(db => {
-          db.executeSql('SELECT * FROM Gorev where hastaneId=' + hastaneId)
+          db.executeSql('SELECT * FROM Task where hospitalId=' + hospitalId)
             .then(([values]) => {
               var array = [];
 
@@ -456,7 +458,7 @@ export class BaseManager {
     });
   }
 
-  getHastaneById(id) {
+  getHospitalById(id) {
     return new Promise((resolve, reject) => {
       this.sqlite
         .openDatabase({
@@ -464,7 +466,7 @@ export class BaseManager {
           location: 'default',
         })
         .then(db => {
-          db.executeSql('SELECT * FROM Hastane where hastaneId=' + id)
+          db.executeSql('SELECT * FROM Hospital where hospitalId=' + id)
             .then(([values]) => {
               var array = [];
 
@@ -482,7 +484,7 @@ export class BaseManager {
     });
   }
 
-  getRandevuById(id) {
+  getAppointmentById(id) {
     return new Promise((resolve, reject) => {
       if (!id) {
         reject(false);
@@ -494,7 +496,7 @@ export class BaseManager {
           location: 'default',
         })
         .then(db => {
-          db.executeSql('SELECT * FROM Randevu where id=' + id)
+          db.executeSql('SELECT * FROM Appointment where id=' + id)
             .then(([values]) => {
               var array = [];
 
@@ -512,7 +514,7 @@ export class BaseManager {
     });
   }
 
-  getIlacById(id) {
+  getDragById(id) {
     return new Promise((resolve, reject) => {
       if (!id) {
         reject(false);
@@ -524,7 +526,7 @@ export class BaseManager {
           location: 'default',
         })
         .then(db => {
-          db.executeSql('SELECT * FROM Ilac where id=' + id)
+          db.executeSql('SELECT * FROM Drag where id=' + id)
             .then(([values]) => {
               var array = [];
 
@@ -542,7 +544,7 @@ export class BaseManager {
     });
   }
 
-  getGorevById(id) {
+  getTaskById(id) {
     return new Promise((resolve, reject) => {
       if (!id) {
         reject(false);
@@ -554,7 +556,7 @@ export class BaseManager {
           location: 'default',
         })
         .then(db => {
-          db.executeSql('SELECT * FROM Gorev where id=' + id)
+          db.executeSql('SELECT * FROM Task where id=' + id)
             .then(([values]) => {
               var array = [];
 
@@ -572,7 +574,7 @@ export class BaseManager {
     });
   }
 
-  deleteHastane(id) {
+  deleteHospital(id) {
     return new Promise((resolve, reject) => {
       this.sqlite
         .openDatabase({
@@ -580,11 +582,11 @@ export class BaseManager {
           location: 'default',
         })
         .then(db => {
-          db.executeSql('DELETE FROM Hastane where hastaneId=' + id)
+          db.executeSql('DELETE FROM Hospital where hospitalId=' + id)
             .then(val => {
-              this.deleteRandevuByHastaneId(id);
-              this.deleteIlacByHastaneId(id);
-              this.deleteGorevByHastaneId(id);
+              this.deleteAppointmentByHospitalId(id);
+              this.deleteDragByHospitalId(id);
+              this.deleteTaskByHospitalId(id);
               resolve(true);
             })
             .catch(err => {
@@ -594,7 +596,7 @@ export class BaseManager {
     });
   }
 
-  deleteRandevu(id) {
+  deleteAppointment(id) {
     return new Promise((resolve, reject) => {
       this.sqlite
         .openDatabase({
@@ -602,26 +604,7 @@ export class BaseManager {
           location: 'default',
         })
         .then(db => {
-          db.executeSql('DELETE FROM Randevu where id=' + id)
-            .then(val => {
-              resolve(true);
-            })
-            .catch(err => {
-              reject(false);
-            });
-        });
-    });
-  }
-
-  deleteIlac(id) {
-    return new Promise((resolve, reject) => {
-      this.sqlite
-        .openDatabase({
-          name: 'awe3',
-          location: 'default',
-        })
-        .then(db => {
-          db.executeSql('DELETE FROM Ilac where id=' + id)
+          db.executeSql('DELETE FROM Appointment where id=' + id)
             .then(val => {
               resolve(true);
             })
@@ -632,7 +615,7 @@ export class BaseManager {
     });
   }
 
-  deleteGorev(id) {
+  deleteDrag(id) {
     return new Promise((resolve, reject) => {
       this.sqlite
         .openDatabase({
@@ -640,7 +623,7 @@ export class BaseManager {
           location: 'default',
         })
         .then(db => {
-          db.executeSql('DELETE FROM Gorev where id=' + id)
+          db.executeSql('DELETE FROM Drag where id=' + id)
             .then(val => {
               resolve(true);
             })
@@ -651,7 +634,7 @@ export class BaseManager {
     });
   }
 
-  deleteRandevuByHastaneId(id) {
+  deleteTask(id) {
     return new Promise((resolve, reject) => {
       this.sqlite
         .openDatabase({
@@ -659,7 +642,7 @@ export class BaseManager {
           location: 'default',
         })
         .then(db => {
-          db.executeSql('DELETE FROM Randevu where hastaneId=' + id)
+          db.executeSql('DELETE FROM Task where id=' + id)
             .then(val => {
               resolve(true);
             })
@@ -670,7 +653,7 @@ export class BaseManager {
     });
   }
 
-  deleteIlacByHastaneId(id) {
+  deleteAppointmentByHospitalId(id) {
     return new Promise((resolve, reject) => {
       this.sqlite
         .openDatabase({
@@ -678,7 +661,7 @@ export class BaseManager {
           location: 'default',
         })
         .then(db => {
-          db.executeSql('DELETE FROM Ilac where hastaneId=' + id)
+          db.executeSql('DELETE FROM Appointment where hospitalId=' + id)
             .then(val => {
               resolve(true);
             })
@@ -689,7 +672,7 @@ export class BaseManager {
     });
   }
 
-  deleteGorevByHastaneId(id) {
+  deleteDragByHospitalId(id) {
     return new Promise((resolve, reject) => {
       this.sqlite
         .openDatabase({
@@ -697,7 +680,26 @@ export class BaseManager {
           location: 'default',
         })
         .then(db => {
-          db.executeSql('DELETE FROM Gorev where hastaneId=' + id)
+          db.executeSql('DELETE FROM Drag where hospitalId=' + id)
+            .then(val => {
+              resolve(true);
+            })
+            .catch(err => {
+              reject(false);
+            });
+        });
+    });
+  }
+
+  deleteTaskByHospitalId(id) {
+    return new Promise((resolve, reject) => {
+      this.sqlite
+        .openDatabase({
+          name: 'awe3',
+          location: 'default',
+        })
+        .then(db => {
+          db.executeSql('DELETE FROM Task where hospitalId=' + id)
             .then(val => {
               resolve(true);
             })

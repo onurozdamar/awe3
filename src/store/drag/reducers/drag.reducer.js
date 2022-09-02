@@ -1,4 +1,4 @@
-import * as Actions from '../actions';
+import * as Actions from '../actions/index';
 
 const initialState = {
   data: [],
@@ -8,19 +8,19 @@ const initialState = {
 
 const hospitalReducer = function (state = initialState, action) {
   switch (action.type) {
-    case Actions.GET_GOREVS:
+    case Actions.GET_DRAGS:
       return {...state, data: action.payload};
 
-    case Actions.POST_GOREV:
+    case Actions.POST_DRAG:
       return {...state};
 
-    case Actions.UPDATE_GOREV:
+    case Actions.UPDATE_DRAG:
       return {...state};
 
-    case Actions.DELETE_GOREV:
+    case Actions.DELETE_DRAG:
       return {...state};
 
-    case Actions.GET_GOREV_BY_ID:
+    case Actions.GET_DRAG_BY_ID:
       return {...state, item: action.payload};
 
     case Actions.SET_LOADING:

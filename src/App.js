@@ -2,12 +2,12 @@ import React from 'react';
 import {NavigationContainer} from '@react-navigation/native';
 import {createStackNavigator} from '@react-navigation/stack';
 import Home from './screens/Home';
-import Detail from './screens/HastaneDetail';
-import AddYeniKayit from './screens/AddYeniKayit';
-import AddRandevu from './screens/AddRandevu';
-import AddIlac from './screens/AddIlac';
-import AddGorev from './screens/AddGorev';
-import {Text, TouchableOpacity, View} from 'react-native';
+import Detail from './screens/HospitalDetail';
+import AddNewRecord from './screens/AddNewRecord';
+import AddAppointment from './screens/AddAppointment';
+import AddDrag from './screens/AddDrag';
+import AddTask from './screens/AddTask';
+import {Text, TouchableOpacity} from 'react-native';
 import Icon from 'react-native-vector-icons/FontAwesome';
 import {useDispatch} from 'react-redux';
 import {setOpenModal} from './store/hospital/actions';
@@ -49,34 +49,34 @@ export default function App() {
             ),
           })}
         />
-        <Stack.Screen name="Yeni Kayıt" component={AddYeniKayit} />
-        <Stack.Screen name="Yeni Randevu" component={AddRandevu} />
-        <Stack.Screen name="Yeni İlaç" component={AddIlac} />
-        <Stack.Screen name="Yeni Görev" component={AddGorev} />
+        <Stack.Screen name="Yeni Kayıt" component={AddNewRecord} />
+        <Stack.Screen name="Yeni Appointment" component={AddAppointment} />
+        <Stack.Screen name="Yeni İlaç" component={AddDrag} />
+        <Stack.Screen name="Yeni Görev" component={AddTask} />
         <Stack.Screen
           name="Kayıt Güncelle"
-          component={AddYeniKayit}
+          component={AddNewRecord}
           options={{
             headerRight: () => <Menu />,
           }}
         />
         <Stack.Screen
-          name="Randevu Güncelle"
-          component={AddRandevu}
+          name="Appointment Güncelle"
+          component={AddAppointment}
           options={{
             headerRight: () => <Menu />,
           }}
         />
         <Stack.Screen
           name="İlaç Güncelle"
-          component={AddIlac}
+          component={AddDrag}
           options={{
             headerRight: () => <Menu />,
           }}
         />
         <Stack.Screen
           name="Görev Güncelle"
-          component={AddGorev}
+          component={AddTask}
           options={{
             headerRight: () => <Menu />,
           }}

@@ -7,24 +7,24 @@ const initialState = {
   item: {},
 };
 
-const randevuReducer = function (state = initialState, action) {
+const appointmentReducer = function (state = initialState, action) {
   switch (action.type) {
-    case Actions.GET_RANDEVUS:
+    case Actions.GET_APPOINTMENTS:
       return {...state, data: action.payload};
 
-    case Actions.GET_ALL_RANDEVUS:
+    case Actions.GET_ALL_APPOINTMENTS:
       return {...state, allData: action.payload};
 
-    case Actions.POST_RANDEVU:
+    case Actions.POST_APPOINTMENT:
       return {...state};
 
-    case Actions.UPDATE_RANDEVU:
+    case Actions.UPDATE_APPOINTMENT:
       return {...state};
 
-    case Actions.DELETE_RANDEVU:
+    case Actions.DELETE_APPOINTMENT:
       return {...state};
 
-    case Actions.GET_RANDEVU_BY_ID:
+    case Actions.GET_APPOINTMENT_BY_ID:
       return {...state, item: action.payload};
 
     case Actions.SET_LOADING:
@@ -35,4 +35,4 @@ const randevuReducer = function (state = initialState, action) {
   }
 };
 
-export default randevuReducer;
+export default appointmentReducer;
