@@ -6,14 +6,14 @@ export const DELETE_APPOINTMENT = 'DELETE_APPOINTMENT';
 export const GET_APPOINTMENT_BY_ID = 'GET_APPOINTMENT_BY_ID';
 export const SET_LOADING = 'SET_LOADING';
 
-import {BaseManager} from '../../../database';
+import {AppointmentService} from '../../../database/bussiness/AppointmentService';
 
 export const getAppointment = recordId => dispatch => {
-  const manager = new BaseManager();
+  const service = new AppointmentService();
   dispatch(setLoading(true));
 
-  manager
-    .getAppointment(recordId)
+  service
+    .getByRecordId(recordId)
     .then(res => {
       dispatch(setLoading(false));
       dispatch({
@@ -30,12 +30,12 @@ export const getAppointment = recordId => dispatch => {
     });
 };
 
-export const getAllAppointments = recordId => dispatch => {
-  const manager = new BaseManager();
+export const getAllAppointments = () => dispatch => {
+  const service = new AppointmentService();
   dispatch(setLoading(true));
 
-  manager
-    .getAllAppointments()
+  service
+    .get()
     .then(res => {
       dispatch(setLoading(false));
       dispatch({
@@ -53,11 +53,11 @@ export const getAllAppointments = recordId => dispatch => {
 };
 
 export const getAppointmentById = id => dispatch => {
-  const manager = new BaseManager();
+  const service = new AppointmentService();
   dispatch(setLoading(true));
 
-  manager
-    .getAppointmentById(id)
+  service
+    .getById(id)
     .then(res => {
       dispatch(setLoading(false));
       dispatch({
@@ -75,10 +75,10 @@ export const getAppointmentById = id => dispatch => {
 };
 
 export const addAppointment = model => dispatch => {
-  const manager = new BaseManager();
+  const service = new AppointmentService();
 
-  manager
-    .addAppointment(model)
+  service
+    .add(model)
     .then(res => {
       dispatch({
         type: POST_APPOINTMENT,
@@ -94,10 +94,10 @@ export const addAppointment = model => dispatch => {
 };
 
 export const updateAppointment = model => dispatch => {
-  const manager = new BaseManager();
+  const service = new AppointmentService();
 
-  manager
-    .updateAppointment(model)
+  service
+    .update(model)
     .then(res => {
       dispatch({
         type: UPDATE_APPOINTMENT,
@@ -113,10 +113,10 @@ export const updateAppointment = model => dispatch => {
 };
 
 export const deleteAppointment = id => dispatch => {
-  const manager = new BaseManager();
+  const service = new AppointmentService();
 
-  manager
-    .deleteAppointment(id)
+  service
+    .delete(id)
     .then(res => {
       dispatch({
         type: DELETE_APPOINTMENT,

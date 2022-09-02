@@ -27,7 +27,7 @@ export default function AddAppointment({navigation, route, ...props}) {
   const appointment = useSelector(state => state.appointmentReducer.item);
 
   useEffect(() => {
-    dispatch(getAppointmentById(data.id));
+    data.id && dispatch(getAppointmentById(data.id));
   }, []);
 
   return (
