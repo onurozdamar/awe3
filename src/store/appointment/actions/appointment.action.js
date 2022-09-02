@@ -8,12 +8,12 @@ export const SET_LOADING = 'SET_LOADING';
 
 import {BaseManager} from '../../../database';
 
-export const getAppointment = hospitalId => dispatch => {
+export const getAppointment = recordId => dispatch => {
   const manager = new BaseManager();
   dispatch(setLoading(true));
 
   manager
-    .getAppointment(hospitalId)
+    .getAppointment(recordId)
     .then(res => {
       dispatch(setLoading(false));
       dispatch({
@@ -30,7 +30,7 @@ export const getAppointment = hospitalId => dispatch => {
     });
 };
 
-export const getAllAppointments = hospitalId => dispatch => {
+export const getAllAppointments = recordId => dispatch => {
   const manager = new BaseManager();
   dispatch(setLoading(true));
 

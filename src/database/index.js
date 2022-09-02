@@ -7,7 +7,7 @@ export class BaseManager {
     this.sqlite.enablePromise(true);
   }
 
-  createHospitalTable() {
+  createRecordTable() {
     return new Promise((resolve, reject) => {
       this.sqlite
         .openDatabase({
@@ -16,8 +16,8 @@ export class BaseManager {
         })
         .then(db => {
           db.executeSql(
-            'CREATE TABLE IF NOT EXISTS Hospital (' +
-              'hospitalId INTEGER PRIMARY KEY NOT NULL ,' +
+            'CREATE TABLE IF NOT EXISTS Record (' +
+              'recordId INTEGER PRIMARY KEY NOT NULL ,' +
               'title TEXT, date TEXT);',
           )
             .then(val => {
@@ -44,7 +44,7 @@ export class BaseManager {
           db.executeSql(
             'CREATE TABLE IF NOT EXISTS Appointment (' +
               'id INTEGER PRIMARY KEY NOT NULL ,' +
-              'title TEXT , date TEXT, rezDate TEXT,doctor TEXT, hospitalId INTEGER);',
+              'title TEXT , date TEXT, rezDate TEXT,doctor TEXT, recordId INTEGER);',
           )
             .then(val => {
               resolve(true);
@@ -67,7 +67,7 @@ export class BaseManager {
           db.executeSql(
             'CREATE TABLE IF NOT EXISTS Drag (' +
               'id INTEGER PRIMARY KEY NOT NULL ,' +
-              'title TEXT, date TEXT, endDate TEXT, frequency TEXT, hospitalID INTEGER);',
+              'title TEXT, date TEXT, endDate TEXT, frequency TEXT, recordID INTEGER);',
           )
             .then(val => {
               resolve(true);
@@ -90,7 +90,7 @@ export class BaseManager {
           db.executeSql(
             'CREATE TABLE IF NOT EXISTS Task (' +
               'id INTEGER PRIMARY KEY NOT NULL ,' +
-              'title TEXT, date TEXT,endDate TEXT, desc TEXT, hospitalId INTEGER, complete TEXT);',
+              'title TEXT, date TEXT,endDate TEXT, desc TEXT, recordId INTEGER, complete TEXT);',
           )
             .then(val => {
               resolve(true);
@@ -102,7 +102,7 @@ export class BaseManager {
     });
   }
 
-  addHospital(model) {
+  addRecord(model) {
     return new Promise((resolve, reject) => {
       this.sqlite
         .openDatabase({
@@ -111,7 +111,7 @@ export class BaseManager {
         })
         .then(db => {
           db.executeSql(
-            'INSERT INTO Hospital (title,date)' +
+            'INSERT INTO Record (title,date)' +
               `VALUES('${model.title}','${new Date()}')`,
           )
             .then(val => {
@@ -133,10 +133,10 @@ export class BaseManager {
         })
         .then(db => {
           db.executeSql(
-            'INSERT INTO Appointment (title,date,rezDate,doctor,hospitalId)' +
+            'INSERT INTO Appointment (title,date,rezDate,doctor,recordId)' +
               `VALUES('${model.title}','${new Date()}','${model.rezDate}','${
                 model.doctor
-              }','${model.hospitalId}')`,
+              }','${model.recordId}')`,
           )
             .then(val => {
               resolve(true);
@@ -157,10 +157,10 @@ export class BaseManager {
         })
         .then(db => {
           db.executeSql(
-            'INSERT INTO Drag (title,date,endDate,frequency,hospitalId)' +
+            'INSERT INTO Drag (title,date,endDate,frequency,recordId)' +
               `VALUES('${model.title}','${new Date()}','${model.endDate}','${
                 model.frequency
-              }','${model.hospitalId}')`,
+              }','${model.recordId}')`,
           )
             .then(val => {
               resolve(true);
@@ -181,10 +181,10 @@ export class BaseManager {
         })
         .then(db => {
           db.executeSql(
-            'INSERT INTO Task (title,date,endDate,desc,complete,hospitalId)' +
+            'INSERT INTO Task (title,date,endDate,desc,complete,recordId)' +
               `VALUES('${model.title}','${new Date()}','${model.endDate}','${
                 model.desc
-              }','${model.complete}','${model.hospitalId}')`,
+              }','${model.complete}','${model.recordId}')`,
           )
             .then(val => {
               resolve(true);
@@ -196,7 +196,7 @@ export class BaseManager {
     });
   }
 
-  updateHospital(model) {
+  updateRecord(model) {
     return new Promise((resolve, reject) => {
       this.sqlite
         .openDatabase({
@@ -205,9 +205,9 @@ export class BaseManager {
         })
         .then(db => {
           db.executeSql(
-            'UPDATE Hospital SET ' +
+            'UPDATE Record SET ' +
               `title = '${model.title}'
-               where hospitalId = ${model.id};`,
+               where recordId = ${model.id};`,
           )
             .then(val => {
               resolve(true);
@@ -318,7 +318,7 @@ export class BaseManager {
     });
   }
 
-  getHospital() {
+  getRecord() {
     return new Promise((resolve, reject) => {
       this.sqlite
         .openDatabase({
@@ -326,7 +326,7 @@ export class BaseManager {
           location: 'default',
         })
         .then(db => {
-          db.executeSql('SELECT * FROM Hospital ORDER BY date')
+          db.executeSql('SELECT * FROM Record ORDER BY date')
             .then(([values]) => {
               var array = [];
 
@@ -353,7 +353,7 @@ export class BaseManager {
         })
         .then(db => {
           db.executeSql(
-            'SELECT * FROM Hospital INNER JOIN Appointment ON Hospital.hospitalId = Appointment.hospitalId',
+            'SELECT * FROM Record INNER JOIN Appointment ON Record.recordId = Appointment.recordId',
           )
             .then(([values]) => {
               var array = [];
@@ -374,9 +374,9 @@ export class BaseManager {
     });
   }
 
-  getAppointment(hospitalId) {
+  getAppointment(recordId) {
     return new Promise((resolve, reject) => {
-      if (!hospitalId) {
+      if (!recordId) {
         reject(false);
         return;
       }
@@ -386,9 +386,7 @@ export class BaseManager {
           location: 'default',
         })
         .then(db => {
-          db.executeSql(
-            'SELECT * FROM Appointment where hospitalId=' + hospitalId,
-          )
+          db.executeSql('SELECT * FROM Appointment where recordId=' + recordId)
             .then(([values]) => {
               var array = [];
 
@@ -406,7 +404,7 @@ export class BaseManager {
     });
   }
 
-  getDrag(hospitalId) {
+  getDrag(recordId) {
     return new Promise((resolve, reject) => {
       this.sqlite
         .openDatabase({
@@ -414,7 +412,7 @@ export class BaseManager {
           location: 'default',
         })
         .then(db => {
-          db.executeSql('SELECT * FROM Drag where hospitalId=' + hospitalId)
+          db.executeSql('SELECT * FROM Drag where recordId=' + recordId)
             .then(([values]) => {
               var array = [];
 
@@ -432,7 +430,7 @@ export class BaseManager {
     });
   }
 
-  getTask(hospitalId) {
+  getTask(recordId) {
     return new Promise((resolve, reject) => {
       this.sqlite
         .openDatabase({
@@ -440,7 +438,7 @@ export class BaseManager {
           location: 'default',
         })
         .then(db => {
-          db.executeSql('SELECT * FROM Task where hospitalId=' + hospitalId)
+          db.executeSql('SELECT * FROM Task where recordId=' + recordId)
             .then(([values]) => {
               var array = [];
 
@@ -458,7 +456,7 @@ export class BaseManager {
     });
   }
 
-  getHospitalById(id) {
+  getRecordById(id) {
     return new Promise((resolve, reject) => {
       this.sqlite
         .openDatabase({
@@ -466,7 +464,7 @@ export class BaseManager {
           location: 'default',
         })
         .then(db => {
-          db.executeSql('SELECT * FROM Hospital where hospitalId=' + id)
+          db.executeSql('SELECT * FROM Record where recordId=' + id)
             .then(([values]) => {
               var array = [];
 
@@ -574,7 +572,7 @@ export class BaseManager {
     });
   }
 
-  deleteHospital(id) {
+  deleteRecord(id) {
     return new Promise((resolve, reject) => {
       this.sqlite
         .openDatabase({
@@ -582,11 +580,11 @@ export class BaseManager {
           location: 'default',
         })
         .then(db => {
-          db.executeSql('DELETE FROM Hospital where hospitalId=' + id)
+          db.executeSql('DELETE FROM Record where recordId=' + id)
             .then(val => {
-              this.deleteAppointmentByHospitalId(id);
-              this.deleteDragByHospitalId(id);
-              this.deleteTaskByHospitalId(id);
+              this.deleteAppointmentByRecordId(id);
+              this.deleteDragByRecordId(id);
+              this.deleteTaskByRecordId(id);
               resolve(true);
             })
             .catch(err => {
@@ -653,7 +651,7 @@ export class BaseManager {
     });
   }
 
-  deleteAppointmentByHospitalId(id) {
+  deleteAppointmentByRecordId(id) {
     return new Promise((resolve, reject) => {
       this.sqlite
         .openDatabase({
@@ -661,7 +659,7 @@ export class BaseManager {
           location: 'default',
         })
         .then(db => {
-          db.executeSql('DELETE FROM Appointment where hospitalId=' + id)
+          db.executeSql('DELETE FROM Appointment where recordId=' + id)
             .then(val => {
               resolve(true);
             })
@@ -672,7 +670,7 @@ export class BaseManager {
     });
   }
 
-  deleteDragByHospitalId(id) {
+  deleteDragByRecordId(id) {
     return new Promise((resolve, reject) => {
       this.sqlite
         .openDatabase({
@@ -680,7 +678,7 @@ export class BaseManager {
           location: 'default',
         })
         .then(db => {
-          db.executeSql('DELETE FROM Drag where hospitalId=' + id)
+          db.executeSql('DELETE FROM Drag where recordId=' + id)
             .then(val => {
               resolve(true);
             })
@@ -691,7 +689,7 @@ export class BaseManager {
     });
   }
 
-  deleteTaskByHospitalId(id) {
+  deleteTaskByRecordId(id) {
     return new Promise((resolve, reject) => {
       this.sqlite
         .openDatabase({
@@ -699,7 +697,7 @@ export class BaseManager {
           location: 'default',
         })
         .then(db => {
-          db.executeSql('DELETE FROM Task where hospitalId=' + id)
+          db.executeSql('DELETE FROM Task where recordId=' + id)
             .then(val => {
               resolve(true);
             })

@@ -13,7 +13,7 @@ const Appointments = ({navigation}) => {
   });
 
   const loading = useSelector(state => {
-    return state.hospitalReducer.loading;
+    return state.recordReducer.loading;
   });
 
   useEffect(() => {

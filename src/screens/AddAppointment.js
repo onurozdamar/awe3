@@ -49,13 +49,13 @@ export default function AddAppointment({navigation, route, ...props}) {
             dispatch(
               updateAppointment({
                 ...values,
-                hospitalId: data.hospitalId,
+                recordId: data.recordId,
                 id: data.id,
               }),
             );
             navigation.goBack();
           } else {
-            dispatch(addAppointment({...values, hospitalId: data.hospitalId}));
+            dispatch(addAppointment({...values, recordId: data.recordId}));
             navigation.goBack();
           }
         }}

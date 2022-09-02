@@ -8,11 +8,7 @@ import {
   View,
 } from 'react-native';
 import {useDispatch} from 'react-redux';
-import {
-  addHospital,
-  deleteHospital,
-  updateHospital,
-} from '../store/hospital/actions';
+import {addRecord, deleteRecord, updateRecord} from '../store/record/actions';
 import MyModal from '../components/MyModal';
 
 export default function AddNewRecord({navigation, route, ...props}) {
@@ -27,7 +23,7 @@ export default function AddNewRecord({navigation, route, ...props}) {
     <ScrollView style={styles.container}>
       <MyModal
         onSuccess={() => {
-          dispatch(deleteHospital(data.hospitalId));
+          dispatch(deleteRecord(data.recordId));
           navigation.navigate('Ana Sayfa');
         }}
       />
@@ -49,10 +45,10 @@ export default function AddNewRecord({navigation, route, ...props}) {
         disabled={inputValue === ''}
         onPress={() => {
           if (editing) {
-            dispatch(updateHospital({title: inputValue, id: data.hospitalId}));
+            dispatch(updateRecord({title: inputValue, id: data.recordId}));
             navigation.navigate('Ana Sayfa');
           } else {
-            dispatch(addHospital({title: inputValue}));
+            dispatch(addRecord({title: inputValue}));
             navigation.navigate('Ana Sayfa');
           }
         }}>

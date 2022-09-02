@@ -14,7 +14,7 @@ const MyList = props => {
   const {
     getData,
     reducer,
-    hospitalId,
+    recordId,
     onPressPath,
     onLongPressPath,
     navigation,
@@ -32,7 +32,7 @@ const MyList = props => {
       return;
     }
     const willFocusSubscription = navigation.addListener('focus', () => {
-      dispatch(getData(hospitalId));
+      dispatch(getData(recordId));
     });
 
     return willFocusSubscription;

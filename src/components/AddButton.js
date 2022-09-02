@@ -2,7 +2,7 @@ import React, {useRef, useState} from 'react';
 import {StyleSheet, Text, TouchableOpacity, View} from 'react-native';
 import Icon from 'react-native-vector-icons/FontAwesome';
 import {useDispatch} from 'react-redux';
-import {addHospital} from '../store/hospital/actions';
+import {addRecord} from '../store/record/actions';
 
 function AddButton({navigation}) {
   const [visible, setVisible] = useState(false);
@@ -16,7 +16,7 @@ function AddButton({navigation}) {
       id: 1,
       label: 'Kemoterapi',
       navigate: '',
-      onSelect: () => dispatch(addHospital({title: 'Kemoterapi'})),
+      onSelect: () => dispatch(addRecord({title: 'Kemoterapi'})),
     },
     {id: 2, label: 'Kan', navigate: '', onSelect: () => {}},
   ];

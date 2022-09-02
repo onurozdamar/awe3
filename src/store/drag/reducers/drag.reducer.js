@@ -6,7 +6,7 @@ const initialState = {
   item: {},
 };
 
-const hospitalReducer = function (state = initialState, action) {
+const dragReducer = function (state = initialState, action) {
   switch (action.type) {
     case Actions.GET_DRAGS:
       return {...state, data: action.payload};
@@ -31,4 +31,4 @@ const hospitalReducer = function (state = initialState, action) {
   }
 };
 
-export default hospitalReducer;
+export default dragReducer;

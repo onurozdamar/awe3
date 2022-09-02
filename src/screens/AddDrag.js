@@ -50,7 +50,7 @@ export default function AddDrag({navigation, route, ...props}) {
             dispatch(
               updateDrag({
                 ...values,
-                hospitalId: data.hospitalId,
+                recordId: data.recordId,
                 id: data.id,
               }),
             );
@@ -59,7 +59,7 @@ export default function AddDrag({navigation, route, ...props}) {
             dispatch(
               addDrag({
                 ...values,
-                hospitalId: data.hospitalId,
+                recordId: data.recordId,
               }),
             );
             navigation.goBack();

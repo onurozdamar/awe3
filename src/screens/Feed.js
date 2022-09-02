@@ -5,7 +5,7 @@ import DailyCard from '../components/DailyCard';
 import MyFlatlist from '../components/MyFlatlist';
 import AddButton from '../components/AddButton';
 import {BaseManager} from '../database/index';
-import {getHospital as getHospitalAction} from '../store/hospital/actions/hospital.action';
+import {getRecord as getRecordAction} from '../store/record/actions/record.action';
 
 const Feed = ({navigation}) => {
   const manager = new BaseManager();
@@ -13,15 +13,15 @@ const Feed = ({navigation}) => {
   const dispatch = useDispatch();
 
   const data = useSelector(state => {
-    return state.hospitalReducer.data;
+    return state.recordReducer.data;
   });
 
   const loading = useSelector(state => {
-    return state.hospitalReducer.loading;
+    return state.recordReducer.loading;
   });
 
   useEffect(() => {
-    manager.createHospitalTable();
+    manager.createRecordTable();
     manager.createAppointmentTable();
     manager.createDragTable();
     manager.createTaskTable();
@@ -33,7 +33,7 @@ const Feed = ({navigation}) => {
     }
 
     const willFocusSubscription = navigation.addListener('focus', () => {
-      dispatch(getHospitalAction());
+      dispatch(getRecordAction());
     });
 
     return willFocusSubscription;
@@ -48,7 +48,7 @@ const Feed = ({navigation}) => {
         onLongPressPath="Kayıt Güncelle"
         navigation={navigation}
         component={<DailyCard />}
-        onRefresh={() => dispatch(getHospitalAction())}
+        onRefresh={() => dispatch(getRecordAction())}
       />
       <AddButton navigation={navigation} />
     </View>

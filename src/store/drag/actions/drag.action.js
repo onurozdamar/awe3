@@ -7,12 +7,12 @@ export const SET_LOADING = 'SET_LOADING';
 
 import {BaseManager} from '../../../database';
 
-export const getDrag = hospitalId => dispatch => {
+export const getDrag = recordId => dispatch => {
   const manager = new BaseManager();
   dispatch(setLoading(true));
 
   manager
-    .getDrag(hospitalId)
+    .getDrag(recordId)
     .then(res => {
       dispatch(setLoading(false));
       dispatch({
@@ -80,7 +80,7 @@ export const updateDrag = model => dispatch => {
         type: UPDATE_DRAG,
         payload: res,
       });
-      getDrag(model.hospitalId);
+      getDrag(model.recordId);
     })
     .catch(e => {
       dispatch({

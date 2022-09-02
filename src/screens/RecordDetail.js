@@ -8,17 +8,17 @@ import {addAppointment, getAppointment} from '../store/appointment/actions';
 import {addTask, getTask} from '../store/task/actions';
 import {addDrag, getDrag} from '../store/drag/actions';
 import {useDispatch, useSelector} from 'react-redux';
-import {getHospitalById} from '../store/hospital/actions/hospital.action';
+import {getRecordById} from '../store/record/actions/record.action';
 import moment from 'moment';
 import 'moment/locale/tr';
 import MyPicker from '../components/MyPicker';
 moment.locale('tr');
 
-const HospitalDetail = ({navigation, route, ...props}) => {
+const RecordDetail = ({navigation, route, ...props}) => {
   const {data} = route.params;
 
   const dispatch = useDispatch();
-  const hospital = useSelector(state => state.hospitalReducer.item);
+  const record = useSelector(state => state.recordReducer.item);
   const buttons = [
     {navigate: 'Yeni Appointment', label: 'Appointment Ekle'},
     {navigate: 'Yeni İlaç', label: 'İlaç Ekle'},
@@ -35,7 +35,7 @@ const HospitalDetail = ({navigation, route, ...props}) => {
             desc: 'Kan Verilecek',
             endDate: new Date(),
             complete: false,
-            hospitalId: hospital.hospitalId,
+            recordId: record.recordId,
           }),
         ),
     },
@@ -48,7 +48,7 @@ const HospitalDetail = ({navigation, route, ...props}) => {
             desc: '2 tane potasyum ilacı verilecek',
             endDate: moment().add(2, 'days').format(),
             frequency: 'Günde 1',
-            hospitalId: hospital.hospitalId,
+            recordId: record.recordId,
           }),
         ),
     },
@@ -60,7 +60,7 @@ const HospitalDetail = ({navigation, route, ...props}) => {
             title: 'Kemoterapi',
             rezDate: moment().add(21, 'days').format(),
             doctor: 'Hülya Ertaş',
-            hospitalId: hospital.hospitalId,
+            recordId: record.recordId,
           }),
         ),
     },
@@ -72,7 +72,7 @@ const HospitalDetail = ({navigation, route, ...props}) => {
     }
 
     const willFocusSubscription = navigation.addListener('focus', () => {
-      dispatch(getHospitalById(data.hospitalId));
+      dispatch(getRecordById(data.recordId));
     });
 
     return willFocusSubscription;
@@ -83,12 +83,12 @@ const HospitalDetail = ({navigation, route, ...props}) => {
       return;
     }
 
-    navigation.setParams({date: moment(new Date(hospital.date)).format('LLL')});
-  }, [hospital]);
+    navigation.setParams({date: moment(new Date(record.date)).format('LLL')});
+  }, [record]);
 
   return (
     <ScrollView style={styles.container}>
-      <Text style={styles.title}>{hospital?.title}</Text>
+      <Text style={styles.title}>{record?.title}</Text>
 
       <View style={styles.pickerGroup}>
         <MyPicker
@@ -96,7 +96,7 @@ const HospitalDetail = ({navigation, route, ...props}) => {
           label="Ayrıntılı Ekle"
           onChange={val => {
             navigation.navigate(val.navigate, {
-              data: {hospitalId: data.hospitalId},
+              data: {recordId: data.recordId},
             });
           }}
           component={({item}) => (
@@ -122,7 +122,7 @@ const HospitalDetail = ({navigation, route, ...props}) => {
         navigation={navigation}
         reducer={'appointmentReducer'}
         getData={getAppointment}
-        hospitalId={data.hospitalId}
+        recordId={data.recordId}
       />
 
       <MyList
@@ -132,7 +132,7 @@ const HospitalDetail = ({navigation, route, ...props}) => {
         navigation={navigation}
         reducer={'dragReducer'}
         getData={getDrag}
-        hospitalId={data.hospitalId}
+        recordId={data.recordId}
       />
 
       <MyList
@@ -142,13 +142,13 @@ const HospitalDetail = ({navigation, route, ...props}) => {
         navigation={navigation}
         reducer={'taskReducer'}
         getData={getTask}
-        hospitalId={data.hospitalId}
+        recordId={data.recordId}
       />
     </ScrollView>
   );
 };
 
-export default HospitalDetail;
+export default RecordDetail;
 
 const styles = StyleSheet.create({
   container: {

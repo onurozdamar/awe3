@@ -49,7 +49,7 @@ export default function AddTask({navigation, route, ...props}) {
             dispatch(
               updateTask({
                 ...values,
-                hospitalId: data.hospitalId,
+                recordId: data.recordId,
                 id: data.id,
               }),
             );
@@ -58,7 +58,7 @@ export default function AddTask({navigation, route, ...props}) {
             dispatch(
               addTask({
                 ...values,
-                hospitalId: data.hospitalId,
+                recordId: data.recordId,
               }),
             );
             navigation.goBack();

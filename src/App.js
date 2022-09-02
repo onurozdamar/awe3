@@ -2,7 +2,7 @@ import React from 'react';
 import {NavigationContainer} from '@react-navigation/native';
 import {createStackNavigator} from '@react-navigation/stack';
 import Home from './screens/Home';
-import Detail from './screens/HospitalDetail';
+import Detail from './screens/RecordDetail';
 import AddNewRecord from './screens/AddNewRecord';
 import AddAppointment from './screens/AddAppointment';
 import AddDrag from './screens/AddDrag';
@@ -10,7 +10,7 @@ import AddTask from './screens/AddTask';
 import {Text, TouchableOpacity} from 'react-native';
 import Icon from 'react-native-vector-icons/FontAwesome';
 import {useDispatch} from 'react-redux';
-import {setOpenModal} from './store/hospital/actions';
+import {setOpenModal} from './store/record/actions';
 
 const Stack = createStackNavigator();
 

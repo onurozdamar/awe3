@@ -7,21 +7,21 @@ const initialState = {
   item: {},
 };
 
-const hospitalReducer = function (state = initialState, action) {
+const recordReducer = function (state = initialState, action) {
   switch (action.type) {
-    case Actions.GET_HOSPITALS:
+    case Actions.GET_RECORDS:
       return {...state, data: action.payload};
 
-    case Actions.POST_HOSPITAL:
+    case Actions.POST_RECORD:
       return {...state};
 
-    case Actions.UPDATE_HOSPITAL:
+    case Actions.UPDATE_RECORD:
       return {...state};
 
-    case Actions.DELETE_HOSPITAL:
+    case Actions.DELETE_RECORD:
       return {...state};
 
-    case Actions.GET_HOSPITAL_BY_ID:
+    case Actions.GET_RECORD_BY_ID:
       return {...state, item: action.payload};
 
     case Actions.SET_LOADING:
@@ -35,4 +35,4 @@ const hospitalReducer = function (state = initialState, action) {
   }
 };
 
-export default hospitalReducer;
+export default recordReducer;

@@ -50,7 +50,7 @@ export default function TaskCard(props) {
             updateTaskComplete({
               id: data.id,
               complete: data.complete === 'false',
-              hospitalId: data.hospitalId,
+              recordId: data.recordId,
             }),
           );
         }}

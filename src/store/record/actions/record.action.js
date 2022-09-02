@@ -1,109 +1,109 @@
-export const GET_HOSPITALS = 'GET_HOSPITALS';
-export const POST_HOSPITAL = 'POST_HOSPITAL';
-export const UPDATE_HOSPITAL = 'UPDATE_HOSPITAL';
-export const DELETE_HOSPITAL = 'DELETE_HOSPITAL';
-export const GET_HOSPITAL_BY_ID = 'GET_HOSPITAL_BY_ID';
+export const GET_RECORDS = 'GET_RECORDS';
+export const POST_RECORD = 'POST_RECORD';
+export const UPDATE_RECORD = 'UPDATE_RECORD';
+export const DELETE_RECORD = 'DELETE_RECORD';
+export const GET_RECORD_BY_ID = 'GET_RECORD_BY_ID';
 export const SET_LOADING = 'SET_LOADING';
 export const OPEN_MODAL = 'OPEN_MODAL';
 
 import {BaseManager} from '../../../database';
 
-export const getHospital = () => dispatch => {
+export const getRecord = () => dispatch => {
   const manager = new BaseManager();
   dispatch(setLoading(true));
 
   manager
-    .getHospital()
+    .getRecord()
     .then(res => {
       dispatch(setLoading(false));
       dispatch({
-        type: GET_HOSPITALS,
+        type: GET_RECORDS,
         payload: res,
       });
     })
     .catch(e => {
       dispatch(setLoading(false));
       dispatch({
-        type: GET_HOSPITALS,
+        type: GET_RECORDS,
         payload: [],
       });
     });
 };
 
-export const getHospitalById = id => dispatch => {
+export const getRecordById = id => dispatch => {
   const manager = new BaseManager();
   dispatch(setLoading(true));
 
   manager
-    .getHospitalById(id)
+    .getRecordById(id)
     .then(res => {
       dispatch(setLoading(false));
       dispatch({
-        type: GET_HOSPITAL_BY_ID,
+        type: GET_RECORD_BY_ID,
         payload: res[0],
       });
     })
     .catch(e => {
       dispatch(setLoading(false));
       dispatch({
-        type: GET_HOSPITAL_BY_ID,
+        type: GET_RECORD_BY_ID,
         payload: {},
       });
     });
 };
 
-export const addHospital = model => dispatch => {
+export const addRecord = model => dispatch => {
   const manager = new BaseManager();
 
   manager
-    .addHospital(model)
+    .addRecord(model)
     .then(res => {
       dispatch({
-        type: POST_HOSPITAL,
+        type: POST_RECORD,
         payload: res,
       });
     })
     .catch(e => {
       dispatch({
-        type: POST_HOSPITAL,
+        type: POST_RECORD,
         payload: [],
       });
     });
 };
 
-export const updateHospital = model => dispatch => {
+export const updateRecord = model => dispatch => {
   const manager = new BaseManager();
 
   manager
-    .updateHospital(model)
+    .updateRecord(model)
     .then(res => {
       dispatch({
-        type: UPDATE_HOSPITAL,
+        type: UPDATE_RECORD,
         payload: res,
       });
     })
     .catch(e => {
       dispatch({
-        type: UPDATE_HOSPITAL,
+        type: UPDATE_RECORD,
         payload: [],
       });
     });
 };
 
-export const deleteHospital = id => dispatch => {
+export const deleteRecord = id => dispatch => {
   const manager = new BaseManager();
 
   manager
-    .deleteHospital(id)
+    .deleteRecord(id)
     .then(res => {
       dispatch({
-        type: DELETE_HOSPITAL,
+        type: DELETE_RECORD,
         payload: res,
       });
     })
     .catch(e => {
       dispatch({
-        type: DELETE_HOSPITAL,
+        type: DELETE_RECORD,
         payload: [],
       });
     });

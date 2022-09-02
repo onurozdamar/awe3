@@ -1,13 +1,13 @@
 import React, {useState} from 'react';
 import {Alert, Modal, StyleSheet, Text, Pressable, View} from 'react-native';
 import {useDispatch, useSelector} from 'react-redux';
-import {setOpenModal} from '../store/hospital/actions';
+import {setOpenModal} from '../store/record/actions';
 
 const MyModal = props => {
   const {onSuccess} = props;
 
   const dispatch = useDispatch();
-  const openModal = useSelector(state => state.hospitalReducer.openModal);
+  const openModal = useSelector(state => state.recordReducer.openModal);
 
   return (
     <View style={styles.centeredView}>

@@ -6,7 +6,7 @@ const initialState = {
   item: {},
 };
 
-const hospitalReducer = function (state = initialState, action) {
+const taskdReducer = function (state = initialState, action) {
   switch (action.type) {
     case Actions.GET_TASKS:
       return {...state, data: action.payload};
@@ -31,4 +31,4 @@ const hospitalReducer = function (state = initialState, action) {
   }
 };
 
-export default hospitalReducer;
+export default taskdReducer;

@@ -8,12 +8,12 @@ export const SET_LOADING = 'SET_LOADING';
 
 import {BaseManager} from '../../../database';
 
-export const getTask = hospitalId => dispatch => {
+export const getTask = recordId => dispatch => {
   const manager = new BaseManager();
   dispatch(setLoading(true));
 
   manager
-    .getTask(hospitalId)
+    .getTask(recordId)
     .then(res => {
       dispatch(setLoading(false));
       dispatch({
@@ -62,7 +62,7 @@ export const addTask = model => dispatch => {
         type: POST_TASK,
         payload: res,
       });
-      dispatch(getTask(model.hospitalId));
+      dispatch(getTask(model.recordId));
     })
     .catch(e => {
       dispatch({
@@ -102,7 +102,7 @@ export const updateTaskComplete = model => dispatch => {
         payload: res,
       });
       dispatch(getTaskById(model.id));
-      dispatch(getTask(model.hospitalId));
+      dispatch(getTask(model.recordId));
     })
     .catch(e => {
       dispatch({
