@@ -1,5 +1,4 @@
 import SQLite from 'react-native-sqlite-storage';
-import {getRandevu} from '../store/randevu/actions';
 
 export class BaseManager {
   constructor() {
@@ -327,7 +326,7 @@ export class BaseManager {
           location: 'default',
         })
         .then(db => {
-          db.executeSql('SELECT * FROM Hastane')
+          db.executeSql('SELECT * FROM Hastane ORDER BY date')
             .then(([values]) => {
               var array = [];
 

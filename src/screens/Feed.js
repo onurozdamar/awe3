@@ -11,6 +11,7 @@ import Icon from 'react-native-vector-icons/FontAwesome';
 import {useDispatch, useSelector} from 'react-redux';
 import DailyCard from '../components/DailyCard';
 import MyFlatlist from '../components/MyFlatlist';
+import AddButton from '../components/AddButton';
 import {BaseManager} from '../database/index';
 import {getHastane as getHastaneAction} from '../store/hospital/actions/hospital.action';
 
@@ -55,14 +56,9 @@ const Feed = ({navigation}) => {
         onLongPressPath="Kayıt Güncelle"
         navigation={navigation}
         component={<DailyCard />}
+        onRefresh={() => dispatch(getHastaneAction())}
       />
-      <TouchableOpacity
-        style={styles.floatActionButton}
-        onPress={() => {
-          navigation.navigate('Yeni Kayıt');
-        }}>
-        <Icon name={'plus'} size={30} color={'green'} />
-      </TouchableOpacity>
+      <AddButton navigation={navigation} />
     </View>
   );
 };
@@ -91,7 +87,7 @@ const styles = StyleSheet.create({
   },
   text: {},
   floatActionButton: {
-    backgroundColor: 'rgba(51,125,52,.5)',
+    backgroundColor: 'rgb(151,251,155)',
     width: 50,
     height: 50,
     borderWidth: 1,
