@@ -1,4 +1,4 @@
-import React, {useEffect, useRef, useState} from 'react';
+import React, {useEffect} from 'react';
 import {
   ScrollView,
   StyleSheet,
@@ -15,9 +15,13 @@ import {getGorev} from '../store/gorev/actions';
 import {getIlac} from '../store/ilac/actions';
 import {useDispatch, useSelector} from 'react-redux';
 import {getHastaneById} from '../store/hospital/actions/hospital.action';
+import moment from 'moment';
+import 'moment/locale/tr';
 
 const HastaneDetail = ({navigation, route, ...props}) => {
   const {data} = route.params;
+
+  moment.locale('tr');
 
   const dispatch = useDispatch();
 
@@ -35,39 +39,17 @@ const HastaneDetail = ({navigation, route, ...props}) => {
     return willFocusSubscription;
   }, []);
 
+  useEffect(() => {
+    if (!navigation) {
+      return;
+    }
+
+    navigation.setParams({date: moment(hastane.date).format('LLL')});
+  }, [hastane]);
+
   return (
     <ScrollView style={styles.container}>
       <Text style={styles.title}>{hastane?.title}</Text>
-
-      <MyList
-        component={<RandevuCard />}
-        headerText="Randevular"
-        onLongPressPath="Randevu Güncelle"
-        navigation={navigation}
-        reducer={'randevuReducer'}
-        getData={getRandevu}
-        hastaneId={data.hastaneId}
-      />
-
-      <MyList
-        component={<IlacCard />}
-        headerText="İlaçlar"
-        onLongPressPath="İlaç Güncelle"
-        navigation={navigation}
-        reducer={'ilacReducer'}
-        getData={getIlac}
-        hastaneId={data.hastaneId}
-      />
-
-      <MyList
-        component={<GorevCard />}
-        headerText="Görevler"
-        onLongPressPath="Görev Güncelle"
-        navigation={navigation}
-        reducer={'gorevReducer'}
-        getData={getGorev}
-        hastaneId={data.hastaneId}
-      />
 
       <View style={styles.bottomNav}>
         <TouchableOpacity
@@ -98,6 +80,36 @@ const HastaneDetail = ({navigation, route, ...props}) => {
           <Text style={styles.text}>Görev Ekle</Text>
         </TouchableOpacity>
       </View>
+
+      <MyList
+        component={<RandevuCard />}
+        headerText="Randevular"
+        onLongPressPath="Randevu Güncelle"
+        navigation={navigation}
+        reducer={'randevuReducer'}
+        getData={getRandevu}
+        hastaneId={data.hastaneId}
+      />
+
+      <MyList
+        component={<IlacCard />}
+        headerText="İlaçlar"
+        onLongPressPath="İlaç Güncelle"
+        navigation={navigation}
+        reducer={'ilacReducer'}
+        getData={getIlac}
+        hastaneId={data.hastaneId}
+      />
+
+      <MyList
+        component={<GorevCard />}
+        headerText="Görevler"
+        onLongPressPath="Görev Güncelle"
+        navigation={navigation}
+        reducer={'gorevReducer'}
+        getData={getGorev}
+        hastaneId={data.hastaneId}
+      />
     </ScrollView>
   );
 };
@@ -113,7 +125,7 @@ const styles = StyleSheet.create({
   bottomNav: {
     display: 'flex',
     flexDirection: 'row',
-    marginTop: 'auto',
+    marginBottom: 10,
   },
   button: {
     backgroundColor: 'green',
