@@ -99,10 +99,8 @@ export const updateTaskComplete = model => dispatch => {
     .then(res => {
       dispatch({
         type: UPDATE_TASK_COMPLETE,
-        payload: res,
+        payload: {id: model.id, res},
       });
-      // dispatch(getTaskById(model.id));
-      // dispatch(getTask(model.recordId));
     })
     .catch(e => {
       dispatch({

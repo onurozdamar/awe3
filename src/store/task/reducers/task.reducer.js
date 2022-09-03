@@ -24,7 +24,15 @@ const taskdReducer = function (state = initialState, action) {
       return {...state, item: action.payload};
 
     case Actions.UPDATE_TASK_COMPLETE:
-      return {...state};
+      return {
+        ...state,
+        data: state.data.map(d => {
+          if (d.id === action.payload.id) {
+            return {...d, complete: action.payload.res.complete};
+          }
+          return d;
+        }),
+      };
 
     case Actions.SET_LOADING:
       return {...state, loading: action.payload};

@@ -34,6 +34,10 @@ export default function TaskCard(props) {
     return h + ':' + m;
   }
 
+  function isTrue(value) {
+    return value === 'true' || value === true;
+  }
+
   return (
     <TouchableOpacity
       style={styles.card}
@@ -43,13 +47,13 @@ export default function TaskCard(props) {
       <Text style={styles.desc}>{data?.desc}</Text>
       <CheckBox
         style={styles.checkbox}
-        value={data.complete === 'true'}
+        value={isTrue(data.complete)}
         hitSlop={{top: 20, bottom: 20, left: 20, right: 20}}
         onValueChange={() => {
           dispatch(
             updateTaskComplete({
               id: data.id,
-              complete: data.complete === 'false',
+              complete: isTrue(data.complete) ? 'false' : 'true',
               recordId: data.recordId,
             }),
           );
