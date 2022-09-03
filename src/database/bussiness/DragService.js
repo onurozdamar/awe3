@@ -35,6 +35,6 @@ export class DragService {
   }
 
   delete(id) {
-    this.dragDal.delete(id);
+    return this.dragDal.delete(id);
   }
 }

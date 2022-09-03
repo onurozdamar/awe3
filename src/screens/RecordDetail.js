@@ -35,7 +35,7 @@ const RecordDetail = ({navigation, route, ...props}) => {
             desc: 'Kan Verilecek',
             endDate: new Date(),
             complete: false,
-            recordId: data.recordId,
+            recordId: data.id,
           }),
         ),
     },
@@ -48,7 +48,7 @@ const RecordDetail = ({navigation, route, ...props}) => {
             desc: '2 tane potasyum ilacı verilecek',
             endDate: moment().add(2, 'days').format(),
             frequency: 'Günde 1',
-            recordId: data.recordId,
+            recordId: data.id,
           }),
         ),
     },
@@ -60,7 +60,7 @@ const RecordDetail = ({navigation, route, ...props}) => {
             title: 'Kemoterapi',
             rezDate: moment().add(21, 'days').format(),
             doctor: 'Hülya Ertaş',
-            recordId: data.recordId,
+            recordId: data.id,
           }),
         ),
     },
@@ -72,7 +72,7 @@ const RecordDetail = ({navigation, route, ...props}) => {
     }
 
     const willFocusSubscription = navigation.addListener('focus', () => {
-      dispatch(getRecordById(data.recordId));
+      dispatch(getRecordById(data.id));
     });
 
     return willFocusSubscription;
@@ -96,7 +96,7 @@ const RecordDetail = ({navigation, route, ...props}) => {
           label="Ayrıntılı Ekle"
           onChange={val => {
             navigation.navigate(val.navigate, {
-              data: {recordId: data.recordId},
+              data: {recordId: data.id},
             });
           }}
           component={({item}) => (
@@ -122,7 +122,7 @@ const RecordDetail = ({navigation, route, ...props}) => {
         navigation={navigation}
         reducer={'appointmentReducer'}
         getData={getAppointment}
-        recordId={data.recordId}
+        recordId={data.id}
       />
 
       <MyList
@@ -132,7 +132,7 @@ const RecordDetail = ({navigation, route, ...props}) => {
         navigation={navigation}
         reducer={'dragReducer'}
         getData={getDrag}
-        recordId={data.recordId}
+        recordId={data.id}
       />
 
       <MyList
@@ -142,7 +142,7 @@ const RecordDetail = ({navigation, route, ...props}) => {
         navigation={navigation}
         reducer={'taskReducer'}
         getData={getTask}
-        recordId={data.recordId}
+        recordId={data.id}
       />
     </ScrollView>
   );

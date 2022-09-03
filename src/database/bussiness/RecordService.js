@@ -29,6 +29,6 @@ export class RecordService {
   }
 
   delete(id) {
-    this.recordDal.delete(id);
+    return this.recordDal.delete(id);
   }
 }

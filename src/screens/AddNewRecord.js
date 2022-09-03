@@ -1,4 +1,4 @@
-import React, {useState} from 'react';
+import React from 'react';
 import {
   ScrollView,
   StyleSheet,
@@ -10,12 +10,11 @@ import {
 import {useDispatch} from 'react-redux';
 import {addRecord, deleteRecord, updateRecord} from '../store/record/actions';
 import MyModal from '../components/MyModal';
+import {Formik} from 'formik';
 
 export default function AddNewRecord({navigation, route, ...props}) {
   const editing = route?.params?.editing;
   const data = route?.params?.data;
-
-  const [inputValue, setInputValue] = useState(data?.title ?? '');
 
   const dispatch = useDispatch();
 
@@ -23,39 +22,57 @@ export default function AddNewRecord({navigation, route, ...props}) {
     <ScrollView style={styles.container}>
       <MyModal
         onSuccess={() => {
-          dispatch(deleteRecord(data.recordId));
+          dispatch(deleteRecord(data.id));
           navigation.navigate('Ana Sayfa');
         }}
       />
-      <View style={styles.inputContainer}>
-        <Text style={styles.inputLabel}>
-          {editing ? 'Düzenle' : 'Yeni Kayıt'}
-        </Text>
-        <TextInput
-          style={styles.input}
-          value={inputValue}
-          onChangeText={val => {
-            setInputValue(val);
-          }}
-        />
-      </View>
-
-      <TouchableOpacity
-        style={styles.addButton}
-        disabled={inputValue === ''}
-        onPress={() => {
-          if (editing) {
-            dispatch(updateRecord({title: inputValue, id: data.recordId}));
-            navigation.navigate('Ana Sayfa');
+      <Formik
+        initialValues={{
+          title: data?.id ? data.title : '',
+          date: data?.id ? new Date(data.date) : new Date(),
+        }}
+        onSubmit={values => {
+          if (data?.id) {
+            dispatch(updateRecord({...values, id: data.id}));
+            navigation.goBack();
           } else {
-            dispatch(addRecord({title: inputValue}));
-            navigation.navigate('Ana Sayfa');
+            dispatch(addRecord({...values}));
+            navigation.goBack();
           }
-        }}>
-        <Text style={styles.addButtonText}>
-          {editing ? 'Güncelle' : 'Ekle'}
-        </Text>
-      </TouchableOpacity>
+        }}
+        enableReinitialize={true}>
+        {({handleChange, handleBlur, handleSubmit, setFieldValue, values}) => (
+          <View>
+            <View style={styles.inputContainer}>
+              <Text style={styles.inputLabel}>Başlık</Text>
+              <TextInput
+                style={styles.input}
+                value={values.title}
+                onBlur={handleBlur('title')}
+                onChangeText={handleChange('title')}
+              />
+            </View>
+
+            {data?.id && (
+              <View style={styles.inputContainer}>
+                <Text style={styles.inputLabel}>Appointment Tarihi</Text>
+
+                <MyDatePicker
+                  date={values.date}
+                  onChange={setFieldValue}
+                  fieldName="date"
+                />
+              </View>
+            )}
+
+            <TouchableOpacity style={styles.addButton} onPress={handleSubmit}>
+              <Text style={styles.addButtonText}>
+                {editing ? 'Güncelle' : 'Ekle'}
+              </Text>
+            </TouchableOpacity>
+          </View>
+        )}
+      </Formik>
     </ScrollView>
   );
 }

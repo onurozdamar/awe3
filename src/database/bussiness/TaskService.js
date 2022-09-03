@@ -39,6 +39,6 @@ export class TaskService {
   }
 
   delete(id) {
-    this.taskDal.delete(id);
+    return this.taskDal.delete(id);
   }
 }
