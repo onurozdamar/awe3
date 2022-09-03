@@ -97,7 +97,7 @@ export const deleteQuickAdd = id => dispatch => {
     .then(res => {
       dispatch({
         type: DELETE_QUICK_ADD,
-        payload: res,
+        payload: {res, id},
       });
     })
     .catch(e => {

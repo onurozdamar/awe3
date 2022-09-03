@@ -18,7 +18,10 @@ const recordReducer = function (state = initialState, action) {
       return {...state};
 
     case Actions.DELETE_QUICK_ADD:
-      return {...state};
+      return {
+        ...state,
+        data: state.data.filter(d => d.id !== action.payload.id),
+      };
 
     case Actions.GET_QUICK_ADD_BY_ID:
       return {...state, item: action.payload};
