@@ -41,11 +41,10 @@ export default function AddNewRecord({navigation, route, ...props}) {
                 id: data.id,
               }),
             );
-            navigation.goBack();
           } else {
             dispatch(addRecord({...values, date: values.date.toISOString()}));
-            navigation.goBack();
           }
+          navigation.navigate('Ana Sayfa');
         }}
         enableReinitialize={true}>
         {({handleChange, handleBlur, handleSubmit, setFieldValue, values}) => (
