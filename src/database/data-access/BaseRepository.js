@@ -113,7 +113,7 @@ class BaseRepository {
 
         db.executeSql(query)
           .then(val => {
-            resolve(true);
+            resolve(model);
           })
           .catch(err => {
             reject(false);
