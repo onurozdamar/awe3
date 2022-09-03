@@ -14,7 +14,6 @@ const MyModal = props => {
 
   const dispatch = useDispatch();
   const openModal = useSelector(state => state.recordReducer.openModal);
-  console.log(openModal);
 
   return (
     <View style={styles.centeredView}>
