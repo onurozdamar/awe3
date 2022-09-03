@@ -28,20 +28,18 @@ const RecordDetail = ({navigation, route, ...props}) => {
 
   const quickAddReducer = useSelector(state => state.quickAddReducer);
 
-  const quickAddData = quickAddReducer.data.reduce((acc, val) => {
-    const object = JSON.parse(val.object);
-    if (
-      object.type === types.appointment ||
-      object.type === types.drag ||
-      object.type === types.task
-    ) {
-      if (!acc[object.type]) {
-        acc[object.type] = [];
-      }
-      acc[object.type].push(object.data);
-    }
-    return acc;
-  }, {});
+  const quickAddData = quickAddReducer.data.reduce(
+    (acc, val) => {
+      const object = JSON.parse(val.object);
+      acc[object.type] && acc[object.type].push(object.data);
+      return acc;
+    },
+    {
+      [types.appointment]: [],
+      [types.drag]: [],
+      [types.task]: [],
+    },
+  );
 
   const quickAdd = [
     ...quickAddData[types.appointment].map(d => {
