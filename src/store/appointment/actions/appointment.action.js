@@ -4,7 +4,7 @@ export const POST_APPOINTMENT = 'POST_APPOINTMENT';
 export const UPDATE_APPOINTMENT = 'UPDATE_APPOINTMENT';
 export const DELETE_APPOINTMENT = 'DELETE_APPOINTMENT';
 export const GET_APPOINTMENT_BY_ID = 'GET_APPOINTMENT_BY_ID';
-export const SET_LOADING = 'SET_LOADING';
+export const SET_LOADING = 'SET_LOADING_APPOINTMENT';
 
 import {AppointmentService} from '../../../database/bussiness/AppointmentService';
 

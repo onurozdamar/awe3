@@ -1,12 +1,5 @@
 import React, {cloneElement, useEffect, useState} from 'react';
-import {
-  FlatList,
-  SafeAreaView,
-  StyleSheet,
-  Text,
-  TouchableOpacity,
-  View,
-} from 'react-native';
+import {StyleSheet, Text, TouchableOpacity, View} from 'react-native';
 import Icon from 'react-native-vector-icons/FontAwesome';
 import {useDispatch, useSelector} from 'react-redux';
 
@@ -24,8 +17,7 @@ const MyList = props => {
 
   const dispatch = useDispatch();
 
-  const data = useSelector(state => state[reducer].data);
-  const loading = useSelector(state => state[reducer].loading);
+  const {data, loading} = useSelector(state => state[reducer]);
 
   useEffect(() => {
     if (!navigation) {

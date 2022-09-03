@@ -1,7 +1,6 @@
 import {Formik} from 'formik';
-import React, {useEffect, useState} from 'react';
+import React, {useEffect} from 'react';
 import {
-  Modal,
   ScrollView,
   StyleSheet,
   Text,
@@ -17,7 +16,6 @@ import {
   getDragById,
   updateDrag,
 } from '../store/drag/actions';
-import DateTimePicker from '@react-native-community/datetimepicker';
 import MyDatePicker from '../components/MyDatePicker';
 
 export default function AddDrag({navigation, route, ...props}) {
@@ -28,7 +26,7 @@ export default function AddDrag({navigation, route, ...props}) {
   const drag = useSelector(state => state.dragReducer.item);
 
   useEffect(() => {
-    dispatch(getDragById(data.id));
+    data.id && dispatch(getDragById(data.id));
   }, []);
 
   return (

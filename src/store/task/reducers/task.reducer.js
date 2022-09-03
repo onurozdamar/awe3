@@ -23,6 +23,9 @@ const taskdReducer = function (state = initialState, action) {
     case Actions.GET_TASK_BY_ID:
       return {...state, item: action.payload};
 
+    case Actions.UPDATE_TASK_COMPLETE:
+      return {...state};
+
     case Actions.SET_LOADING:
       return {...state, loading: action.payload};
 
