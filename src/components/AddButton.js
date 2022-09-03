@@ -40,7 +40,6 @@ function AddButton({navigation}) {
               key={item.id}
               onPress={() => {
                 setVisible(false);
-                console.log('seçim', item);
                 item.navigate && navigation.navigate(item.navigate);
                 item.onSelect();
               }}>
@@ -58,7 +57,6 @@ function AddButton({navigation}) {
         }}
         onPress={() => {
           setVisible(v => !v);
-          console.log(dimensions.current);
         }}>
         <Icon name={'plus'} size={30} color={'green'} />
       </TouchableOpacity>

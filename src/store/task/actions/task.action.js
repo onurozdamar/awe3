@@ -54,7 +54,6 @@ export const getTaskById = id => dispatch => {
 
 export const addTask = model => dispatch => {
   const service = new TaskService();
-  console.log(model, '******************');
 
   service
     .add(model)

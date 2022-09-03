@@ -23,7 +23,6 @@ const Feed = ({navigation}) => {
   const data = useSelector(state => {
     return state.recordReducer.data;
   });
-  console.log(data);
 
   const loading = useSelector(state => {
     return state.recordReducer.loading;
