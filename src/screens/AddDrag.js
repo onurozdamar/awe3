@@ -17,6 +17,8 @@ import {
   updateDrag,
 } from '../store/drag/actions';
 import MyDatePicker from '../components/MyDatePicker';
+import {addQuickAdd} from '../store/quick-add/actions/quickAdd.action';
+import {types} from '../contants';
 
 export default function AddDrag({navigation, route, ...props}) {
   const editing = route?.params?.editing;
@@ -39,8 +41,14 @@ export default function AddDrag({navigation, route, ...props}) {
       />
       <MyModal
         onSuccess={() => {
-          // dispatch(deleteAppointment(data.id));
-          console.log('ekle');
+          dispatch(
+            addQuickAdd({
+              object: JSON.stringify({
+                type: types.drag,
+                data: drag,
+              }),
+            }),
+          );
         }}
         reducerKey="addQuick"
         label="Hızlı eklemelere eklensin mi?"

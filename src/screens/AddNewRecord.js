@@ -12,7 +12,8 @@ import {addRecord, deleteRecord, updateRecord} from '../store/record/actions';
 import MyModal from '../components/MyModal';
 import {Formik} from 'formik';
 import MyDatePicker from '../components/MyDatePicker';
-import {routes} from '../contants';
+import {routes, types} from '../contants';
+import {addQuickAdd} from '../store/quick-add/actions/quickAdd.action';
 
 export default function AddNewRecord({navigation, route, ...props}) {
   const editing = route?.params?.editing;
@@ -30,8 +31,14 @@ export default function AddNewRecord({navigation, route, ...props}) {
       />
       <MyModal
         onSuccess={() => {
-          // dispatch(deleteAppointment(data.id));
-          console.log('ekle');
+          dispatch(
+            addQuickAdd({
+              object: JSON.stringify({
+                type: types.record,
+                data: data,
+              }),
+            }),
+          );
         }}
         reducerKey="addQuick"
         label="Hızlı eklemelere eklensin mi?"

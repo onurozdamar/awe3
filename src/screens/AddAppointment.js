@@ -1,7 +1,6 @@
 import {Formik} from 'formik';
-import React, {useEffect, useState} from 'react';
+import React, {useEffect} from 'react';
 import {
-  Button,
   ScrollView,
   StyleSheet,
   Text,
@@ -18,6 +17,8 @@ import {
 } from '../store/appointment/actions';
 import MyModal from '../components/MyModal';
 import MyDatePicker from '../components/MyDatePicker';
+import {addQuickAdd} from '../store/quick-add/actions/quickAdd.action';
+import {types} from '../contants';
 
 export default function AddAppointment({navigation, route, ...props}) {
   const editing = route?.params?.editing;
@@ -41,8 +42,14 @@ export default function AddAppointment({navigation, route, ...props}) {
       />
       <MyModal
         onSuccess={() => {
-          // dispatch(deleteAppointment(data.id));
-          console.log('ekle');
+          dispatch(
+            addQuickAdd({
+              object: JSON.stringify({
+                type: types.appointment,
+                data: appointment,
+              }),
+            }),
+          );
         }}
         reducerKey="addQuick"
         label="Hızlı eklemelere eklensin mi?"

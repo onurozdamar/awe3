@@ -11,12 +11,14 @@ import {
 } from 'react-native';
 import {useDispatch, useSelector} from 'react-redux';
 import MyModal from '../components/MyModal';
+import {types} from '../contants';
 import {
   addTask,
   deleteTask,
   getTaskById,
   updateTask,
 } from '../store/task/actions';
+import {addQuickAdd} from '../store/quick-add/actions/quickAdd.action';
 
 export default function AddTask({navigation, route, ...props}) {
   const editing = route?.params?.editing;
@@ -39,8 +41,14 @@ export default function AddTask({navigation, route, ...props}) {
       />
       <MyModal
         onSuccess={() => {
-          // dispatch(deleteAppointment(data.id));
-          console.log('ekle');
+          dispatch(
+            addQuickAdd({
+              object: JSON.stringify({
+                type: types.task,
+                data: task,
+              }),
+            }),
+          );
         }}
         reducerKey="addQuick"
         label="Hızlı eklemelere eklensin mi?"

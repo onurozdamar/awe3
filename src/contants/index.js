@@ -27,3 +27,11 @@ export const routes = {
   updateTask: 'Görev Güncelle',
   updateDrag: 'İlaç Güncelle',
 };
+
+export const types = {
+  record: 'record',
+  drag: 'drag',
+  task: 'task',
+  appointment: 'appointment',
+  quickAdd: 'quickAdd',
+};
