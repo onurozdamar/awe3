@@ -37,6 +37,16 @@ export default function AddAppointment({navigation, route, ...props}) {
           dispatch(deleteAppointment(data.id));
           navigation.goBack();
         }}
+        reducerKey="delete"
+      />
+      <MyModal
+        onSuccess={() => {
+          // dispatch(deleteAppointment(data.id));
+          console.log('ekle');
+        }}
+        reducerKey="addQuick"
+        label="Hızlı eklemelere eklensin mi?"
+        okLabel="Ekle"
       />
       <Formik
         initialValues={{

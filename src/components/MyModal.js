@@ -1,42 +1,47 @@
-import React, {useState} from 'react';
-import {Alert, Modal, StyleSheet, Text, Pressable, View} from 'react-native';
+import React from 'react';
+import {Modal, StyleSheet, Text, TouchableOpacity, View} from 'react-native';
 import {useDispatch, useSelector} from 'react-redux';
 import {setOpenModal} from '../store/record/actions';
 
 const MyModal = props => {
-  const {onSuccess} = props;
+  const {
+    onSuccess,
+    label = 'Silmek İstediğinize Emin misiniz?',
+    okLabel = 'Sil',
+    cancelLabel = 'İptal',
+    reducerKey = 'delete',
+  } = props;
 
   const dispatch = useDispatch();
   const openModal = useSelector(state => state.recordReducer.openModal);
+  console.log(openModal);
 
   return (
     <View style={styles.centeredView}>
       <Modal
         animationType="slide"
         transparent={true}
-        visible={openModal}
+        visible={openModal[reducerKey] ?? false}
         onRequestClose={() => {
-          dispatch(setOpenModal(false));
+          dispatch(setOpenModal({reducerKey: false}));
         }}>
         <View style={styles.centeredView}>
           <View style={styles.modalView}>
-            <Text style={styles.modalText}>
-              Silmek İstediğinize Emin misiniz?
-            </Text>
+            <Text style={styles.modalText}>{label}</Text>
             <View style={styles.actions}>
-              <Pressable
+              <TouchableOpacity
                 style={[styles.button, styles.buttonDelete]}
                 onPress={() => {
                   onSuccess && onSuccess();
-                  dispatch(setOpenModal(false));
+                  dispatch(setOpenModal({reducerKey: false}));
                 }}>
-                <Text style={styles.textStyle}>Sil</Text>
-              </Pressable>
-              <Pressable
+                <Text style={styles.textStyle}>{okLabel}</Text>
+              </TouchableOpacity>
+              <TouchableOpacity
                 style={[styles.button, styles.buttonCancel]}
-                onPress={() => dispatch(setOpenModal(false))}>
-                <Text style={styles.textStyle}>İptal</Text>
-              </Pressable>
+                onPress={() => dispatch(setOpenModal({reducerKey: false}))}>
+                <Text style={styles.textStyle}>{cancelLabel}</Text>
+              </TouchableOpacity>
             </View>
           </View>
         </View>

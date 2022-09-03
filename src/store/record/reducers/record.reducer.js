@@ -3,7 +3,7 @@ import * as Actions from '../actions/index';
 const initialState = {
   data: [],
   loading: false,
-  openModal: false,
+  openModal: {delete: false, addQuick: false},
   item: {},
 };
 

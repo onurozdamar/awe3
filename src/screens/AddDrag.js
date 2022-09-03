@@ -37,6 +37,15 @@ export default function AddDrag({navigation, route, ...props}) {
           navigation.goBack();
         }}
       />
+      <MyModal
+        onSuccess={() => {
+          // dispatch(deleteAppointment(data.id));
+          console.log('ekle');
+        }}
+        reducerKey="addQuick"
+        label="Hızlı eklemelere eklensin mi?"
+        okLabel="Ekle"
+      />
       <Formik
         initialValues={{
           title: data.id ? drag?.title : '',

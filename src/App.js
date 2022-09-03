@@ -7,7 +7,7 @@ import AddNewRecord from './screens/AddNewRecord';
 import AddAppointment from './screens/AddAppointment';
 import AddDrag from './screens/AddDrag';
 import AddTask from './screens/AddTask';
-import {Text, TouchableOpacity} from 'react-native';
+import {Text, TouchableOpacity, View} from 'react-native';
 import Icon from 'react-native-vector-icons/FontAwesome';
 import {useDispatch} from 'react-redux';
 import {setOpenModal} from './store/record/actions';
@@ -19,14 +19,24 @@ const Menu = () => {
   const dispatch = useDispatch();
 
   return (
-    <TouchableOpacity
-      style={{margin: 15}}
-      hitSlop={{top: 15, bottom: 15, left: 20, right: 20}}
-      onPress={() => {
-        dispatch(setOpenModal(true));
-      }}>
-      <Icon name={'ellipsis-v'} size={30} color={'black'} />
-    </TouchableOpacity>
+    <View style={{display: 'flex', flexDirection: 'row', gap: 10}}>
+      <TouchableOpacity
+        style={{margin: 15}}
+        hitSlop={{top: 15, bottom: 15, left: 20, right: 20}}
+        onPress={() => {
+          dispatch(setOpenModal({delete: true}));
+        }}>
+        <Icon name={'trash'} size={30} color={'red'} />
+      </TouchableOpacity>
+      <TouchableOpacity
+        style={{margin: 15}}
+        hitSlop={{top: 15, bottom: 15, left: 20, right: 20}}
+        onPress={() => {
+          dispatch(setOpenModal({addQuick: true}));
+        }}>
+        <Icon name={'ellipsis-v'} size={30} color={'black'} />
+      </TouchableOpacity>
+    </View>
   );
 };
 

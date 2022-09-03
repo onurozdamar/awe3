@@ -28,6 +28,15 @@ export default function AddNewRecord({navigation, route, ...props}) {
           navigation.navigate(routes.mainPage);
         }}
       />
+      <MyModal
+        onSuccess={() => {
+          // dispatch(deleteAppointment(data.id));
+          console.log('ekle');
+        }}
+        reducerKey="addQuick"
+        label="Hızlı eklemelere eklensin mi?"
+        okLabel="Ekle"
+      />
       <Formik
         initialValues={{
           title: data?.id ? data.title : '',
