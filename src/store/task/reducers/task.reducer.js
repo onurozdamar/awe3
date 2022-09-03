@@ -12,7 +12,7 @@ const taskdReducer = function (state = initialState, action) {
       return {...state, data: action.payload};
 
     case Actions.POST_TASK:
-      return {...state};
+      return {...state, data: [...state.data, action.payload]};
 
     case Actions.UPDATE_TASK:
       return {...state};

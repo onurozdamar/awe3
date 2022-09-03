@@ -12,7 +12,7 @@ const dragReducer = function (state = initialState, action) {
       return {...state, data: action.payload};
 
     case Actions.POST_DRAG:
-      return {...state};
+      return {...state, data: [...state.data, action.payload]};
 
     case Actions.UPDATE_DRAG:
       return {...state};

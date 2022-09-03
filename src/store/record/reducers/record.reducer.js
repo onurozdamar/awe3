@@ -13,7 +13,7 @@ const recordReducer = function (state = initialState, action) {
       return {...state, data: action.payload};
 
     case Actions.POST_RECORD:
-      return {...state};
+      return {...state, data: [...state.data, action.payload]};
 
     case Actions.UPDATE_RECORD:
       return {...state};

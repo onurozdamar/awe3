@@ -16,7 +16,7 @@ const appointmentReducer = function (state = initialState, action) {
       return {...state, allData: action.payload};
 
     case Actions.POST_APPOINTMENT:
-      return {...state};
+      return {...state, data: [...state.data, action.payload]};
 
     case Actions.UPDATE_APPOINTMENT:
       return {...state};
