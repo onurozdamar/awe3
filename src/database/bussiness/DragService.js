@@ -14,6 +14,22 @@ export class DragService {
     return this.dragDal.get();
   }
 
+  getById(id) {
+    return this.dragDal.get({
+      where: {keyword: 'WHERE', value: 'id= ' + id},
+    });
+  }
+
+  getByRecordId(recordId) {
+    return this.dragDal.get({
+      where: {keyword: 'WHERE', value: 'recordId= ' + recordId},
+    });
+  }
+
+  add(model) {
+    return this.dragDal.add(model);
+  }
+
   update(model) {
     return this.dragDal.update(model);
   }

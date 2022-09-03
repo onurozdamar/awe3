@@ -14,7 +14,27 @@ export class TaskService {
     return this.taskDal.get();
   }
 
+  getById(id) {
+    return this.taskDal.get({
+      where: {keyword: 'WHERE', value: 'id= ' + id},
+    });
+  }
+
+  getByRecordId(recordId) {
+    return this.taskDal.get({
+      where: {keyword: 'WHERE', value: 'recordId= ' + recordId},
+    });
+  }
+
+  add(model) {
+    return this.taskDal.add(model);
+  }
+
   update(model) {
+    return this.taskDal.update(model);
+  }
+
+  updateComplete(model) {
     return this.taskDal.update(model);
   }
 
