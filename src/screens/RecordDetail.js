@@ -12,6 +12,7 @@ import {getRecordById} from '../store/record/actions/record.action';
 import moment from 'moment';
 import 'moment/locale/tr';
 import MyPicker from '../components/MyPicker';
+import {routes} from '../contants';
 moment.locale('tr');
 
 const RecordDetail = ({navigation, route, ...props}) => {
@@ -20,9 +21,9 @@ const RecordDetail = ({navigation, route, ...props}) => {
   const dispatch = useDispatch();
   const record = useSelector(state => state.recordReducer.item);
   const buttons = [
-    {navigate: 'Yeni Appointment', label: 'Appointment Ekle'},
-    {navigate: 'Yeni İlaç', label: 'İlaç Ekle'},
-    {navigate: 'Yeni Görev', label: 'Görev Ekle'},
+    {navigate: routes.newAppointment, label: 'Appointment Ekle'},
+    {navigate: routes.newDrag, label: 'İlaç Ekle'},
+    {navigate: routes.newTask, label: 'Görev Ekle'},
   ];
 
   const quickAdd = [
@@ -121,7 +122,7 @@ const RecordDetail = ({navigation, route, ...props}) => {
       <MyList
         component={<AppointmentCard />}
         headerText="Appointments"
-        onLongPressPath="Appointment Güncelle"
+        onLongPressPath={routes.updateAppointment}
         navigation={navigation}
         reducer={'appointmentReducer'}
         getData={getAppointment}
@@ -131,7 +132,7 @@ const RecordDetail = ({navigation, route, ...props}) => {
       <MyList
         component={<DragCard />}
         headerText="İlaçlar"
-        onLongPressPath="İlaç Güncelle"
+        onLongPressPath={routes.updateDrag}
         navigation={navigation}
         reducer={'dragReducer'}
         getData={getDrag}
@@ -141,7 +142,7 @@ const RecordDetail = ({navigation, route, ...props}) => {
       <MyList
         component={<TaskCard />}
         headerText="Görevler"
-        onLongPressPath="Görev Güncelle"
+        onLongPressPath={routes.updateTask}
         navigation={navigation}
         reducer={'taskReducer'}
         getData={getTask}

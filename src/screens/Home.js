@@ -3,6 +3,7 @@ import Feed from './Feed';
 import {createBottomTabNavigator} from '@react-navigation/bottom-tabs';
 import Icon from 'react-native-vector-icons/FontAwesome';
 import Appointments from './Appointments';
+import {routes} from '../contants';
 
 const Tab = createBottomTabNavigator();
 
@@ -15,9 +16,9 @@ const Home = ({navigation}) => {
         tabBarIcon: ({focused, color, size}) => {
           let iconName;
 
-          if (route.name === 'Ana Sayfa') {
+          if (route.name === routes.mainPage) {
             iconName = 'hospital-o';
-          } else if (route.name === 'Appointments') {
+          } else if (route.name === routes.appointments) {
             iconName = 'book';
           }
 
@@ -26,8 +27,8 @@ const Home = ({navigation}) => {
         tabBarActiveTintColor: 'tomato',
         tabBarInactiveTintColor: 'gray',
       })}>
-      <Tab.Screen name="Ana Sayfa" component={Feed} />
-      <Tab.Screen name="Appointments" component={Appointments} />
+      <Tab.Screen name={routes.mainPage} component={Feed} />
+      <Tab.Screen name={routes.appointments} component={Appointments} />
     </Tab.Navigator>
   );
 };

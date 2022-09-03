@@ -11,6 +11,7 @@ import {
   DragService,
   TaskService,
 } from '../database/bussiness';
+import {routes} from '../contants';
 
 const Feed = ({navigation}) => {
   const recordService = new RecordService();
@@ -53,12 +54,12 @@ const Feed = ({navigation}) => {
         data={data}
         loading={loading}
         onPress={val => {
-          navigation.navigate('Detail', {
+          navigation.navigate(routes.recordDetail, {
             data: val.item,
           });
         }}
         onLongPress={val => {
-          navigation.navigate('Kayıt Güncelle', {
+          navigation.navigate(routes.updateRecord, {
             editing: true,
             data: val.item,
           });

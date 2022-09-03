@@ -2,6 +2,7 @@ import React, {useRef, useState} from 'react';
 import {StyleSheet, Text, TouchableOpacity, View} from 'react-native';
 import Icon from 'react-native-vector-icons/FontAwesome';
 import {useDispatch} from 'react-redux';
+import {routes} from '../contants';
 import {addRecord} from '../store/record/actions';
 
 function AddButton({navigation}) {
@@ -11,7 +12,7 @@ function AddButton({navigation}) {
   const dispatch = useDispatch();
 
   const selectItems = [
-    {id: 0, label: 'Yeni', navigate: 'Yeni Kayıt', onSelect: () => {}},
+    {id: 0, label: 'Yeni', navigate: routes.newRecord, onSelect: () => {}},
     {
       id: 1,
       label: 'Kemoterapi',

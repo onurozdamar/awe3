@@ -12,6 +12,7 @@ import {addRecord, deleteRecord, updateRecord} from '../store/record/actions';
 import MyModal from '../components/MyModal';
 import {Formik} from 'formik';
 import MyDatePicker from '../components/MyDatePicker';
+import {routes} from '../contants';
 
 export default function AddNewRecord({navigation, route, ...props}) {
   const editing = route?.params?.editing;
@@ -24,7 +25,7 @@ export default function AddNewRecord({navigation, route, ...props}) {
       <MyModal
         onSuccess={() => {
           dispatch(deleteRecord(data.id));
-          navigation.navigate('Ana Sayfa');
+          navigation.navigate(routes.mainPage);
         }}
       />
       <Formik
@@ -44,7 +45,7 @@ export default function AddNewRecord({navigation, route, ...props}) {
           } else {
             dispatch(addRecord({...values, date: values.date.toISOString()}));
           }
-          navigation.navigate('Ana Sayfa');
+          navigation.navigate(routes.mainPage);
         }}
         enableReinitialize={true}>
         {({handleChange, handleBlur, handleSubmit, setFieldValue, values}) => (

@@ -11,6 +11,7 @@ import {Text, TouchableOpacity} from 'react-native';
 import Icon from 'react-native-vector-icons/FontAwesome';
 import {useDispatch} from 'react-redux';
 import {setOpenModal} from './store/record/actions';
+import {routes} from './contants';
 
 const Stack = createStackNavigator();
 
@@ -34,12 +35,12 @@ export default function App() {
     <NavigationContainer>
       <Stack.Navigator>
         <Stack.Screen
-          name="Home"
+          name={routes.home}
           component={Home}
           options={{header: () => {}}}
         />
         <Stack.Screen
-          name="Detail"
+          name={routes.recordDetail}
           component={Detail}
           options={({navigation, route}) => ({
             headerRight: () => (
@@ -49,33 +50,33 @@ export default function App() {
             ),
           })}
         />
-        <Stack.Screen name="Yeni Kayıt" component={AddNewRecord} />
-        <Stack.Screen name="Yeni Appointment" component={AddAppointment} />
-        <Stack.Screen name="Yeni İlaç" component={AddDrag} />
-        <Stack.Screen name="Yeni Görev" component={AddTask} />
+        <Stack.Screen name={routes.newRecord} component={AddNewRecord} />
+        <Stack.Screen name={routes.newAppointment} component={AddAppointment} />
+        <Stack.Screen name={routes.newDrag} component={AddDrag} />
+        <Stack.Screen name={routes.newTask} component={AddTask} />
         <Stack.Screen
-          name="Kayıt Güncelle"
+          name={routes.updateRecord}
           component={AddNewRecord}
           options={{
             headerRight: () => <Menu />,
           }}
         />
         <Stack.Screen
-          name="Appointment Güncelle"
+          name={routes.updateAppointment}
           component={AddAppointment}
           options={{
             headerRight: () => <Menu />,
           }}
         />
         <Stack.Screen
-          name="İlaç Güncelle"
+          name={routes.updateDrag}
           component={AddDrag}
           options={{
             headerRight: () => <Menu />,
           }}
         />
         <Stack.Screen
-          name="Görev Güncelle"
+          name={routes.updateTask}
           component={AddTask}
           options={{
             headerRight: () => <Menu />,
