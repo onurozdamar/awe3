@@ -4,11 +4,19 @@ import {useDispatch, useSelector} from 'react-redux';
 import DailyCard from '../components/DailyCard';
 import MyFlatlist from '../components/MyFlatlist';
 import AddButton from '../components/AddButton';
-import {BaseManager} from '../database/index';
 import {getRecord as getRecordAction} from '../store/record/actions/record.action';
+import {
+  RecordService,
+  AppointmentService,
+  DragService,
+  TaskService,
+} from '../database/bussiness';
 
 const Feed = ({navigation}) => {
-  const manager = new BaseManager();
+  const recordService = new RecordService();
+  const appointmentService = new AppointmentService();
+  const dragService = new DragService();
+  const taskService = new TaskService();
 
   const dispatch = useDispatch();
 
@@ -21,10 +29,10 @@ const Feed = ({navigation}) => {
   });
 
   useEffect(() => {
-    manager.createRecordTable();
-    manager.createAppointmentTable();
-    manager.createDragTable();
-    manager.createTaskTable();
+    recordService.create();
+    appointmentService.create();
+    dragService.create();
+    taskService.create();
   }, []);
 
   useEffect(() => {
