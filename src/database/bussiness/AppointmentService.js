@@ -12,7 +12,7 @@ export class AppointmentService {
 
   get() {
     return this.appointmentDal.get({
-      orderBy: {keyword: 'ORDER BY', value: 'date'},
+      orderBy: {keyword: 'ORDER BY', value: 'date DESC'},
     });
   }
 
