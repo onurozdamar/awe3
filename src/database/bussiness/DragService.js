@@ -38,4 +38,8 @@ export class DragService {
   delete(id) {
     return this.dragDal.delete(id);
   }
+
+  deleteByRecordId(id) {
+    return this.dragDal.delete(id, 'recordId');
+  }
 }

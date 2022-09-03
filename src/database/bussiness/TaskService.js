@@ -42,4 +42,8 @@ export class TaskService {
   delete(id) {
     return this.taskDal.delete(id);
   }
+
+  deleteByRecordId(id) {
+    return this.taskDal.delete(id, 'recordId');
+  }
 }

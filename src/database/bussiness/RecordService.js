@@ -1,5 +1,8 @@
 import {RecordDal} from '../data-access';
 import {RecordType} from '../types';
+import {AppointmentService} from './AppointmentService';
+import {DragService} from './DragService';
+import {TaskService} from './TaskService';
 
 export class RecordService {
   constructor() {
@@ -31,6 +34,9 @@ export class RecordService {
   }
 
   delete(id) {
+    new DragService().deleteByRecordId(id);
+    new TaskService().deleteByRecordId(id);
+    new AppointmentService().deleteByRecordId(id);
     return this.recordDal.delete(id);
   }
 }

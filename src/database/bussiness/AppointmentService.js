@@ -40,4 +40,8 @@ export class AppointmentService {
   delete(id) {
     return this.appointmentDal.delete(id);
   }
+
+  deleteByRecordId(id) {
+    return this.appointmentDal.delete(id, 'recordId');
+  }
 }
