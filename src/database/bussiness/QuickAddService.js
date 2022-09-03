@@ -11,9 +11,7 @@ export class QuickAddService {
   }
 
   get() {
-    return this.quickAddDal.get({
-      orderBy: {keyword: 'ORDER BY', value: 'rezDate DESC'},
-    });
+    return this.quickAddDal.get();
   }
 
   getById(id) {
