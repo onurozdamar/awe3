@@ -52,9 +52,17 @@ const Feed = ({navigation}) => {
       <MyFlatlist
         data={data}
         loading={loading}
-        onPressPath="Detail"
-        onLongPressPath="Kayıt Güncelle"
-        navigation={navigation}
+        onPress={val => {
+          navigation.navigate('Detail', {
+            data: val.item,
+          });
+        }}
+        onLongPress={val => {
+          navigation.navigate('Kayıt Güncelle', {
+            editing: true,
+            data: val.item,
+          });
+        }}
         component={<DailyCard />}
         onRefresh={() => dispatch(getRecordAction())}
       />

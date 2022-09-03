@@ -1,16 +1,8 @@
-import React, {cloneElement, useEffect, useState} from 'react';
-import {FlatList, SafeAreaView, Text, View} from 'react-native';
+import React, {cloneElement, useState} from 'react';
+import {FlatList, SafeAreaView} from 'react-native';
 
 const MyFlatlist = props => {
-  const {
-    data,
-    loading,
-    onPressPath,
-    onLongPressPath,
-    navigation,
-    component,
-    onRefresh,
-  } = props;
+  const {data, loading, onPress, onLongPress, component, onRefresh} = props;
 
   function RenderItem(props) {
     return cloneElement(component, props);
@@ -31,21 +23,10 @@ const MyFlatlist = props => {
             <RenderItem
               data={data.item}
               onPress={() => {
-                if (!onPressPath) {
-                  return;
-                }
-                navigation.navigate(onPressPath, {
-                  data: {id: data.item.id},
-                });
+                onPress && onPress(data);
               }}
               onLongPress={() => {
-                if (!onLongPressPath) {
-                  return;
-                }
-                navigation.navigate(onLongPressPath, {
-                  editing: true,
-                  data: data.item,
-                });
+                onLongPress && onLongPress(data);
               }}
             />
           );

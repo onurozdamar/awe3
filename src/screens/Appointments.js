@@ -33,9 +33,13 @@ const Appointments = ({navigation}) => {
       <MyFlatlist
         data={data}
         loading={loading}
-        onPressPath="Detail"
-        navigation={navigation}
         component={<AppointmentCard />}
+        onPress={val => {
+          navigation.navigate('Detail', {
+            data: {id: val.item.recordId},
+          });
+        }}
+        onRefresh={() => dispatch(getAllAppointments())}
       />
     </View>
   );
