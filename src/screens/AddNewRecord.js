@@ -11,6 +11,7 @@ import {useDispatch} from 'react-redux';
 import {addRecord, deleteRecord, updateRecord} from '../store/record/actions';
 import MyModal from '../components/MyModal';
 import {Formik} from 'formik';
+import MyDatePicker from '../components/MyDatePicker';
 
 export default function AddNewRecord({navigation, route, ...props}) {
   const editing = route?.params?.editing;
@@ -33,10 +34,16 @@ export default function AddNewRecord({navigation, route, ...props}) {
         }}
         onSubmit={values => {
           if (data?.id) {
-            dispatch(updateRecord({...values, id: data.id}));
+            dispatch(
+              updateRecord({
+                ...values,
+                date: values.date.toISOString(),
+                id: data.id,
+              }),
+            );
             navigation.goBack();
           } else {
-            dispatch(addRecord({...values}));
+            dispatch(addRecord({...values, date: values.date.toISOString()}));
             navigation.goBack();
           }
         }}

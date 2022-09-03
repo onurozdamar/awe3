@@ -23,6 +23,7 @@ export class DragService {
   getByRecordId(recordId) {
     return this.dragDal.get({
       where: {keyword: 'WHERE', value: 'recordId= ' + recordId},
+      orderBy: {keyword: 'ORDER BY', value: 'date DESC'},
     });
   }
 

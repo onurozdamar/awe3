@@ -11,7 +11,9 @@ export class AppointmentService {
   }
 
   get() {
-    return this.appointmentDal.get();
+    return this.appointmentDal.get({
+      orderBy: {keyword: 'ORDER BY', value: 'date'},
+    });
   }
 
   getById(id) {
@@ -23,6 +25,7 @@ export class AppointmentService {
   getByRecordId(recordId) {
     return this.appointmentDal.get({
       where: {keyword: 'WHERE', value: 'recordId= ' + recordId},
+      orderBy: {keyword: 'ORDER BY', value: 'date DESC'},
     });
   }
 

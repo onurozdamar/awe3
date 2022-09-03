@@ -23,6 +23,7 @@ export class TaskService {
   getByRecordId(recordId) {
     return this.taskDal.get({
       where: {keyword: 'WHERE', value: 'recordId= ' + recordId},
+      orderBy: {keyword: 'ORDER BY', value: 'date DESC'},
     });
   }
 

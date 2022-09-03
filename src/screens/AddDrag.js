@@ -41,6 +41,7 @@ export default function AddDrag({navigation, route, ...props}) {
         initialValues={{
           title: data.id ? drag?.title : '',
           frequency: data.id ? drag?.frequency : '',
+          date: data.id ? new Date(drag?.date) : new Date(),
           endDate: data.id ? new Date(drag?.endDate) : new Date(),
         }}
         onSubmit={values => {
@@ -49,6 +50,8 @@ export default function AddDrag({navigation, route, ...props}) {
               updateDrag({
                 ...values,
                 recordId: data.recordId,
+                date: values.date.toISOString(),
+                endDate: values.endDate.toISOString(),
                 id: data.id,
               }),
             );
@@ -57,6 +60,8 @@ export default function AddDrag({navigation, route, ...props}) {
             dispatch(
               addDrag({
                 ...values,
+                date: values.date.toISOString(),
+                endDate: values.endDate.toISOString(),
                 recordId: data.recordId,
               }),
             );
@@ -95,6 +100,18 @@ export default function AddDrag({navigation, route, ...props}) {
                 showTime={false}
               />
             </View>
+
+            {data?.id && (
+              <View style={styles.inputContainer}>
+                <Text style={styles.inputLabel}>Ekleme Tarihi</Text>
+                <MyDatePicker
+                  date={values.date}
+                  onChange={setFieldValue}
+                  fieldName="date"
+                  showTime={false}
+                />
+              </View>
+            )}
 
             <TouchableOpacity style={styles.addButton} onPress={handleSubmit}>
               <Text style={styles.addButtonText}>

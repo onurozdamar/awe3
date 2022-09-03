@@ -41,6 +41,7 @@ export default function AddTask({navigation, route, ...props}) {
         initialValues={{
           title: data.id ? task?.title : '',
           desc: data.id ? task?.desc : '',
+          date: data.id ? new Date(task?.date) : new Date(),
           endDate: data.id ? new Date(task?.endDate) : new Date(),
           complete: data.id ? task?.complete === 'true' : false,
         }}
@@ -49,6 +50,8 @@ export default function AddTask({navigation, route, ...props}) {
             dispatch(
               updateTask({
                 ...values,
+                date: values.date.toISOString(),
+                endDate: values.endDate.toISOString(),
                 recordId: data.recordId,
                 id: data.id,
               }),
@@ -58,6 +61,8 @@ export default function AddTask({navigation, route, ...props}) {
             dispatch(
               addTask({
                 ...values,
+                date: values.date.toISOString(),
+                endDate: values.endDate.toISOString(),
                 recordId: data.recordId,
               }),
             );
@@ -96,6 +101,18 @@ export default function AddTask({navigation, route, ...props}) {
               />
             </View>
 
+            {data?.id && (
+              <View style={styles.inputContainer}>
+                <Text style={styles.inputLabel}>Ekleme Tarihi</Text>
+                <MyDatePicker
+                  date={values.date}
+                  onChange={setFieldValue}
+                  fieldName="date"
+                  showTime={false}
+                />
+              </View>
+            )}
+
             <View style={styles.inputContainer}>
               <Text style={styles.inputLabel}>Tamamlandı</Text>
               <CheckBox
@@ -130,8 +147,8 @@ const styles = StyleSheet.create({
   },
   inputContainer: {
     width: '100%',
-    marginBottom: 25,
-    marginTop: 10,
+    marginBottom: 15,
+    marginTop: 0,
   },
   input: {
     width: '100%',

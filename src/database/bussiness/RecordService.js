@@ -11,7 +11,9 @@ export class RecordService {
   }
 
   get() {
-    return this.recordDal.get();
+    return this.recordDal.get({
+      orderBy: {keyword: 'ORDER BY', value: 'date DESC'},
+    });
   }
 
   getById(id) {

@@ -42,6 +42,7 @@ export default function AddAppointment({navigation, route, ...props}) {
         initialValues={{
           title: data.id ? appointment?.title : '',
           doctor: data.id ? appointment?.doctor : '',
+          date: data.id ? new Date(appointment?.date) : new Date(),
           rezDate: data.id ? new Date(appointment?.rezDate) : new Date(),
         }}
         onSubmit={values => {
@@ -50,12 +51,21 @@ export default function AddAppointment({navigation, route, ...props}) {
               updateAppointment({
                 ...values,
                 recordId: data.recordId,
+                date: values.date.toISOString(),
+                rezDate: values.rezDate.toISOString(),
                 id: data.id,
               }),
             );
             navigation.goBack();
           } else {
-            dispatch(addAppointment({...values, recordId: data.recordId}));
+            dispatch(
+              addAppointment({
+                ...values,
+                date: values.date.toISOString(),
+                rezDate: values.rezDate.toISOString(),
+                recordId: data.recordId,
+              }),
+            );
             navigation.goBack();
           }
         }}
@@ -91,6 +101,18 @@ export default function AddAppointment({navigation, route, ...props}) {
                 fieldName="rezDate"
               />
             </View>
+
+            {data?.id && (
+              <View style={styles.inputContainer}>
+                <Text style={styles.inputLabel}>Ekleme Tarihi</Text>
+                <MyDatePicker
+                  date={values.date}
+                  onChange={setFieldValue}
+                  fieldName="date"
+                  showTime={false}
+                />
+              </View>
+            )}
 
             <TouchableOpacity style={styles.addButton} onPress={handleSubmit}>
               <Text style={styles.addButtonText}>
