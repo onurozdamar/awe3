@@ -3,16 +3,16 @@ export const POST_DRAG = 'POST_DRAG';
 export const UPDATE_DRAG = 'UPDATE_DRAG';
 export const DELETE_DRAG = 'DELETE_DRAG';
 export const GET_DRAG_BY_ID = 'GET_DRAG_BY_ID';
-export const SET_LOADING = 'SET_LOADING';
+export const SET_LOADING = 'SET_LOADING_DRAG';
 
-import {BaseManager} from '../../../database';
+import {DragService} from '../../../database/bussiness/DragService';
 
 export const getDrag = recordId => dispatch => {
-  const manager = new BaseManager();
+  const service = new DragService();
   dispatch(setLoading(true));
 
-  manager
-    .getDrag(recordId)
+  service
+    .getByRecordId(recordId)
     .then(res => {
       dispatch(setLoading(false));
       dispatch({
@@ -30,11 +30,11 @@ export const getDrag = recordId => dispatch => {
 };
 
 export const getDragById = id => dispatch => {
-  const manager = new BaseManager();
+  const service = new DragService();
   dispatch(setLoading(true));
 
-  return manager
-    .getDragById(id)
+  service
+    .getById(id)
     .then(res => {
       dispatch(setLoading(false));
       dispatch({
@@ -52,10 +52,10 @@ export const getDragById = id => dispatch => {
 };
 
 export const addDrag = model => dispatch => {
-  const manager = new BaseManager();
+  const service = new DragService();
 
-  manager
-    .addDrag(model)
+  service
+    .add(model)
     .then(res => {
       dispatch({
         type: POST_DRAG,
@@ -71,10 +71,10 @@ export const addDrag = model => dispatch => {
 };
 
 export const updateDrag = model => dispatch => {
-  const manager = new BaseManager();
+  const service = new DragService();
 
-  manager
-    .updateDrag(model)
+  service
+    .update(model)
     .then(res => {
       dispatch({
         type: UPDATE_DRAG,
@@ -91,10 +91,10 @@ export const updateDrag = model => dispatch => {
 };
 
 export const deleteDrag = id => dispatch => {
-  const manager = new BaseManager();
+  const service = new DragService();
 
-  manager
-    .deleteDrag(id)
+  service
+    .delete(id)
     .then(res => {
       dispatch({
         type: DELETE_DRAG,

@@ -4,16 +4,16 @@ export const UPDATE_TASK = 'UPDATE_TASK';
 export const DELETE_TASK = 'DELETE_TASK';
 export const GET_TASK_BY_ID = 'GET_TASK_BY_ID';
 export const UPDATE_TASK_COMPLETE = 'UPDATE_TASK_COMPLETE';
-export const SET_LOADING = 'SET_LOADING';
+export const SET_LOADING = 'SET_LOADING_TASK';
 
-import {BaseManager} from '../../../database';
+import {TaskService} from '../../../database/bussiness/TaskService';
 
 export const getTask = recordId => dispatch => {
-  const manager = new BaseManager();
+  const service = new TaskService();
   dispatch(setLoading(true));
 
-  manager
-    .getTask(recordId)
+  service
+    .getByRecordId(recordId)
     .then(res => {
       dispatch(setLoading(false));
       dispatch({
@@ -31,11 +31,11 @@ export const getTask = recordId => dispatch => {
 };
 
 export const getTaskById = id => dispatch => {
-  const manager = new BaseManager();
+  const service = new TaskService();
   dispatch(setLoading(true));
 
-  return manager
-    .getTaskById(id)
+  service
+    .getById(id)
     .then(res => {
       dispatch(setLoading(false));
       dispatch({
@@ -53,16 +53,16 @@ export const getTaskById = id => dispatch => {
 };
 
 export const addTask = model => dispatch => {
-  const manager = new BaseManager();
+  const service = new TaskService();
+  console.log(model, '******************');
 
-  manager
-    .addTask(model)
+  service
+    .add(model)
     .then(res => {
       dispatch({
         type: POST_TASK,
         payload: res,
       });
-      dispatch(getTask(model.recordId));
     })
     .catch(e => {
       dispatch({
@@ -73,10 +73,10 @@ export const addTask = model => dispatch => {
 };
 
 export const updateTask = model => dispatch => {
-  const manager = new BaseManager();
+  const service = new TaskService();
 
-  manager
-    .updateTask(model)
+  service
+    .update(model)
     .then(res => {
       dispatch({
         type: UPDATE_TASK,
@@ -92,17 +92,17 @@ export const updateTask = model => dispatch => {
 };
 
 export const updateTaskComplete = model => dispatch => {
-  const manager = new BaseManager();
+  const service = new TaskService();
 
-  manager
-    .updateTaskComplete(model)
+  service
+    .updateComplete(model)
     .then(res => {
       dispatch({
         type: UPDATE_TASK_COMPLETE,
         payload: res,
       });
-      dispatch(getTaskById(model.id));
-      dispatch(getTask(model.recordId));
+      // dispatch(getTaskById(model.id));
+      // dispatch(getTask(model.recordId));
     })
     .catch(e => {
       dispatch({
@@ -113,10 +113,10 @@ export const updateTaskComplete = model => dispatch => {
 };
 
 export const deleteTask = id => dispatch => {
-  const manager = new BaseManager();
+  const service = new TaskService();
 
-  manager
-    .deleteTask(id)
+  service
+    .delete(id)
     .then(res => {
       dispatch({
         type: DELETE_TASK,

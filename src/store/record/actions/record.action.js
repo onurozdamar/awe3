@@ -3,17 +3,17 @@ export const POST_RECORD = 'POST_RECORD';
 export const UPDATE_RECORD = 'UPDATE_RECORD';
 export const DELETE_RECORD = 'DELETE_RECORD';
 export const GET_RECORD_BY_ID = 'GET_RECORD_BY_ID';
-export const SET_LOADING = 'SET_LOADING';
+export const SET_LOADING = 'SET_LOADING_RECORD';
 export const OPEN_MODAL = 'OPEN_MODAL';
 
-import {BaseManager} from '../../../database';
+import {RecordService} from '../../../database/bussiness/RecordService';
 
 export const getRecord = () => dispatch => {
-  const manager = new BaseManager();
+  const service = new RecordService();
   dispatch(setLoading(true));
 
-  manager
-    .getRecord()
+  service
+    .get()
     .then(res => {
       dispatch(setLoading(false));
       dispatch({
@@ -31,11 +31,11 @@ export const getRecord = () => dispatch => {
 };
 
 export const getRecordById = id => dispatch => {
-  const manager = new BaseManager();
+  const service = new RecordService();
   dispatch(setLoading(true));
 
-  manager
-    .getRecordById(id)
+  service
+    .getById(id)
     .then(res => {
       dispatch(setLoading(false));
       dispatch({
@@ -53,10 +53,10 @@ export const getRecordById = id => dispatch => {
 };
 
 export const addRecord = model => dispatch => {
-  const manager = new BaseManager();
+  const service = new RecordService();
 
-  manager
-    .addRecord(model)
+  service
+    .add(model)
     .then(res => {
       dispatch({
         type: POST_RECORD,
@@ -72,10 +72,10 @@ export const addRecord = model => dispatch => {
 };
 
 export const updateRecord = model => dispatch => {
-  const manager = new BaseManager();
+  const service = new RecordService();
 
-  manager
-    .updateRecord(model)
+  service
+    .update(model)
     .then(res => {
       dispatch({
         type: UPDATE_RECORD,
@@ -91,10 +91,10 @@ export const updateRecord = model => dispatch => {
 };
 
 export const deleteRecord = id => dispatch => {
-  const manager = new BaseManager();
+  const service = new RecordService();
 
-  manager
-    .deleteRecord(id)
+  service
+    .delete(id)
     .then(res => {
       dispatch({
         type: DELETE_RECORD,
