@@ -91,7 +91,7 @@ class BaseRepository {
 
         db.executeSql(query)
           .then(val => {
-            resolve(true);
+            resolve({...model, id: val[0].insertId});
           })
           .catch(err => {
             reject(false);

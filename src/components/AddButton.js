@@ -16,9 +16,9 @@ function AddButton({navigation}) {
       id: 1,
       label: 'Kemoterapi',
       navigate: '',
-      onSelect: () => dispatch(addRecord({title: 'Kemoterapi'})),
+      onSelect: () =>
+        dispatch(addRecord({title: 'Kemoterapi', date: new Date()})),
     },
-    {id: 2, label: 'Kan', navigate: '', onSelect: () => {}},
   ];
 
   return (
