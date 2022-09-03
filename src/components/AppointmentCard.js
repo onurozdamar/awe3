@@ -46,9 +46,9 @@ export default function AppointmentCard(props) {
           flex: 1,
           justifyContent: 'space-between',
         }}>
-        <Text style={styles.dateInfo}>Appointment Tarihi</Text>
-        <Text style={styles.dateInfo}>Appointment Saati</Text>
         <Text style={styles.dateInfo}>Eklenme Tarihi</Text>
+        <Text style={styles.dateInfo}>Appointment Saati</Text>
+        <Text style={styles.dateInfo}>Appointment Tarihi</Text>
       </View>
       <View
         style={{
@@ -57,9 +57,9 @@ export default function AppointmentCard(props) {
           flex: 1,
           justifyContent: 'space-between',
         }}>
-        <Text style={styles.date}>{formatDate(data?.rezDate)}</Text>
-        <Text style={styles.date}>{formatTime(data?.rezDate)}</Text>
         <Text style={styles.date}>{formatDate(data?.date)}</Text>
+        <Text style={styles.date}>{formatTime(data?.rezDate)}</Text>
+        <Text style={styles.date}>{formatDate(data?.rezDate)}</Text>
       </View>
       <Icon
         name={active ? 'check' : 'pause'}
