@@ -1,5 +1,11 @@
 import SQLite from 'react-native-sqlite-storage';
-import {AppointmentType, DragType, RecordType, TaskType} from '../types';
+import {
+  AppointmentType,
+  DragType,
+  QuickAddType,
+  RecordType,
+  TaskType,
+} from '../types';
 
 class BaseRepository {
   constructor(entityType) {
@@ -160,5 +166,11 @@ export class TaskDal extends BaseRepository {
 export class DragDal extends BaseRepository {
   constructor() {
     super(DragType);
+  }
+}
+
+export class QuickAddDal extends BaseRepository {
+  constructor() {
+    super(QuickAddType);
   }
 }

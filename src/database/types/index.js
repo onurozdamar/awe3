@@ -43,3 +43,11 @@ export const TaskType = {
   },
   className: 'Task',
 };
+
+export const QuickAddType = {
+  columns: {
+    id: 'INTEGER PRIMARY KEY NOT NULL',
+    object: 'TEXT',
+  },
+  className: 'QuickAdd',
+};
