@@ -12,6 +12,7 @@ import Icon from 'react-native-vector-icons/FontAwesome';
 import {useDispatch} from 'react-redux';
 import {setOpenModal} from './store/record/actions';
 import {routes} from './contants';
+import Settings from './screens/Settings';
 
 const Stack = createStackNavigator();
 
@@ -92,6 +93,7 @@ export default function App() {
             headerRight: () => <Menu />,
           }}
         />
+        <Stack.Screen name={routes.settings} component={Settings} />
       </Stack.Navigator>
     </NavigationContainer>
   );
