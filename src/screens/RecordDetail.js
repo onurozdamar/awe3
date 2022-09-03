@@ -12,7 +12,7 @@ import {getRecordById} from '../store/record/actions/record.action';
 import moment from 'moment';
 import 'moment/locale/tr';
 import MyPicker from '../components/MyPicker';
-import {routes} from '../contants';
+import {routes, types} from '../contants';
 moment.locale('tr');
 
 const RecordDetail = ({navigation, route, ...props}) => {
@@ -26,48 +26,71 @@ const RecordDetail = ({navigation, route, ...props}) => {
     {navigate: routes.newTask, label: 'Görev Ekle'},
   ];
 
+  const quickAddReducer = useSelector(state => state.quickAddReducer);
+
+  const quickAddData = quickAddReducer.data.reduce((acc, val) => {
+    const object = JSON.parse(val.object);
+    if (
+      object.type === types.appointment ||
+      object.type === types.drag ||
+      object.type === types.task
+    ) {
+      if (!acc[object.type]) {
+        acc[object.type] = [];
+      }
+      acc[object.type].push(object.data);
+    }
+    return acc;
+  }, {});
+
   const quickAdd = [
-    {
-      label: 'Kan Ekle',
-      onChange: () =>
-        dispatch(
-          addTask({
-            title: 'Kan',
-            desc: 'Kan Verilecek',
-            date: new Date().toISOString(),
-            endDate: new Date().toISOString(),
-            complete: false,
-            recordId: data.id,
-          }),
-        ),
-    },
-    {
-      label: 'İlaç Ekle',
-      onChange: () =>
-        dispatch(
-          addDrag({
-            title: 'İlaç verilecek',
-            desc: '2 tane potasyum ilacı verilecek',
-            endDate: moment().add(2, 'days').format(),
-            frequency: 'Günde 1',
-            date: new Date().toISOString(),
-            recordId: data.id,
-          }),
-        ),
-    },
-    {
-      label: 'Appointment Ekle',
-      onChange: () =>
-        dispatch(
-          addAppointment({
-            title: 'Kemoterapi',
-            rezDate: moment().add(21, 'days').format(),
-            doctor: 'Hülya Ertaş',
-            date: new Date().toISOString(),
-            recordId: data.id,
-          }),
-        ),
-    },
+    ...quickAddData[types.appointment].map(d => {
+      return {
+        label: d.title,
+        onChange: () =>
+          dispatch(
+            addAppointment({
+              title: d.title,
+              rezDate: moment().add(21, 'days').format(),
+              doctor: d.doctor,
+              date: new Date().toISOString(),
+              recordId: data.id,
+            }),
+          ),
+      };
+    }),
+    ...quickAddData[types.drag].map(d => {
+      return {
+        label: d.title,
+        onChange: () =>
+          dispatch(
+            addDrag({
+              title: d.title,
+              desc: d.desc,
+              endDate: moment().add(2, 'days').format(),
+              frequency: d.frequency,
+              date: new Date().toISOString(),
+              recordId: data.id,
+            }),
+          ),
+      };
+    }),
+    ...quickAddData[types.task].map(d => {
+      return {
+        label: d.title,
+        onChange: () =>
+          dispatch(
+            addTask({
+              title: d.title,
+              desc: d.title,
+              date: new Date().toISOString(),
+              endDate: new Date().toISOString(),
+              complete: false,
+              recordId: data.id,
+            }),
+          ),
+      };
+    }),
   ];
 
   useEffect(() => {

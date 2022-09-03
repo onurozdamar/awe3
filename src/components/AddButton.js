@@ -1,8 +1,8 @@
 import React, {useRef, useState} from 'react';
 import {StyleSheet, Text, TouchableOpacity, View} from 'react-native';
 import Icon from 'react-native-vector-icons/FontAwesome';
-import {useDispatch} from 'react-redux';
-import {routes} from '../contants';
+import {useDispatch, useSelector} from 'react-redux';
+import {routes, types} from '../contants';
 import {addRecord} from '../store/record/actions';
 
 function AddButton({navigation}) {
@@ -10,18 +10,31 @@ function AddButton({navigation}) {
   const dimensions = useRef({width: 0, height: 0});
 
   const dispatch = useDispatch();
+  const {data} = useSelector(state => state.quickAddReducer);
+
+  const quickAddData = data
+    .map(d => {
+      const object = JSON.parse(d.object);
+      if (object.type === types.record) {
+        return object;
+      }
+      return null;
+    })
+    .filter(d => d);
 
   const selectItems = [
     {id: 0, label: 'Yeni', navigate: routes.newRecord, onSelect: () => {}},
-    {
-      id: 1,
-      label: 'Kemoterapi',
-      navigate: '',
-      onSelect: () =>
-        dispatch(
-          addRecord({title: 'Kemoterapi', date: new Date().toISOString()}),
-        ),
-    },
+    ...quickAddData.map((item, index) => {
+      return {
+        id: index + 1,
+        label: item.data.title,
+        onSelect: () =>
+          dispatch(
+            addRecord({title: item.data.title, date: new Date().toISOString()}),
+          ),
+      };
+    }),
+    ,
   ];
 
   return (
