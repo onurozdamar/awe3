@@ -4,6 +4,7 @@ import {useDispatch, useSelector} from 'react-redux';
 import MyFlatlist from '../components/MyFlatlist';
 import AppointmentCard from '../components/AppointmentCard';
 import {getAllAppointments} from '../store/appointment/actions';
+import {routes} from '../contants';
 
 const Appointments = ({navigation}) => {
   const dispatch = useDispatch();
@@ -35,7 +36,7 @@ const Appointments = ({navigation}) => {
         loading={loading}
         component={<AppointmentCard />}
         onPress={val => {
-          navigation.navigate('Detail', {
+          navigation.navigate(routes.recordDetail, {
             data: {id: val.item.recordId},
           });
         }}

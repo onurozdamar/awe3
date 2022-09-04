@@ -26,7 +26,7 @@ export const routes = {
   updateAppointment: 'Randevu Güncelle',
   updateTask: 'Görev Güncelle',
   updateDrag: 'İlaç Güncelle',
-  settings: 'settings',
+  settings: 'Ayarlar',
 };
 
 export const types = {
