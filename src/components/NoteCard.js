@@ -1,21 +1,9 @@
 import React from 'react';
 import {StyleSheet, Text, TouchableOpacity, View} from 'react-native';
+import {formatDate} from '../helper';
 
 export default function NoteCard(props) {
   const {data, onPress, onLongPress} = props;
-
-  function formatDate(dateStr) {
-    if (!dateStr) {
-      return '';
-    }
-
-    var date = new Date(dateStr);
-    var dd = String(date.getDate()).padStart(2, '0');
-    var mm = String(date.getMonth() + 1).padStart(2, '0');
-    var yyyy = date.getFullYear();
-
-    return dd + '/' + mm + '/' + yyyy;
-  }
 
   return (
     <TouchableOpacity
