@@ -6,7 +6,7 @@ export const GET_RECORD_BY_ID = 'GET_RECORD_BY_ID';
 export const SET_LOADING = 'SET_LOADING_RECORD';
 export const OPEN_MODAL = 'OPEN_MODAL';
 
-import {RecordService} from '../../../database/bussiness/RecordService';
+import {RecordService} from '../../../database/business/RecordService';
 
 export const getRecord = () => dispatch => {
   const service = new RecordService();

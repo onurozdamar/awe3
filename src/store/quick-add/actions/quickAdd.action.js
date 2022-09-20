@@ -5,7 +5,7 @@ export const DELETE_QUICK_ADD = 'DELETE_QUICK_ADD';
 export const GET_QUICK_ADD_BY_ID = 'GET_QUICK_ADD_BY_ID';
 export const SET_LOADING = 'SET_LOADING_QUICK_ADD';
 
-import {QuickAddService} from '../../../database/bussiness/QuickAddService';
+import {QuickAddService} from '../../../database/business/QuickAddService';
 
 export const getQuickAdd = () => dispatch => {
   const service = new QuickAddService();

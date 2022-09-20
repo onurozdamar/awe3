@@ -6,7 +6,7 @@ export const DELETE_APPOINTMENT = 'DELETE_APPOINTMENT';
 export const GET_APPOINTMENT_BY_ID = 'GET_APPOINTMENT_BY_ID';
 export const SET_LOADING = 'SET_LOADING_APPOINTMENT';
 
-import {AppointmentService} from '../../../database/bussiness/AppointmentService';
+import {AppointmentService} from '../../../database/business/AppointmentService';
 
 export const getAppointment = recordId => dispatch => {
   const service = new AppointmentService();

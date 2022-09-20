@@ -1,4 +1,4 @@
-import {NoteService} from '../../../database/bussiness/NoteService';
+import {NoteService} from '../../../database/business/NoteService';
 
 export const GET_NOTES = 'GET_NOTES';
 export const GET_NOTE_BY_ID = 'GET_NOTE_BY_ID';

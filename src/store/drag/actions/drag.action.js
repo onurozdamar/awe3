@@ -5,7 +5,7 @@ export const DELETE_DRAG = 'DELETE_DRAG';
 export const GET_DRAG_BY_ID = 'GET_DRAG_BY_ID';
 export const SET_LOADING = 'SET_LOADING_DRAG';
 
-import {DragService} from '../../../database/bussiness/DragService';
+import {DragService} from '../../../database/business/DragService';
 
 export const getDrag = recordId => dispatch => {
   const service = new DragService();

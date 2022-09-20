@@ -6,7 +6,7 @@ export const GET_TASK_BY_ID = 'GET_TASK_BY_ID';
 export const UPDATE_TASK_COMPLETE = 'UPDATE_TASK_COMPLETE';
 export const SET_LOADING = 'SET_LOADING_TASK';
 
-import {TaskService} from '../../../database/bussiness/TaskService';
+import {TaskService} from '../../../database/business/TaskService';
 
 export const getTask = recordId => dispatch => {
   const service = new TaskService();

@@ -12,7 +12,7 @@ import {
   TaskService,
   QuickAddService,
   NoteService,
-} from '../database/bussiness';
+} from '../database/business';
 import {routes} from '../contants';
 import {getQuickAdd} from '../store/quick-add/actions/quickAdd.action';
 
