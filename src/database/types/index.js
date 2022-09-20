@@ -44,6 +44,16 @@ export const TaskType = {
   className: 'Task',
 };
 
+export const NoteType = {
+  columns: {
+    id: 'INTEGER PRIMARY KEY NOT NULL',
+    desc: 'TEXT',
+    date: 'TEXT',
+    recordId: 'INTEGER',
+  },
+  className: 'Note',
+};
+
 export const QuickAddType = {
   columns: {
     id: 'INTEGER PRIMARY KEY NOT NULL',

@@ -7,12 +7,14 @@ import AppointmentCard from '../components/AppointmentCard';
 import {addAppointment, getAppointment} from '../store/appointment/actions';
 import {addTask, getTask} from '../store/task/actions';
 import {addDrag, getDrag} from '../store/drag/actions';
+import {getNote} from '../store/note/actions';
 import {useDispatch, useSelector} from 'react-redux';
 import {getRecordById} from '../store/record/actions/record.action';
 import moment from 'moment';
 import 'moment/locale/tr';
 import MyPicker from '../components/MyPicker';
 import {routes, types} from '../contants';
+import NoteCard from '../components/NoteCard';
 moment.locale('tr');
 
 const RecordDetail = ({navigation, route, ...props}) => {
@@ -24,6 +26,7 @@ const RecordDetail = ({navigation, route, ...props}) => {
     {navigate: routes.newAppointment, label: 'Appointment Ekle'},
     {navigate: routes.newDrag, label: 'İlaç Ekle'},
     {navigate: routes.newTask, label: 'Görev Ekle'},
+    {navigate: routes.newNote, label: 'Not Ekle'},
   ];
 
   const quickAddReducer = useSelector(state => state.quickAddReducer);
@@ -167,6 +170,16 @@ const RecordDetail = ({navigation, route, ...props}) => {
         navigation={navigation}
         reducer={'taskReducer'}
         getData={getTask}
+        recordId={data.id}
+      />
+
+      <MyList
+        component={<NoteCard />}
+        headerText="Notlar"
+        onLongPressPath={routes.updateNote}
+        navigation={navigation}
+        reducer={'noteReducer'}
+        getData={getNote}
         recordId={data.id}
       />
     </ScrollView>

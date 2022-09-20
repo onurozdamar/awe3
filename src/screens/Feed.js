@@ -11,6 +11,7 @@ import {
   DragService,
   TaskService,
   QuickAddService,
+  NoteService,
 } from '../database/bussiness';
 import {routes} from '../contants';
 import {getQuickAdd} from '../store/quick-add/actions/quickAdd.action';
@@ -20,6 +21,7 @@ const Feed = ({navigation}) => {
   const appointmentService = new AppointmentService();
   const dragService = new DragService();
   const taskService = new TaskService();
+  const noteService = new NoteService();
   const quickAddService = new QuickAddService();
 
   const dispatch = useDispatch();
@@ -37,6 +39,7 @@ const Feed = ({navigation}) => {
     appointmentService.create();
     dragService.create();
     taskService.create();
+    noteService.create();
     quickAddService.create();
     dispatch(getQuickAdd());
   }, []);

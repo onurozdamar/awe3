@@ -13,10 +13,11 @@ import {useDispatch} from 'react-redux';
 import {setOpenModal} from './store/record/actions';
 import {routes} from './contants';
 import Settings from './screens/Settings';
+import AddNote from './screens/AddNote';
 
 const Stack = createStackNavigator();
 
-const Menu = () => {
+const Menu = ({addQuick}) => {
   const dispatch = useDispatch();
 
   return (
@@ -29,14 +30,16 @@ const Menu = () => {
         }}>
         <Icon name={'trash'} size={30} color={'red'} />
       </TouchableOpacity>
-      <TouchableOpacity
-        style={{margin: 15}}
-        hitSlop={{top: 15, bottom: 15, left: 20, right: 20}}
-        onPress={() => {
-          dispatch(setOpenModal({addQuick: true}));
-        }}>
-        <Icon name={'ellipsis-v'} size={30} color={'black'} />
-      </TouchableOpacity>
+      {addQuick && (
+        <TouchableOpacity
+          style={{margin: 15}}
+          hitSlop={{top: 15, bottom: 15, left: 20, right: 20}}
+          onPress={() => {
+            dispatch(setOpenModal({addQuick: true}));
+          }}>
+          <Icon name={'ellipsis-v'} size={30} color={'black'} />
+        </TouchableOpacity>
+      )}
     </View>
   );
 };
@@ -65,30 +68,38 @@ export default function App() {
         <Stack.Screen name={routes.newAppointment} component={AddAppointment} />
         <Stack.Screen name={routes.newDrag} component={AddDrag} />
         <Stack.Screen name={routes.newTask} component={AddTask} />
+        <Stack.Screen name={routes.newNote} component={AddNote} />
         <Stack.Screen
           name={routes.updateRecord}
           component={AddNewRecord}
           options={{
-            headerRight: () => <Menu />,
+            headerRight: () => <Menu addQuick />,
           }}
         />
         <Stack.Screen
           name={routes.updateAppointment}
           component={AddAppointment}
           options={{
-            headerRight: () => <Menu />,
+            headerRight: () => <Menu addQuick />,
           }}
         />
         <Stack.Screen
           name={routes.updateDrag}
           component={AddDrag}
           options={{
-            headerRight: () => <Menu />,
+            headerRight: () => <Menu addQuick />,
           }}
         />
         <Stack.Screen
           name={routes.updateTask}
           component={AddTask}
+          options={{
+            headerRight: () => <Menu />,
+          }}
+        />
+        <Stack.Screen
+          name={routes.updateNote}
+          component={AddNote}
           options={{
             headerRight: () => <Menu />,
           }}

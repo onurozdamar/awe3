@@ -22,10 +22,12 @@ export const routes = {
   newAppointment: 'Yeni Randevu',
   newTask: 'Yeni Görev',
   newDrag: 'Yeni İlaç',
+  newNote: 'Yeni Not',
   updateRecord: 'Kayıt Güncelle',
   updateAppointment: 'Randevu Güncelle',
   updateTask: 'Görev Güncelle',
   updateDrag: 'İlaç Güncelle',
+  updateNote: 'Not Güncelle',
   settings: 'Ayarlar',
 };
 

@@ -5,6 +5,7 @@ import {
   QuickAddType,
   RecordType,
   TaskType,
+  NoteType,
 } from '../types';
 
 class BaseRepository {
@@ -172,5 +173,11 @@ export class DragDal extends BaseRepository {
 export class QuickAddDal extends BaseRepository {
   constructor() {
     super(QuickAddType);
+  }
+}
+
+export class NoteDal extends BaseRepository {
+  constructor() {
+    super(NoteType);
   }
 }
